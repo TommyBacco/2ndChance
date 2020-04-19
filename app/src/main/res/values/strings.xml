@@ -8,8 +8,21 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+
+    <string name="fullname">Full Name</string>
+    <string name="nickname">Nickname</string>
+    <string name="email">email@address.com</string>
+    <string name="area">Area of interest</string>
+    <string name="address">Address</string>
+    <string name="telephone">Telephone number</string>
+
+    <string name="pencil_button">pencil button</string>
+    <string name="save_button">Save</string>
+
+    <string name="menu_gallery">Select an image from the gallery</string>
+    <string name="menu_camera">Use the camera to take a picture</string>
 
     <string name="home_second">Home Second</string>
 </resources>
