@@ -3,21 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/showProfileFragment">
+    app:startDestination="@id/itemDetailsFragment">
     <fragment
-        android:id="@+id/showProfileFragment"
+        android:id="@+id/nav_showProfile"
         android:name="com.example.group15_lab2.ShowProfileFragment"
         android:label="ShowProfileFragment" >
         <action
             android:id="@+id/action_showProfileFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment"
+            app:destination="@id/nav_editProfile"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/editProfileFragment"
+        android:id="@+id/nav_editProfile"
         android:name="com.example.group15_lab2.EditProfileFragment"
         android:label="EditProfileFragment" />
+    <fragment
+        android:id="@+id/itemDetailsFragment"
+        android:name="com.example.group15_lab2.ItemDetailsFragment"
+        android:label="ItemDetailsFragment" />
 </navigation>

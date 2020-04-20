@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFFFF"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:text="title"
+            android:textAllCaps="true"
+            android:textColor="#000000"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_title"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="12dp"
+            android:text="Category:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/item_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_title"
+            android:layout_marginBottom="8dp"
+            android:layout_toRightOf="@id/category"
+            android:text="Mycategory..."
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/kind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="5dp"
+            android:text="Sub-category:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/item_sub_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category"
+            android:layout_toRightOf="@id/kind"
+            android:text="Subcategory..."
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#000000" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        app:srcCompat="@drawable/item_icon" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFFFF">
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="8dp"
+                android:text="Price:"
+                android:textStyle="italic"
+                android:layout_marginRight="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="8dp"
+                android:layout_toRightOf="@id/price"
+                android:text="123"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#e61919"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/item_price"
+                android:layout_marginBottom="8dp"
+                android:text="€"
+                android:textStyle="bold"
+                android:textColor="#e61919"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/price"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="8dp"
+                android:text="Expire date:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/item_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/price"
+                android:layout_marginBottom="8dp"
+                android:layout_toRightOf="@id/date"
+                android:text="30/04/20"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="8dp"
+                android:text="Location:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/item_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_date"
+                android:layout_marginBottom="8dp"
+                android:layout_toRightOf="@id/location"
+                android:text="MyLocation"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/location"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="8dp"
+                android:text="Delivery type:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/item_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_location"
+                android:layout_marginBottom="12dp"
+                android:layout_toRightOf="@id/delivery"
+                android:text="Delivery"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/item_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/delivery"
+                android:layout_marginBottom="8dp"
+                android:text="DESCRIPTION..."
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
