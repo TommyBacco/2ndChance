@@ -9,7 +9,7 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/user_avatar"
+        android:id="@+id/item_image"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

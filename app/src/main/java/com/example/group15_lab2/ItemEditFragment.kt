@@ -1,7 +1,7 @@
 package com.example.group15_lab2
 
 import android.Manifest
-import android.app.Activity.RESULT_OK
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -18,19 +18,19 @@ import android.provider.MediaStore
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_edit_profile.*
+import kotlinx.android.synthetic.main.fragment_item_edit.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.util.*
 
-class EditProfileFragment : Fragment() {
+class ItemEditFragment : Fragment() {
 
+    private lateinit var itemEdit: Item
     private var imageByteArray:ByteArray?=null
     private var rotation:Float = 0F
     private val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
@@ -39,9 +39,11 @@ class EditProfileFragment : Fragment() {
     private val REQUEST_SELECT_GALLERY_PHOTO = 20
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 21
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_edit_profile,container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_item_edit, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,43 +56,52 @@ class EditProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         registerForContextMenu(activity!!.findViewById(R.id.camera_button))
-        camera_button.setOnClickListener {v -> activity!!.openContextMenu(v)}
+        imageEdit.setOnClickListener {v -> activity!!.openContextMenu(v)}
 
-        if(savedInstanceState==null) {
-            rotation = arguments?.getFloat("group15.lab2.AVATAR_ROTATION") ?: 0F
-            showImage(arguments?.getByteArray("group15.lab2.AVATAR"), rotation)
-            user_fullname_edit.setText(arguments?.getString("group15.lab2.FULL_NAME"))
-            user_nickname_edit.setText(arguments?.getString("group15.lab2.NICKNAME"))
-            user_email_edit.setText(arguments?.getString("group15.lab2.EMAIL"))
-            user_location_edit.setText(arguments?.getString("group15.lab2.LOCATION"))
-            user_address_edit.setText(arguments?.getString("group15.lab2.ADDRESS"))
-            user_telephone_edit.setText(arguments?.getString("group15.lab2.TELEPHONE"))
+        if(savedInstanceState == null) {
+            val jsonStringItem:String? = sharedPref.getString(arguments?.getString("group15.lab2.KEY").toString(),null)
+            if(jsonStringItem != null){
+                itemEdit = Gson().fromJson(jsonStringItem, Item::class.java)
+                titleEditText.hint = itemEdit.title
+                priceEditText.hint = itemEdit.price.toString()
+                expireEditText.hint = itemEdit.expireDate
+                categoryEditText.hint = itemEdit.category
+                subCategoryEditText.hint = itemEdit.subcategory
+                locationEditText.hint = itemEdit.location
+                deliveryEditText.hint = itemEdit.delivery
+                descriptionEditText.hint = itemEdit.description
+                rotation = itemEdit.imageRotation
+                val jsonStringImage:String? = sharedPref.getString(itemEdit.getFile(),null)
+                if(jsonStringImage != null){
+                    itemEdit = Gson().fromJson(jsonStringImage,Item::class.java)
+                }
+            }
         } else{
             rotation=savedInstanceState.getFloat("ROTATION_E", 0F)
-            showImage(savedInstanceState.getByteArray("AVATAR_E"),rotation)
+            showImage(savedInstanceState.getByteArray("IMAGE_E"),rotation)
         }
 
-        rotate_button.setOnClickListener{
+        rotateButton.setOnClickListener{
             rotation+=90
             if(rotation>=360) rotation=0F
-            var source = (user_avatar_edit.drawable as BitmapDrawable).bitmap
+            var source = (imageEdit.drawable as BitmapDrawable).bitmap
             source=rotateImage(source,90F)
-            user_avatar_edit.setImageBitmap(source)
+            imageEdit.setImageBitmap(source)
         }
     }
 
-    private fun showImage(byteArray: ByteArray?,rotation:Float){
+    private fun showImage(byteArray: ByteArray?, rotation:Float){
         if(byteArray!=null){
             imageByteArray=byteArray
             var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
             if(rotation!=0F)
                 imageBitmap=rotateImage(imageBitmap,rotation)
-            user_avatar_edit.setImageBitmap(imageBitmap)
-            rotate_button.visibility=View.VISIBLE
+            imageEdit.setImageBitmap(imageBitmap)
+            rotateButton.visibility=View.VISIBLE
         }
         else {
-            user_avatar_edit.setImageResource(R.drawable.user_icon)
-            rotate_button.visibility=View.INVISIBLE
+            imageEdit.setImageResource(R.drawable.user_icon)
+            rotateButton.visibility=View.INVISIBLE
         }
     }
 
@@ -103,7 +114,7 @@ class EditProfileFragment : Fragment() {
         return when (item.itemId) {
             R.id.save_button -> {
                 savePreferences()
-                saveImage(imageByteArray)
+                saveImage(imageByteArray, itemEdit.getFile())
                 findNavController().popBackStack()
                 true
             }
@@ -111,12 +122,12 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-    private fun saveImage(byteArray: ByteArray?){
+    private fun saveImage(byteArray: ByteArray?, imageFile: String){
         if(byteArray!=null){
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this.activity != null)
                 checkEnoughFreeMemory(byteArray)
             try{
-                this.activity?.openFileOutput(FILE_UserProfile_Avatar, Context.MODE_PRIVATE)?.write(byteArray)
+                this.activity?.openFileOutput(imageFile, Context.MODE_PRIVATE)?.write(byteArray)
             } catch (exc:Exception){
                 exc.printStackTrace()
             }
@@ -143,13 +154,21 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun savePreferences(){
-        val profile = Profile(user_fullname_edit.text.toString(),user_nickname_edit.text.toString(),
-            user_email_edit.text.toString(),user_location_edit.text.toString(),
-            user_address_edit.text.toString(),user_telephone_edit.text.toString(),rotation)
+        val item = Item(
+            titleEditText.text.toString(),
+            priceEditText.text.toString().toInt(),
+            expireEditText.text.toString(),
+            categoryEditText.text.toString(),
+            subCategoryEditText.text.toString(),
+            locationEditText.text.toString(),
+            deliveryEditText.text.toString(),
+            descriptionEditText.text.toString(),
+            rotation
+        )
 
-        val jsonString:String = Gson().toJson(profile)
+        val jsonString:String = Gson().toJson(item)
 
-        sharedPref.edit().putString(KEY_UserProfile,jsonString).apply()
+        sharedPref.edit().putString(item.getKey(),jsonString).apply()
     }
 
 
@@ -213,29 +232,29 @@ class EditProfileFragment : Fragment() {
         var stream = ByteArrayOutputStream()
         image.compress(Bitmap.CompressFormat.JPEG, quality, stream)
         imageByteArray = stream.toByteArray()
-        rotate_button.visibility = View.VISIBLE
+        rotateButton.visibility = View.VISIBLE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         //New image via camera
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap?
             if(imageBitmap!=null) {
-                user_avatar_edit.setImageBitmap(imageBitmap)
+                imageEdit.setImageBitmap(imageBitmap)
                 setImageByteArray(imageBitmap,100)
             }
         }
 
         //New image from gallery
-        if (requestCode == REQUEST_SELECT_GALLERY_PHOTO && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_SELECT_GALLERY_PHOTO && resultCode == Activity.RESULT_OK) {
             val imageUri = data?.data
             if (imageUri != null) {
                 val imageBitmap = handleSamplingBitmap(activity!!,imageUri)
                 if(imageBitmap!=null) {
                     setImageByteArray(imageBitmap, 50)
-                    user_avatar_edit.setImageBitmap(imageBitmap)
+                    imageEdit.setImageBitmap(imageBitmap)
                 }
             }
         }
@@ -310,8 +329,10 @@ class EditProfileFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         with(outState){
-            putByteArray("AVATAR_E",imageByteArray)
+            putByteArray("IMAGE_E",imageByteArray)
             putFloat("ROTATION_E", rotation)
         }
     }
+
+
 }

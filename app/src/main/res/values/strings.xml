@@ -25,4 +25,7 @@
     <string name="menu_camera">Use the camera to take a picture</string>
 
     <string name="home_second">Home Second</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

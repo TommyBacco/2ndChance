@@ -21,7 +21,6 @@ class ShowProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_show_profile,container,false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         populateTextView()
@@ -43,7 +42,7 @@ class ShowProfileFragment : Fragment() {
                 user_location.text = location
                 user_address.text = address
                 user_telephone.text = telephone
-                imageRotation= rotation
+                imageRotation = rotation
             }
         }
     }
@@ -62,12 +61,11 @@ class ShowProfileFragment : Fragment() {
             var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
             if(rotation!=0F)
                 imageBitmap=rotateImage(imageBitmap,rotation)
-            user_avatar.setImageBitmap(imageBitmap)
+            item_image.setImageBitmap(imageBitmap)
         }
         else
-            user_avatar.setImageResource(R.drawable.user_icon)
+            item_image.setImageResource(R.drawable.user_icon)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -93,14 +91,14 @@ class ShowProfileFragment : Fragment() {
     private fun editProfile(){
         val bundle = Bundle()
         with(bundle){
-            putByteArray("group15.lab1.AVATAR",imageByteArray)
-            putFloat("group15.lab1.AVATAR_ROTATION",imageRotation)
-            putString("group15.lab1.FULL_NAME", user_fullname.text.toString())
-            putString("group15.lab1.NICKNAME", user_nickname.text.toString())
-            putString("group15.lab1.EMAIL", user_email.text.toString())
-            putString("group15.lab1.LOCATION", user_location.text.toString())
-            putString("group15.lab1.ADDRESS", user_address.text.toString())
-            putString("group15.lab1.TELEPHONE", user_telephone.text.toString())
+            putByteArray("group15.lab2.AVATAR",imageByteArray)
+            putFloat("group15.lab2.AVATAR_ROTATION",imageRotation)
+            putString("group15.lab2.FULL_NAME", user_fullname.text.toString())
+            putString("group15.lab2.NICKNAME", user_nickname.text.toString())
+            putString("group15.lab2.EMAIL", user_email.text.toString())
+            putString("group15.lab2.LOCATION", user_location.text.toString())
+            putString("group15.lab2.ADDRESS", user_address.text.toString())
+            putString("group15.lab2.TELEPHONE", user_telephone.text.toString())
         }
         findNavController().navigate(R.id.action_showProfileFragment_to_editProfileFragment,bundle)
     }

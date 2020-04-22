@@ -27,7 +27,6 @@ class ItemAdapter(val users:ArrayList<Item>): RecyclerView.Adapter<ItemAdapter.V
        return ViewHolder(v,clickListener)
     }
 
-
     override fun getItemCount() = users.size
 
     override fun onBindViewHolder(holder: ItemAdapter.ViewHolder, position: Int) {
@@ -55,11 +54,9 @@ class ItemAdapter(val users:ArrayList<Item>): RecyclerView.Adapter<ItemAdapter.V
 
 
         fun bind(item:Item){
-            name.text = item.name
-            price.text = item.price
-            image.setImageResource(item.image)
-
-
+            name.text = item.title
+            price.text = item.price.toString()
+            //image.setImageResource(item.image)
         }
     }
 

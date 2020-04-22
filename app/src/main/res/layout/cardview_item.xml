@@ -45,6 +45,19 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
 
+        <TextView
+            android:id="@+id/cardview_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardview_name"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_toEndOf="@+id/cardview_price"
+            android:layout_toRightOf="@id/cardview_image"
+            android:text="€"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
         <ImageView
             android:id="@+id/cardview_edit"
             android:layout_width="30dp"
