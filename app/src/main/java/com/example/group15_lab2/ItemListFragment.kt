@@ -42,7 +42,7 @@ class ItemListFragment : Fragment() {
         sharedPref.edit().putString(myData[4].getKey(), Gson().toJson(myData[4])).apply()
 
         recyclerView.layoutManager = LinearLayoutManager(context)
-        var myAdapter = ItemAdapter(myData)
+        val myAdapter = ItemAdapter(myData)
         recyclerView.adapter = myAdapter
 
         myAdapter.setOnItemClickListener(object : ItemAdapter.ClickListener{
@@ -57,9 +57,7 @@ class ItemListFragment : Fragment() {
             override fun onItemEdit(position: Int) {
                 Toast.makeText(context,"EDIT on ${myData[position].title}",Toast.LENGTH_SHORT).show()
                 val bundle = Bundle()
-                with(bundle){
-                    putString("group15.lab2.KEY", myData[position].getKey())
-                }
+                with(bundle){ putString("group15.lab2.KEY", myData[position].getKey()) }
                 findNavController().navigate(R.id.action_itemListFragment_to_itemEditFragment, bundle)
             }
         })
