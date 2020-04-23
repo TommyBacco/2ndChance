@@ -21,6 +21,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 import java.io.ByteArrayOutputStream
@@ -54,6 +55,8 @@ class EditProfileFragment : Fragment() {
 
         registerForContextMenu(activity!!.findViewById(R.id.camera_button))
         camera_button.setOnClickListener {v -> activity!!.openContextMenu(v)}
+
+        activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)?.hide()
 
         if(savedInstanceState == null) {
             rotation = arguments?.getFloat("group15.lab2.AVATAR_ROTATION") ?: 0F

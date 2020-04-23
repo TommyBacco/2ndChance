@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_item_list.*
 
@@ -40,6 +41,8 @@ class ItemListFragment : Fragment() {
         sharedPref.edit().putString(myData[2].getKey(), Gson().toJson(myData[2])).apply()
         sharedPref.edit().putString(myData[3].getKey(), Gson().toJson(myData[3])).apply()
         sharedPref.edit().putString(myData[4].getKey(), Gson().toJson(myData[4])).apply()
+
+        activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)?.show()
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         val myAdapter = ItemAdapter(myData)

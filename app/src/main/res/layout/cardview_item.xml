@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardBackgroundColor="@color/design_default_color_primary"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="@color/myColorPrimaryLight"
     app:cardCornerRadius="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="4dp"
-        android:padding="4dp">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/cardview_image"
@@ -36,7 +37,8 @@
             android:layout_toEndOf="@+id/cardview_image"
             android:text="@string/default_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/background_light" />
+            android:textColor="@color/myColorPrimaryText"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/cardview_price"
@@ -47,7 +49,7 @@
             android:layout_marginEnd="4dp"
             android:text="@string/default_price"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/background_light" />
+            android:textColor="@color/myColorAccent" />
 
 
         <TextView
@@ -58,7 +60,7 @@
             android:layout_toEndOf="@+id/cardview_price"
             android:text="@string/currency"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/background_light" />
+            android:textColor="@color/myColorAccent" />
 
         <ImageView
             android:id="@+id/cardview_edit"

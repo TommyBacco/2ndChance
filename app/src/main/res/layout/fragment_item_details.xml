@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFFFF"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -23,7 +22,7 @@
             android:text="@string/default_title"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#000000"
+            android:textColor="@color/myColorPrimaryText"
             android:textStyle="bold" />
 
         <TextView
@@ -37,6 +36,7 @@
             android:layout_marginBottom="12dp"
             android:text="@string/item_category"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/myColorSecondaryText"
             android:textStyle="italic" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_toEndOf="@+id/category"
             android:text="@string/default_category"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#000000" />
+            android:textColor="@color/myColorPrimaryText" />
 
         <TextView
             android:id="@+id/kind"
@@ -63,6 +63,7 @@
             android:layout_marginBottom="8dp"
             android:text="@string/item_subcategory"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/myColorSecondaryText"
             android:textStyle="italic" />
 
         <TextView
@@ -74,7 +75,7 @@
             android:layout_toEndOf="@+id/kind"
             android:text="@string/default_subcategory"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#000000" />
+            android:textColor="@color/myColorPrimaryText" />
 
         <ImageView
             android:id="@+id/item_image"
@@ -98,7 +99,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFFFF"
+            android:background="#00FFFFFF"
             android:padding="16dp">
 
             <TextView
@@ -111,6 +112,7 @@
                 android:layout_marginBottom="12dp"
                 android:text="@string/item_price"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/myColorSecondaryText"
                 android:textStyle="italic" />
 
             <TextView
@@ -123,7 +125,7 @@
                 android:layout_toEndOf="@id/price"
                 android:text="@string/default_price"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#e61919"
+                android:textColor="@color/myColorAccent"
                 android:textStyle="bold" />
 
             <TextView
@@ -135,7 +137,7 @@
                 android:layout_toEndOf="@+id/item_price"
                 android:text="@string/currency"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#e61919"
+                android:textColor="@color/myColorAccent"
                 android:textStyle="bold" />
 
             <TextView
@@ -148,6 +150,7 @@
                 android:layout_marginBottom="12dp"
                 android:text="@string/item_ExpireDate"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/myColorSecondaryText"
                 android:textStyle="italic" />
 
             <TextView
@@ -160,7 +163,7 @@
                 android:layout_toEndOf="@+id/date"
                 android:text="@string/default_ExpireDate"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000000"
+                android:textColor="@color/myColorAccent"
                 android:textStyle="bold" />
 
             <TextView
@@ -173,6 +176,7 @@
                 android:layout_marginBottom="12dp"
                 android:text="@string/item_location"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/myColorSecondaryText"
                 android:textStyle="italic" />
 
             <TextView
@@ -185,7 +189,7 @@
                 android:layout_toEndOf="@+id/location"
                 android:text="@string/default_location"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000000" />
+                android:textColor="@color/myColorPrimaryText" />
 
             <TextView
                 android:id="@+id/delivery"
@@ -198,6 +202,7 @@
                 android:layout_marginBottom="12dp"
                 android:text="@string/item_delivery"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/myColorSecondaryText"
                 android:textStyle="italic" />
 
             <TextView
@@ -209,7 +214,7 @@
                 android:layout_toEndOf="@+id/delivery"
                 android:text="@string/default_delivery"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000000" />
+                android:textColor="@color/myColorPrimaryText" />
 
             <TextView
                 android:id="@+id/description"
@@ -220,6 +225,7 @@
                 android:layout_marginBottom="4dp"
                 android:text="@string/item_description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/myColorSecondaryText"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -230,7 +236,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="5dp"
                 android:text="@string/default_description"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/myColorSecondaryText" />
 
 
         </RelativeLayout>

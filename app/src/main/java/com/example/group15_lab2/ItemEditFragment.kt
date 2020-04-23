@@ -21,6 +21,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_item_edit.*
 import java.io.ByteArrayOutputStream
@@ -64,6 +65,8 @@ class ItemEditFragment : Fragment() {
             source = rotateImage(source, 90F)
             imageEdit.setImageBitmap(source)
         }
+
+        activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)?.hide()
 
         if(savedInstanceState == null) {
             val jsonStringItem: String? = sharedPref.getString(arguments?.getString("group15.lab2.KEY").toString(),null)

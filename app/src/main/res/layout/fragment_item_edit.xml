@@ -18,9 +18,10 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="12dp"
+                android:layout_weight="1">
 
                 <ImageView
                     android:id="@+id/imageEdit"
@@ -45,93 +46,127 @@
                     android:src="@android:drawable/ic_menu_rotate" />
             </RelativeLayout>
 
-            <EditText
-                android:id="@+id/titleEditText"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_title"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                android:layout_weight="4">
 
-            <EditText
-                android:id="@+id/priceEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_price"
-                android:importantForAutofill="no"
-                android:inputType="number" />
+                <EditText
+                    android:id="@+id/titleEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:hint="@string/default_title"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/myColorPrimaryText"
+                    android:textColorHint="@color/myColorSecondaryText" />
 
-            <EditText
-                android:id="@+id/expireEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_ExpireDate"
-                android:importantForAutofill="no"
-                android:inputType="date" />
+                <EditText
+                    android:id="@+id/priceEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/titleEditText"
+                    android:layout_alignStart="@+id/titleEditText"
+                    android:layout_alignEnd="@+id/titleEditText"
+                    android:layout_marginBottom="24dp"
+                    android:hint="@string/default_price"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:textColor="@color/myColorPrimaryText"
+                    android:textColorHint="@color/myColorSecondaryText" />
 
-            <EditText
-                android:id="@+id/categoryEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_category"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                <EditText
+                    android:id="@+id/expireEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/priceEditText"
+                    android:layout_alignStart="@+id/titleEditText"
+                    android:layout_alignEnd="@+id/titleEditText"
+                    android:layout_marginBottom="24dp"
+                    android:hint="@string/default_ExpireDate"
+                    android:importantForAutofill="no"
+                    android:inputType="date"
+                    android:textColor="@color/myColorPrimaryText"
+                    android:textColorHint="@color/myColorSecondaryText" />
 
-            <EditText
-                android:id="@+id/subCategoryEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_subcategory"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                <EditText
+                    android:id="@+id/categoryEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/expireEditText"
+                    android:layout_alignStart="@+id/titleEditText"
+                    android:layout_alignEnd="@+id/titleEditText"
+                    android:layout_marginBottom="24dp"
+                    android:hint="@string/default_category"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/myColorPrimaryText"
+                    android:textColorHint="@color/myColorSecondaryText" />
 
-            <EditText
-                android:id="@+id/locationEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_location"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                <EditText
+                    android:id="@+id/subCategoryEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/categoryEditText"
+                    android:layout_alignStart="@+id/titleEditText"
+                    android:layout_alignEnd="@+id/titleEditText"
+                    android:layout_marginBottom="24dp"
+                    android:hint="@string/default_subcategory"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/myColorPrimaryText"
+                    android:textColorHint="@color/myColorSecondaryText" />
 
-            <EditText
-                android:id="@+id/deliveryEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_delivery"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                <EditText
+                    android:id="@+id/locationEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/subCategoryEditText"
+                    android:layout_alignStart="@+id/titleEditText"
+                    android:layout_alignEnd="@+id/titleEditText"
+                    android:layout_marginBottom="24dp"
+                    android:hint="@string/default_location"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/myColorPrimaryText"
+                    android:textColorHint="@color/myColorSecondaryText" />
 
-            <EditText
-                android:id="@+id/descriptionEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_description"
-                android:importantForAutofill="no"
-                android:inputType="textImeMultiLine" />
+                <EditText
+                    android:id="@+id/deliveryEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/locationEditText"
+                    android:layout_alignStart="@+id/titleEditText"
+                    android:layout_alignEnd="@+id/titleEditText"
+                    android:layout_marginBottom="24dp"
+                    android:hint="@string/default_delivery"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/myColorPrimaryText"
+                    android:textColorHint="@color/myColorSecondaryText" />
+
+                <EditText
+                    android:id="@+id/descriptionEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/deliveryEditText"
+                    android:layout_alignStart="@+id/titleEditText"
+                    android:layout_alignEnd="@+id/titleEditText"
+                    android:layout_marginBottom="24dp"
+                    android:hint="@string/default_description"
+                    android:importantForAutofill="no"
+                    android:inputType="textImeMultiLine"
+                    android:textColor="@color/myColorPrimaryText"
+                    android:textColorHint="@color/myColorSecondaryText" />
+
+            </RelativeLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

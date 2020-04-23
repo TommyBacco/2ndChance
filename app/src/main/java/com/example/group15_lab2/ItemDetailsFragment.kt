@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_item_details.*
 
@@ -23,6 +24,9 @@ class ItemDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)?.show()
+
         val jsonString:String? = sharedPref.getString(arguments?.getString("group15.lab2.KEY").toString(),null)
         if(jsonString != null) {
             itemShow = Gson().fromJson(jsonString, Item::class.java)

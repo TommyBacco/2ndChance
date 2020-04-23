@@ -3,9 +3,6 @@ package com.example.group15_lab2
 import android.graphics.Bitmap
 import android.graphics.Matrix
 
-val DEFAULT_IMAGE_PROFILE = "Default_Image_Profile"
-val DEFAULT_IMAGE_ITEM = "Default_Image_Item"
-
 val KEY_UserProfile = "Profile_Details"
 val FILE_UserProfile_Avatar = "User_Image_Avatar"
 
