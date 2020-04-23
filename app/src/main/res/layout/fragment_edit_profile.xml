@@ -60,7 +60,7 @@
                 android:id="@+id/user_fullname_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/fullname"
+                android:hint="@string/profile_fullname"
                 android:imeOptions="actionDone"
                 android:inputType="textCapWords"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -69,7 +69,7 @@
                 android:id="@+id/user_nickname_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/nickname"
+                android:hint="@string/profile_nickname"
                 android:inputType="text"
                 android:imeOptions="actionDone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -78,7 +78,7 @@
                 android:id="@+id/user_email_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
+                android:hint="@string/profile_email"
                 android:inputType="textEmailAddress"
                 android:imeOptions="actionDone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -87,7 +87,7 @@
                 android:id="@+id/user_location_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/area"
+                android:hint="@string/profile_area"
                 android:inputType="textCapSentences"
                 android:imeOptions="actionDone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -96,7 +96,7 @@
                 android:id="@+id/user_address_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/address"
+                android:hint="@string/profile_address"
                 android:imeOptions="actionDone"
                 android:inputType="textPostalAddress"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -105,7 +105,7 @@
                 android:id="@+id/user_telephone_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/telephone"
+                android:hint="@string/profile_telephone"
                 android:imeOptions="actionDone"
                 android:inputType="phone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />

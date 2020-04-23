@@ -10,22 +10,41 @@
     <string name="menu_home">Home</string>
     <string name="menu_slideshow">Slideshow</string>
 
+    <string name="profile_fullname">Full Name</string>
+    <string name="profile_image">Image</string>
+    <string name="profile_nickname">Nickname</string>
+    <string name="profile_email">email@address.com</string>
+    <string name="profile_area">Area of interest</string>
+    <string name="profile_address">Address</string>
+    <string name="profile_telephone">Telephone number</string>
 
-    <string name="fullname">Full Name</string>
-    <string name="nickname">Nickname</string>
-    <string name="email">email@address.com</string>
-    <string name="area">Area of interest</string>
-    <string name="address">Address</string>
-    <string name="telephone">Telephone number</string>
-
-    <string name="pencil_button">pencil button</string>
+    <string name="pencil_button">Edit</string>
     <string name="save_button">Save</string>
+    <string name="rotate_button">Rotate</string>
 
     <string name="menu_gallery">Select an image from the gallery</string>
     <string name="menu_camera">Use the camera to take a picture</string>
 
     <string name="home_second">Home Second</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item_image">Image:</string>
+    <string name="item_price">Price:</string>
+    <string name="item_ExpireDate">Expire Date:</string>
+    <string name="item_category">Category:</string>
+    <string name="item_subcategory">Sub-category:</string>
+    <string name="item_location">Location:</string>
+    <string name="item_delivery">Delivery Type:</string>
+    <string name="item_description">Description:</string>
+
+    <string name="default_title">Title</string>
+    <string name="default_price">Price</string>
+    <string name="default_ExpireDate">30/04/2020</string>
+    <string name="default_category">Category</string>
+    <string name="default_subcategory">Sub-category</string>
+    <string name="default_location">Location</string>
+    <string name="default_delivery">Standard</string>
+    <string name="default_description">Description</string>
+
+    <string name="currency">€</string>
+
 </resources>

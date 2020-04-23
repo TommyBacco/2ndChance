@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="12dp"
     tools:context=".ItemEditFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -20,13 +19,17 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
 
                 <ImageView
                     android:id="@+id/imageEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:contentDescription="@string/item_image"
                     app:srcCompat="@drawable/item_icon" />
 
                 <ImageButton
@@ -38,6 +41,7 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginBottom="149dp"
                     android:backgroundTint="#00FFFFFF"
+                    android:contentDescription="@string/rotate_button"
                     android:src="@android:drawable/ic_menu_rotate" />
             </RelativeLayout>
 
@@ -45,64 +49,88 @@
                 android:id="@+id/titleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Title"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:hint="@string/default_title"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/priceEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Price"
-                android:inputType="textPersonName" />
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:hint="@string/default_price"
+                android:importantForAutofill="no"
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/expireEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Expire Date"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:hint="@string/default_ExpireDate"
+                android:importantForAutofill="no"
                 android:inputType="date" />
 
             <EditText
                 android:id="@+id/categoryEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Category"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:hint="@string/default_category"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/subCategoryEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Sub-category"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:hint="@string/default_subcategory"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/locationEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Location"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:hint="@string/default_location"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/deliveryEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Delivery Type"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:hint="@string/default_delivery"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/descriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Description"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:hint="@string/default_description"
+                android:importantForAutofill="no"
                 android:inputType="textImeMultiLine" />
 
         </LinearLayout>

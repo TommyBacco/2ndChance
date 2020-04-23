@@ -56,11 +56,11 @@ class ShowProfileFragment : Fragment() {
     }
 
     private fun showImage(byteArray: ByteArray?,rotation:Float){
-        if(byteArray!=null){
-            imageByteArray=byteArray
+        if(byteArray != null){
+            imageByteArray = byteArray
             var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
             if(rotation!=0F)
-                imageBitmap=rotateImage(imageBitmap,rotation)
+                imageBitmap = rotateImage(imageBitmap, rotation)
             item_image.setImageBitmap(imageBitmap)
         }
         else
@@ -100,6 +100,6 @@ class ShowProfileFragment : Fragment() {
             putString("group15.lab2.ADDRESS", user_address.text.toString())
             putString("group15.lab2.TELEPHONE", user_telephone.text.toString())
         }
-        findNavController().navigate(R.id.action_showProfileFragment_to_editProfileFragment,bundle)
+        findNavController().navigate(R.id.action_showProfileFragment_to_editProfileFragment, bundle)
     }
 }

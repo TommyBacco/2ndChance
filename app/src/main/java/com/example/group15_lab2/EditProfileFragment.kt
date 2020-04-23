@@ -18,7 +18,6 @@ import android.provider.MediaStore
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -46,7 +45,7 @@ class EditProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-        retainInstance=true
+        retainInstance = true
         super.onCreate(savedInstanceState)
     }
 
@@ -56,7 +55,7 @@ class EditProfileFragment : Fragment() {
         registerForContextMenu(activity!!.findViewById(R.id.camera_button))
         camera_button.setOnClickListener {v -> activity!!.openContextMenu(v)}
 
-        if(savedInstanceState==null) {
+        if(savedInstanceState == null) {
             rotation = arguments?.getFloat("group15.lab2.AVATAR_ROTATION") ?: 0F
             showImage(arguments?.getByteArray("group15.lab2.AVATAR"), rotation)
             user_fullname_edit.setText(arguments?.getString("group15.lab2.FULL_NAME"))
@@ -65,32 +64,32 @@ class EditProfileFragment : Fragment() {
             user_location_edit.setText(arguments?.getString("group15.lab2.LOCATION"))
             user_address_edit.setText(arguments?.getString("group15.lab2.ADDRESS"))
             user_telephone_edit.setText(arguments?.getString("group15.lab2.TELEPHONE"))
-        } else{
+        } else {
             rotation=savedInstanceState.getFloat("ROTATION_E", 0F)
             showImage(savedInstanceState.getByteArray("AVATAR_E"),rotation)
         }
 
         rotate_button.setOnClickListener{
-            rotation+=90
-            if(rotation>=360) rotation=0F
+            rotation += 90
+            if(rotation >= 360) rotation = 0F
             var source = (user_avatar_edit.drawable as BitmapDrawable).bitmap
-            source=rotateImage(source,90F)
+            source = rotateImage(source, 90F)
             user_avatar_edit.setImageBitmap(source)
         }
     }
 
-    private fun showImage(byteArray: ByteArray?,rotation:Float){
-        if(byteArray!=null){
-            imageByteArray=byteArray
+    private fun showImage(byteArray: ByteArray?, rotation:Float){
+        if(byteArray != null){
+            imageByteArray = byteArray
             var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            if(rotation!=0F)
-                imageBitmap=rotateImage(imageBitmap,rotation)
+            if(rotation != 0F)
+                imageBitmap = rotateImage(imageBitmap, rotation)
             user_avatar_edit.setImageBitmap(imageBitmap)
-            rotate_button.visibility=View.VISIBLE
+            rotate_button.visibility = View.VISIBLE
         }
         else {
             user_avatar_edit.setImageResource(R.drawable.user_icon)
-            rotate_button.visibility=View.INVISIBLE
+            rotate_button.visibility = View.INVISIBLE
         }
     }
 
@@ -134,7 +133,6 @@ class EditProfileFragment : Fragment() {
         if (availableBytes >= NUM_BYTES_NEEDED_FOR_MY_APP) {
             storageManager.allocateBytes(
                 appSpecificInternalDirUuid, NUM_BYTES_NEEDED_FOR_MY_APP)
-
         } else {// Display prompt to user, requesting that they choose files to remove.
             Intent().apply {
                 action = StorageManager.ACTION_MANAGE_STORAGE
@@ -143,9 +141,14 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun savePreferences(){
-        val profile = Profile(user_fullname_edit.text.toString(),user_nickname_edit.text.toString(),
-            user_email_edit.text.toString(),user_location_edit.text.toString(),
-            user_address_edit.text.toString(),user_telephone_edit.text.toString(),rotation)
+        val profile = Profile(
+            user_fullname_edit.text.toString(),
+            user_nickname_edit.text.toString(),
+            user_email_edit.text.toString(),
+            user_location_edit.text.toString(),
+            user_address_edit.text.toString(),
+            user_telephone_edit.text.toString(),
+            rotation)
 
         val jsonString:String = Gson().toJson(profile)
 

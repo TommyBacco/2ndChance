@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#FFFFFFFF"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,21 +18,24 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="12dp"
-            android:text="title"
+            android:text="@string/default_title"
             android:textAllCaps="true"
-            android:textColor="#000000"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#000000"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/item_title"
-            android:layout_marginRight="5dp"
+            android:layout_below="@+id/item_title"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginBottom="12dp"
-            android:text="Category:"
+            android:text="@string/item_category"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="italic" />
 
@@ -42,10 +43,12 @@
             android:id="@+id/item_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/item_title"
+            android:layout_alignTop="@+id/category"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@id/category"
-            android:text="Mycategory..."
+            android:layout_toEndOf="@+id/category"
+            android:text="@string/default_category"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#000000" />
 
@@ -54,9 +57,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/category"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="5dp"
-            android:text="Sub-category:"
+            android:layout_alignStart="@+id/category"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/item_subcategory"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="italic" />
 
@@ -64,53 +69,59 @@
             android:id="@+id/item_sub_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/category"
-            android:layout_toRightOf="@id/kind"
-            android:text="Subcategory..."
+            android:layout_alignTop="@+id/kind"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/kind"
+            android:text="@string/default_subcategory"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#000000" />
 
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/kind"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="@string/item_image"
+            android:gravity="center"
+            app:srcCompat="@drawable/item_icon" />
 
-    <ImageView
-        android:id="@+id/item_image"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        app:srcCompat="@drawable/item_icon" />
+    </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2">
+        android:layout_weight="1">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFFFF">
+            android:background="#FFFFFFFF"
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginBottom="8dp"
-                android:text="Price:"
-                android:textStyle="italic"
-                android:layout_marginRight="5dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="12dp"
+                android:text="@string/item_price"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="2dp"
+                android:layout_marginEnd="2dp"
                 android:layout_marginBottom="8dp"
-                android:layout_toRightOf="@id/price"
-                android:text="123"
+                android:layout_toEndOf="@id/price"
+                android:text="@string/default_price"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#e61919"
                 android:textStyle="bold" />
@@ -120,21 +131,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@id/item_price"
                 android:layout_marginBottom="8dp"
-                android:text="€"
-                android:textStyle="bold"
+                android:layout_toEndOf="@+id/item_price"
+                android:text="@string/currency"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#e61919"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/price"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="8dp"
-                android:text="Expire date:"
+                android:layout_below="@+id/price"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="12dp"
+                android:text="@string/item_ExpireDate"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textStyle="italic" />
 
@@ -142,10 +154,11 @@
                 android:id="@+id/item_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/price"
+                android:layout_alignTop="@+id/date"
+                android:layout_marginTop="0dp"
                 android:layout_marginBottom="8dp"
-                android:layout_toRightOf="@id/date"
-                android:text="30/04/20"
+                android:layout_toEndOf="@+id/date"
+                android:text="@string/default_ExpireDate"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -154,10 +167,11 @@
                 android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/date"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="8dp"
-                android:text="Location:"
+                android:layout_below="@+id/date"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="12dp"
+                android:text="@string/item_location"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textStyle="italic" />
 
@@ -165,10 +179,11 @@
                 android:id="@+id/item_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/item_date"
+                android:layout_alignTop="@+id/location"
+                android:layout_marginStart="0dp"
                 android:layout_marginBottom="8dp"
-                android:layout_toRightOf="@id/location"
-                android:text="MyLocation"
+                android:layout_toEndOf="@+id/location"
+                android:text="@string/default_location"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#000000" />
 
@@ -176,10 +191,12 @@
                 android:id="@+id/delivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/location"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="8dp"
-                android:text="Delivery type:"
+                android:layout_below="@+id/location"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="12dp"
+                android:text="@string/item_delivery"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textStyle="italic" />
 
@@ -187,29 +204,32 @@
                 android:id="@+id/item_delivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/item_location"
-                android:layout_marginBottom="12dp"
-                android:layout_toRightOf="@id/delivery"
-                android:text="Delivery"
+                android:layout_alignTop="@+id/delivery"
+                android:layout_marginBottom="8dp"
+                android:layout_toEndOf="@+id/delivery"
+                android:text="@string/default_delivery"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#000000" />
+
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/delivery"
-                android:layout_marginBottom="5dp"
-                android:text="Description"
-                android:textStyle="bold|italic"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:layout_below="@+id/delivery"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="4dp"
+                android:text="@string/item_description"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/item_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/description"
-                android:text="Item description..."
-                android:layout_marginLeft="5dp"
+                android:layout_below="@+id/description"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="5dp"
+                android:text="@string/default_description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
 

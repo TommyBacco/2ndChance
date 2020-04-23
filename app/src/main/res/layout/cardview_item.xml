@@ -1,71 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="4dp"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/design_default_color_primary"
+    app:cardCornerRadius="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="4dp"
         android:padding="4dp">
-        
+
         <ImageView
             android:id="@+id/cardview_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_margin="4dp"/>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/item_image"
+            app:srcCompat="@drawable/item_icon" />
 
         <TextView
             android:id="@+id/cardview_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_toRightOf="@id/cardview_image"
-            android:text="Name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:layout_alignTop="@+id/cardview_image"
+            android:layout_marginBottom="8dp"
+            android:layout_toEndOf="@+id/cardview_image"
+            android:text="@string/default_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/background_light" />
 
         <TextView
             android:id="@+id/cardview_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cardview_name"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
+            android:layout_below="@+id/cardview_name"
+            android:layout_alignStart="@+id/cardview_name"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_toRightOf="@id/cardview_image"
-            android:text="Price"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:text="@string/default_price"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/background_light" />
 
 
         <TextView
             android:id="@+id/cardview_currency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cardview_name"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_alignTop="@+id/cardview_price"
             android:layout_toEndOf="@+id/cardview_price"
-            android:layout_toRightOf="@id/cardview_image"
-            android:text="€"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:text="@string/currency"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/background_light" />
 
         <ImageView
             android:id="@+id/cardview_edit"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_edit"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_margin="4dp"/>
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/pencil_button"
+            android:src="@drawable/ic_edit"
+            app:srcCompat="@android:drawable/ic_menu_edit" />
 
     </RelativeLayout>
 
