@@ -94,8 +94,8 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_save, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_save, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -157,8 +157,8 @@ class EditProfileFragment : Fragment() {
     }
 
 
-    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
-        menu?.setHeaderTitle("Choose a new image")
+    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+        menu.setHeaderTitle("Choose a new image")
         activity?.menuInflater?.inflate(R.menu.menu_camera, menu)
     }
 

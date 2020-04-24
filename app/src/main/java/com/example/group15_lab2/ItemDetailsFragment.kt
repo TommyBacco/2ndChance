@@ -89,8 +89,8 @@ class ItemDetailsFragment : Fragment() {
             item_image.setImageResource(R.drawable.item_icon)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_pencil, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_pencil, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
