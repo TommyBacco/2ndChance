@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_item_details.*
 
 class ItemDetailsFragment : Fragment() {
 
-    private var itemLastID: Int = 0
+    private var itemID: Int = 0
     private val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
     private var imageByteArray: ByteArray? = null
 
@@ -29,14 +29,15 @@ class ItemDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        itemLastID = sharedPref.getInt("group15.lab2.ITEM_ID", -1)
-        if(itemLastID != -1){
-            val jsonString = KEY_ItemDetails + itemLastID.toString()
+        itemID = sharedPref.getInt("group15.lab2.ITEM_ID", -1)
+        if(itemID != -1){
+            val jsonString = KEY_ItemDetails + itemID.toString()
             val itemShow = Gson().fromJson(jsonString, Item::class.java)
             populateTextView(itemShow)
             populateImageView(itemShow.imageRotation)
         }
 
+        var itemLastID = sharedPref.getInt("group15.lab2.LAST_ITEM_ID", -1)
         val fab = activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)
         fab?.show()
         fab?.setOnClickListener {
@@ -64,7 +65,7 @@ class ItemDetailsFragment : Fragment() {
 
     private fun populateImageView(rotation: Float){
         try{
-            val byteArray: ByteArray? = context!!.openFileInput(KEY_ItemDetails + itemLastID.toString()).readBytes()
+            val byteArray: ByteArray? = context!!.openFileInput(KEY_ItemDetails + itemID.toString()).readBytes()
             if(byteArray != null){
                 imageByteArray = byteArray
                 var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
@@ -97,7 +98,7 @@ class ItemDetailsFragment : Fragment() {
     private fun editItem(){
         val bundle = Bundle()
         with(bundle){
-            putInt("group15.lab2.ITEM_ID", itemLastID)
+            putInt("group15.lab2.ITEM_ID", itemID)
         }
         findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
     }

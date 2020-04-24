@@ -46,9 +46,9 @@ class ItemListFragment : Fragment() {
         }
         sharedPref.edit().putInt(KEY_ItemLastID, itemLastID).apply()
         emptyMessage.visibility = View.INVISIBLE
-        //items.clear()
+        items.clear()
 
-        //populateItemList()
+        populateItemList()
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         val myAdapter = ItemAdapter(items)
@@ -58,6 +58,7 @@ class ItemListFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 val bundle = Bundle()
                 with(bundle){
+                    putInt("group15.lab2.LAST_ITEM_ID", itemLastID)
                     putInt("group15.lab2.ITEM_ID", position)
                 }
                 findNavController().navigate(R.id.action_itemListFragment_to_itemDetailsFragment, bundle)
