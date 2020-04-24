@@ -16,6 +16,11 @@ import kotlinx.android.synthetic.main.fragment_item_list.*
 
 class ItemListFragment : Fragment() {
 
+    //QUANDO SI EFFETTUA UNA NAVIGAZIONE, AL SUCCESSIVO FRAGMENT VERRA' TRASFERITO SOLAMENTE L'ID DEL CORRISPETTIVO ITEM
+    private val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
+    private var itemLastID: Int = -1
+    private lateinit var items: ArrayList<Item>
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_item_list,container,false)
@@ -24,46 +29,79 @@ class ItemListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val myData = arrayListOf(
-            Item("Item1",1,"30/04/2020"),
-            Item("Item2",2,"29/04/2020"),
-            Item("Item3",3,"28/04/2020"),
-            Item("Item4",4,"27/04/2020"),
-            Item("Item5",5,"26/04/2020"))
-        myData[0].setPosition(0)
-        myData[1].setPosition(1)
-        myData[2].setPosition(2)
-        myData[3].setPosition(3)
-        myData[4].setPosition(4)
-        val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
-        sharedPref.edit().putString(myData[0].getKey(), Gson().toJson(myData[0])).apply()
-        sharedPref.edit().putString(myData[1].getKey(), Gson().toJson(myData[1])).apply()
-        sharedPref.edit().putString(myData[2].getKey(), Gson().toJson(myData[2])).apply()
-        sharedPref.edit().putString(myData[3].getKey(), Gson().toJson(myData[3])).apply()
-        sharedPref.edit().putString(myData[4].getKey(), Gson().toJson(myData[4])).apply()
+        //TODO remove this initalization of items
+        items = arrayListOf(
+            Item("Item0","0.99","30/04/2020"),
+            Item("Item1","1.00","04/05/2020"),
+            Item("Item2","2.50","28/04/2020"),
+            Item("Item3","3.00","15/06/2020"),
+            Item("Item4","4.70","01/10/2020"),
+            Item("Item5","5.20","30/08/2020"),
+            Item("Item6","6.10","11/05/2020"))
+        items.forEach{
+            itemLastID++
+            val jsonString = KEY_ItemDetails + itemLastID.toString()
+            val item = Gson().toJson(it)
+            sharedPref.edit().putString(jsonString, Gson().toJson(item)).apply()
+        }
+        sharedPref.edit().putInt(KEY_ItemLastID, itemLastID).apply()
+        emptyMessage.visibility = View.INVISIBLE
+        //items.clear()
 
-        activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)?.show()
+        //populateItemList()
 
         recyclerView.layoutManager = LinearLayoutManager(context)
-        val myAdapter = ItemAdapter(myData)
+        val myAdapter = ItemAdapter(items)
         recyclerView.adapter = myAdapter
 
         myAdapter.setOnItemClickListener(object : ItemAdapter.ClickListener{
             override fun onItemClick(position: Int) {
                 val bundle = Bundle()
                 with(bundle){
-                    putString("group15.lab2.KEY", myData[position].getKey())
+                    putInt("group15.lab2.ITEM_ID", position)
                 }
                 findNavController().navigate(R.id.action_itemListFragment_to_itemDetailsFragment, bundle)
             }
 
             override fun onItemEdit(position: Int) {
-                Toast.makeText(context,"EDIT on ${myData[position].title}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"EDIT on ${items[position].title}",Toast.LENGTH_SHORT).show()
                 val bundle = Bundle()
-                with(bundle){ putString("group15.lab2.KEY", myData[position].getKey()) }
+                with(bundle){
+                    putInt("group15.lab2.ITEM_ID", position)
+                    putBoolean("group15.lab2.NEW", false)
+                }
                 findNavController().navigate(R.id.action_itemListFragment_to_itemEditFragment, bundle)
             }
         })
 
+        val fab = activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)
+        fab?.show()
+        fab?.setOnClickListener {
+            sharedPref.edit().putInt(KEY_ItemLastID, itemLastID).apply()
+            val bundle = Bundle()
+            with(bundle){
+                putInt("group15.lab2.ITEM_ID", itemLastID)
+                putBoolean("group15.lab2.NEW", true)
+            }
+            findNavController().navigate(R.id.action_itemListFragment_to_itemEditFragment, bundle)
+            //TODO bisogna aggiornare la lista
+        }
     }
+
+    private fun populateItemList() {
+        itemLastID = sharedPref.getInt(KEY_ItemLastID, -1)
+        if (itemLastID != -1) { //Popolamento interfaccia con item da 0 a itemLastID
+            emptyMessage.visibility = View.INVISIBLE
+            for (i in 0..itemLastID) {
+                //TODO non so cosa ci sia di sbagliato
+                val jsonString: String? = sharedPref.getString(KEY_ItemDetails + i.toString(), null)
+                if (jsonString != null) {
+                    val item: Item = Gson().fromJson(jsonString, Item::class.java)
+                    items.add(item)
+                }
+            }
+        } else
+            emptyMessage.visibility = View.VISIBLE
+    }
+
 }

@@ -13,52 +13,63 @@ import kotlinx.android.synthetic.main.fragment_item_details.*
 
 class ItemDetailsFragment : Fragment() {
 
-    private lateinit var itemShow: Item
+    private var itemLastID: Int = 0
     private val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
     private var imageByteArray: ByteArray? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_item_details,container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)?.show()
-
-        val jsonString:String? = sharedPref.getString(arguments?.getString("group15.lab2.KEY").toString(),null)
-        if(jsonString != null) {
-            itemShow = Gson().fromJson(jsonString, Item::class.java)
-            populateTextView()
+        itemLastID = sharedPref.getInt("group15.lab2.ITEM_ID", -1)
+        if(itemLastID != -1){
+            val jsonString = KEY_ItemDetails + itemLastID.toString()
+            val itemShow = Gson().fromJson(jsonString, Item::class.java)
+            populateTextView(itemShow)
             populateImageView(itemShow.imageRotation)
+        }
+
+        val fab = activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)
+        fab?.show()
+        fab?.setOnClickListener {
+            sharedPref.edit().putInt(KEY_ItemLastID, itemLastID).apply()
+            val bundle = Bundle()
+            with(bundle){
+                putInt("group15.lab2.ITEM_ID", itemLastID)
+                putBoolean("group15.lab2.NEW", true)
+            }
+            findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
+            //TODO DOPO L'INSERIMENTO DI UN NUOVO ITEM NECESSARIO AGGIORNARE LA LISTA!
         }
     }
 
-    private fun populateTextView() {
+    private fun populateTextView(itemShow: Item) {
         item_title.text = itemShow.title
-        item_price.text = itemShow.price.toString()
+        item_price.text = itemShow.price
         item_date.text = itemShow.expireDate
         item_category.text = itemShow.category
         item_sub_category.text = itemShow.subcategory
         item_location.text = itemShow.location
         item_delivery.text = itemShow.delivery
         item_description.text = itemShow.description
-
-        val jsonStringImage: String? = sharedPref.getString(itemShow.getFile(), null)
-        if (jsonStringImage != null) {
-            itemShow = Gson().fromJson(jsonStringImage, Item::class.java)
-        }
     }
 
     private fun populateImageView(rotation: Float){
         try{
-            val byteArray = this.activity!!.openFileInput(itemShow.getFile()).readBytes()
+            val byteArray: ByteArray? = context!!.openFileInput(KEY_ItemDetails + itemLastID.toString()).readBytes()
             if(byteArray != null){
                 imageByteArray = byteArray
                 var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                if(rotation!=0F)
-                    imageBitmap=rotateImage(imageBitmap,rotation)
+                if(rotation != 0F)
+                    imageBitmap = rotateImage(imageBitmap, rotation)
                 item_image.setImageBitmap(imageBitmap)
             }
             else
@@ -68,16 +79,11 @@ class ItemDetailsFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_pencil, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.pencil_button -> {
@@ -91,9 +97,8 @@ class ItemDetailsFragment : Fragment() {
     private fun editItem(){
         val bundle = Bundle()
         with(bundle){
-            putString("group15.lab2.KEY", itemShow.getKey())
+            putInt("group15.lab2.ITEM_ID", itemLastID)
         }
         findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
     }
-
 }

@@ -15,18 +15,11 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/action_nav_showProfile_to_itemListFragment"
-            app:destination="@id/itemListFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_editProfile"
         android:name="com.example.group15_lab2.EditProfileFragment"
-        android:label="EditProfileFragment" >
-        <action
-            android:id="@+id/action_nav_editProfile_to_nav_showProfile"
-            app:destination="@id/nav_showProfile" />
-    </fragment>
+        android:label="EditProfileFragment" />
     <fragment
         android:id="@+id/itemDetailsFragment"
         android:name="com.example.group15_lab2.ItemDetailsFragment"
@@ -34,9 +27,6 @@
         <action
             android:id="@+id/action_itemDetailsFragment_to_itemEditFragment"
             app:destination="@id/itemEditFragment" />
-        <action
-            android:id="@+id/action_itemDetailsFragment_to_itemListFragment"
-            app:destination="@id/itemListFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemListFragment"
@@ -56,9 +46,5 @@
         android:id="@+id/itemEditFragment"
         android:name="com.example.group15_lab2.ItemEditFragment"
         android:label="fragment_item_edit"
-        tools:layout="@layout/fragment_item_edit" >
-        <action
-            android:id="@+id/action_itemEditFragment_to_itemDetailsFragment"
-            app:destination="@id/itemDetailsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_item_edit" />
 </navigation>

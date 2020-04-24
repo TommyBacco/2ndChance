@@ -28,6 +28,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
+                    android:contentDescription="@string/profile_image"
                     app:srcCompat="@drawable/user_icon" />
 
                 <ImageButton
@@ -38,18 +39,9 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:backgroundTint="#00FFFFFF"
+                    android:contentDescription="@string/rotate_button"
                     android:visibility="visible"
                     app:srcCompat="@android:drawable/ic_menu_rotate" />
-
-                <ImageButton
-                    android:id="@+id/camera_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@id/user_avatar_edit"
-                    android:layout_alignBottom="@id/user_avatar_edit"
-                    android:layout_centerHorizontal="true"
-                    android:background="#00FFFFFF"
-                    app:srcCompat="@android:drawable/ic_menu_camera" />
 
             </RelativeLayout>
 
@@ -71,7 +63,8 @@
                     android:hint="@string/profile_fullname"
                     android:imeOptions="actionDone"
                     android:inputType="textCapWords"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/user_nickname_edit"
@@ -84,7 +77,8 @@
                     android:hint="@string/profile_nickname"
                     android:imeOptions="actionDone"
                     android:inputType="text"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/user_email_edit"
@@ -97,7 +91,8 @@
                     android:hint="@string/profile_email"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/user_location_edit"
@@ -110,7 +105,8 @@
                     android:hint="@string/profile_area"
                     android:imeOptions="actionDone"
                     android:inputType="textCapSentences"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/user_address_edit"
@@ -123,7 +119,8 @@
                     android:hint="@string/profile_address"
                     android:imeOptions="actionDone"
                     android:inputType="textPostalAddress"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/user_telephone_edit"
@@ -136,7 +133,8 @@
                     android:hint="@string/profile_telephone"
                     android:imeOptions="actionDone"
                     android:inputType="phone"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:importantForAutofill="no" />
             </RelativeLayout>
 
         </LinearLayout>

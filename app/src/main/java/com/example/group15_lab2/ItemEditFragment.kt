@@ -31,8 +31,8 @@ import java.util.*
 
 class ItemEditFragment : Fragment() {
 
-    private lateinit var itemEdit: Item
-    private var imageByteArray:ByteArray? = null
+    private var itemID: Int = 0
+    private var imageByteArray: ByteArray? = null
     private var rotation: Float = 0F
     private val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
 
@@ -41,14 +41,16 @@ class ItemEditFragment : Fragment() {
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 21
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_item_edit, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
+        // ??? -> Serve metodo per gestire meglio onSaveInstanceState
         retainInstance = true
         super.onCreate(savedInstanceState)
     }
@@ -56,39 +58,62 @@ class ItemEditFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        imageEdit.setOnClickListener {v -> activity?.openContextMenu(v)}
+        registerForContextMenu(activity!!.findViewById(R.id.item_image_edit))
+        item_image_edit.setOnClickListener {v -> activity!!.openContextMenu(v)}
 
-        rotateButton.setOnClickListener{
+        item_rotate_button.setOnClickListener{
             rotation += 90
             if(rotation >= 360) rotation = 0F
-            var source = (imageEdit.drawable as BitmapDrawable).bitmap
+            var source = (item_image_edit.drawable as BitmapDrawable).bitmap
             source = rotateImage(source, 90F)
-            imageEdit.setImageBitmap(source)
+            item_image_edit.setImageBitmap(source)
         }
 
         activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)?.hide()
 
         if(savedInstanceState == null) {
-            val jsonStringItem: String? = sharedPref.getString(arguments?.getString("group15.lab2.KEY").toString(),null)
-            if(jsonStringItem != null){
-                itemEdit = Gson().fromJson(jsonStringItem, Item::class.java)
-                titleEditText.hint = itemEdit.title
-                priceEditText.hint = itemEdit.price.toString()
-                expireEditText.hint = itemEdit.expireDate
-                categoryEditText.hint = itemEdit.category
-                subCategoryEditText.hint = itemEdit.subcategory
-                locationEditText.hint = itemEdit.location
-                deliveryEditText.hint = itemEdit.delivery
-                descriptionEditText.hint = itemEdit.description
-                rotation = itemEdit.imageRotation
-                val jsonStringImage: String? = sharedPref.getString(itemEdit.getFile(),null)
-                if(jsonStringImage != null){
-                    itemEdit = Gson().fromJson(jsonStringImage, Item::class.java)
+            itemID = arguments?.getInt("group15.lab2.ITEM_ID") ?: -1
+            if(itemID != -1) {
+                if(arguments?.getBoolean("group15.lab2.NEW") == true){
+                    itemID++
+                } else {
+                    val jsonStringItem = KEY_ItemDetails + itemID.toString()
+                    var item = Gson().fromJson(jsonStringItem, Item::class.java)
+                    populateTextView(item)
+                    populateImageView(item.imageRotation)
                 }
             }
         } else {
             rotation = savedInstanceState.getFloat("ROTATION_E", 0F)
             showImage(savedInstanceState.getByteArray("IMAGE_E"), rotation)
+        }
+    }
+
+    private fun populateTextView(item:Item) {
+        item_title_edit.hint = item.title
+        item_price_edit.hint = item.price
+        item_category_edit.hint = item.expireDate
+        item_category_edit.hint = item.category
+        item_sub_category_edit.hint = item.subcategory
+        item_location_edit.hint = item.location
+        item_delivery_edit.hint = item.delivery
+        item_description_edit.hint = item.description
+        rotation = item.imageRotation
+     }
+
+    private fun populateImageView(rotation: Float){
+        try{
+            val byteArray = context!!.openFileInput(KEY_ItemDetails + itemID.toString())?.readBytes()
+            if(byteArray != null){
+                imageByteArray = byteArray
+                var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                if(rotation != 0F)
+                    imageBitmap = rotateImage(imageBitmap,rotation)
+                item_image_edit.setImageBitmap(imageBitmap)
+            } else
+                item_image_edit.setImageResource(R.drawable.item_icon)
+        } catch (exc:Exception){
+            item_image_edit.setImageResource(R.drawable.item_icon)
         }
     }
 
@@ -98,12 +123,12 @@ class ItemEditFragment : Fragment() {
             var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
             if(rotation != 0F)
                 imageBitmap = rotateImage(imageBitmap, rotation)
-            imageEdit.setImageBitmap(imageBitmap)
-            rotateButton.visibility = View.VISIBLE
+            item_image_edit.setImageBitmap(imageBitmap)
+            item_rotate_button.visibility = View.VISIBLE
         }
         else {
-            imageEdit.setImageResource(R.drawable.user_icon)
-            rotateButton.visibility = View.INVISIBLE
+            item_image_edit.setImageResource(R.drawable.user_icon)
+            item_rotate_button.visibility = View.INVISIBLE
         }
     }
 
@@ -116,7 +141,8 @@ class ItemEditFragment : Fragment() {
         return when (item.itemId) {
             R.id.save_button -> {
                 savePreferences()
-                saveImage(imageByteArray, itemEdit.getFile())
+                saveImage(imageByteArray)
+                //TROVARE UN MODO PER FAR AGGIORNARE EVENTUALMENTE LA itemList SE NAVIAGAZIONE E' AVVENUTA DA itemListFragment
                 findNavController().popBackStack()
                 true
             }
@@ -124,12 +150,12 @@ class ItemEditFragment : Fragment() {
         }
     }
 
-    private fun saveImage(byteArray: ByteArray?, imageFile: String){
+    private fun saveImage(byteArray: ByteArray?){
         if(byteArray != null){
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this.activity != null)
-                checkEnoughFreeMemory(byteArray.size * 1L)
+                checkEnoughFreeMemory(byteArray)
             try{
-                this.activity?.openFileOutput(imageFile, Context.MODE_PRIVATE)?.write(byteArray)
+                this.activity?.openFileOutput(FILE_ItemImage + itemID.toString(), Context.MODE_PRIVATE)?.write(byteArray)
             } catch (exc:Exception){
                 exc.printStackTrace()
             }
@@ -137,34 +163,34 @@ class ItemEditFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun checkEnoughFreeMemory(BYTES_TO_SAVE_IMAGE: Long): Boolean{
+    private fun checkEnoughFreeMemory(byteArray: ByteArray) {
+        val NUM_BYTES_NEEDED_FOR_MY_APP =  byteArray.size * 1L
 
         val storageManager = this.activity?.getSystemService(StorageManager::class.java)
         val appSpecificInternalDirUuid: UUID = storageManager!!.getUuidForPath(this.activity!!.filesDir)
         val availableBytes: Long = storageManager.getAllocatableBytes(appSpecificInternalDirUuid)
-        if (availableBytes >= BYTES_TO_SAVE_IMAGE) {
-            storageManager.allocateBytes(appSpecificInternalDirUuid, BYTES_TO_SAVE_IMAGE)
-            return true
+        if (availableBytes >= NUM_BYTES_NEEDED_FOR_MY_APP) {
+            storageManager.allocateBytes(appSpecificInternalDirUuid, NUM_BYTES_NEEDED_FOR_MY_APP)
         } else  // Display prompt to user, requesting that they choose files to remove.
             Intent().apply { action = StorageManager.ACTION_MANAGE_STORAGE }
-        return false
-
     }
 
     private fun savePreferences(){
-        if(titleEditText.text.toString() != "") itemEdit.title = titleEditText.text.toString()
-        if(priceEditText.text.toString() != "") itemEdit.price = priceEditText.text.toString().toInt()
-        if(expireEditText.text.toString() != "") itemEdit.expireDate = expireEditText.text.toString()
-        if(categoryEditText.text.toString() != "") itemEdit.category = categoryEditText.text.toString()
-        if(subCategoryEditText.text.toString() != "") itemEdit.subcategory = subCategoryEditText.text.toString()
-        if(locationEditText.text.toString() != "") itemEdit.location = locationEditText.text.toString()
-        if(deliveryEditText.text.toString() != "") itemEdit.delivery = deliveryEditText.text.toString()
-        if(descriptionEditText.text.toString() != "") itemEdit.description = descriptionEditText.text.toString()
-        itemEdit.imageRotation = rotation
+        val jsonString = KEY_ItemDetails + itemID.toString()
+        val item = Gson().fromJson(jsonString, Item::class.java)
 
-        sharedPref.edit().putString(itemEdit.getKey(), Gson().toJson(itemEdit)).apply()
+        if(item_title_edit.text.toString().isNotEmpty()) item.title = item_title_edit.text.toString()
+        if(item_price_edit.text.toString().isNotEmpty()) item.price = item_price_edit.text.toString()
+        if(expireEditText.text.toString().isNotEmpty()) item.expireDate = item_category_edit.text.toString()
+        if(item_category_edit.text.toString().isNotEmpty()) item.category = item_category_edit.text.toString()
+        if(item_sub_category_edit.text.toString().isNotEmpty()) item.subcategory = item_sub_category_edit.text.toString()
+        if(item_location_edit.text.toString().isNotEmpty()) item.location = item_location_edit.text.toString()
+        if(item_delivery_edit.text.isNotEmpty()) item.delivery = item_delivery_edit.text.toString()
+        if(item_description_edit.text.toString().isNotEmpty()) item.description = item_description_edit.text.toString()
+        item.imageRotation = rotation
+
+        sharedPref.edit().putString(KEY_ItemDetails + itemID.toString(), jsonString).apply()
     }
-
 
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
         menu?.setHeaderTitle("Choose a new image")
@@ -190,7 +216,7 @@ class ItemEditFragment : Fragment() {
                         PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
                 } else {
                     // Permission has already been granted
-                    var photoPickerIntent =  Intent(Intent.ACTION_PICK);
+                    val photoPickerIntent =  Intent(Intent.ACTION_PICK);
                     photoPickerIntent.type = "image/*";
                     startActivityForResult(photoPickerIntent, REQUEST_SELECT_GALLERY_PHOTO)
                 }
@@ -208,7 +234,7 @@ class ItemEditFragment : Fragment() {
             PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     // permission was granted, yay!
-                    var photoPickerIntent =  Intent(Intent.ACTION_PICK);
+                    val photoPickerIntent =  Intent(Intent.ACTION_PICK);
                     photoPickerIntent.type = "image/*";
                     startActivityForResult(photoPickerIntent, REQUEST_SELECT_GALLERY_PHOTO)
 
@@ -223,10 +249,10 @@ class ItemEditFragment : Fragment() {
 
     private fun setImageByteArray(image: Bitmap, quality:Int) {
         rotation = 0F
-        var stream = ByteArrayOutputStream()
+        val stream = ByteArrayOutputStream()
         image.compress(Bitmap.CompressFormat.JPEG, quality, stream)
         imageByteArray = stream.toByteArray()
-        rotateButton.visibility = View.VISIBLE
+        item_rotate_button.visibility = View.VISIBLE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -235,8 +261,8 @@ class ItemEditFragment : Fragment() {
         //New image via camera
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap?
-            if(imageBitmap!=null) {
-                imageEdit.setImageBitmap(imageBitmap)
+            if(imageBitmap != null) {
+                item_image_edit.setImageBitmap(imageBitmap)
                 setImageByteArray(imageBitmap,100)
             }
         }
@@ -248,7 +274,7 @@ class ItemEditFragment : Fragment() {
                 val imageBitmap = handleSamplingBitmap(activity!!, imageUri)
                 if(imageBitmap != null) {
                     setImageByteArray(imageBitmap, 50)
-                    imageEdit.setImageBitmap(imageBitmap)
+                    item_image_edit.setImageBitmap(imageBitmap)
                 }
             }
         }
