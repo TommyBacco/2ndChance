@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -14,14 +15,12 @@ import kotlinx.android.synthetic.main.fragment_item_details.*
 class ItemDetailsFragment : Fragment() {
 
     private var itemID: Int = 0
+    private var rotation:Float = 0F
     private val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
     private var imageByteArray: ByteArray? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_item_details,container,false)
     }
@@ -29,26 +28,22 @@ class ItemDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        itemID = sharedPref.getInt("group15.lab2.ITEM_ID", -1)
-        if(itemID != -1){
-            val jsonString = KEY_ItemDetails + itemID.toString()
-            val itemShow = Gson().fromJson(jsonString, Item::class.java)
-            populateTextView(itemShow)
-            populateImageView(itemShow.imageRotation)
-        }
+        if(savedInstanceState == null) {
+            itemID = arguments?.getInt("group15.lab2.ITEM_ID") ?: -1
 
-        var itemLastID = sharedPref.getInt("group15.lab2.LAST_ITEM_ID", -1)
-        val fab = activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)
-        fab?.show()
-        fab?.setOnClickListener {
-            sharedPref.edit().putInt(KEY_ItemLastID, itemLastID).apply()
-            val bundle = Bundle()
-            with(bundle){
-                putInt("group15.lab2.ITEM_ID", itemLastID)
-                putBoolean("group15.lab2.NEW", true)
+            if(itemID != -1){
+                val key:String = KEY_ItemDetails + itemID
+                val jsonString: String? = sharedPref.getString(key, null)
+                if (jsonString != null) {
+                    val item: Item = Gson().fromJson(jsonString, Item::class.java)
+                    populateTextView(item)
+                    populateImageView(rotation)
+                }
             }
-            findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
-            //TODO DOPO L'INSERIMENTO DI UN NUOVO ITEM NECESSARIO AGGIORNARE LA LISTA!
+
+        } else {
+            rotation = savedInstanceState.getFloat("ITEM_IMAGE_ROTATION", 0F)
+            showImage(savedInstanceState.getByteArray("ITEM_IMAGE"), rotation)
         }
     }
 
@@ -61,11 +56,13 @@ class ItemDetailsFragment : Fragment() {
         item_location.text = itemShow.location
         item_delivery.text = itemShow.delivery
         item_description.text = itemShow.description
+        rotation = itemShow.imageRotation
     }
 
     private fun populateImageView(rotation: Float){
         try{
-            val byteArray: ByteArray? = context!!.openFileInput(KEY_ItemDetails + itemID.toString()).readBytes()
+            val fileName = FILE_ItemImage + itemID
+            val byteArray: ByteArray? = context!!.openFileInput(fileName).readBytes()
             if(byteArray != null){
                 imageByteArray = byteArray
                 var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
@@ -78,6 +75,18 @@ class ItemDetailsFragment : Fragment() {
         } catch (exc:Exception){
             item_image.setImageResource(R.drawable.item_icon)
         }
+    }
+
+    private fun showImage(byteArray: ByteArray?, rotation:Float){
+        if(byteArray != null){
+            imageByteArray=byteArray
+            var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+            if(rotation != 0F)
+                imageBitmap = rotateImage(imageBitmap, rotation)
+            item_image.setImageBitmap(imageBitmap)
+        }
+        else
+            item_image.setImageResource(R.drawable.item_icon)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -96,10 +105,15 @@ class ItemDetailsFragment : Fragment() {
     }
 
     private fun editItem(){
-        val bundle = Bundle()
-        with(bundle){
-            putInt("group15.lab2.ITEM_ID", itemID)
-        }
+        val bundle = bundleOf(Pair("group15.lab2.ITEM_ID",itemID))
         findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        with(outState){
+            putByteArray("ITEM_IMAGE",imageByteArray)
+            putFloat("ITEM_IMAGE_ROTATION", rotation)
+        }
     }
 }

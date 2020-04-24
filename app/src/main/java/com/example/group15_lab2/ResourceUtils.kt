@@ -20,13 +20,13 @@ data class Profile(
 )
 
 data class Item(
-    var title:String,
-    var price:String,
-    var expireDate: String,
-    var category: String? = "Category",
-    var subcategory: String? = "Sub-category",
-    var location: String? = "Location",
-    var delivery: String? = "Delivery type",
+    var title:String?,
+    var price:String?,
+    var expireDate: String?,
+    var category: String?,
+    var subcategory: String?,
+    var location: String?,
+    var delivery: String?,
     //var description: String? = "Description",
     var description: String? = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
             "Ut semper viverra nunc ut aliquet. Vestibulum fermentum ex at ante mollis " +
@@ -34,7 +34,8 @@ data class Item(
             "pulvinar arcu. Maecenas malesuada dui sem, at fermentum leo mattis vel. Ut " +
             "consequat nec lectus in dictum. In lacinia risus in ex fringilla, sed bibendum" +
             " felis suscipit. Suspendisse rhoncus libero ipsum, eu pharetra nisl laoreet ut.",
-    var imageRotation: Float = 0F
+    var imageRotation: Float = 0F,
+    var itemID:Int = -1
 )
 
 fun rotateImage(startBitmap: Bitmap, degree:Float): Bitmap {

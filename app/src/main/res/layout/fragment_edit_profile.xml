@@ -2,140 +2,113 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="#FFFFFFFF"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/user_avatar_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/user_icon"
+            android:adjustViewBounds="true"
+            />
+
+        <ImageButton
+            android:id="@+id/rotate_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/user_avatar_edit"
+            android:background="#ffffffff"
+            android:visibility="visible"
+            app:srcCompat="@android:drawable/ic_menu_rotate"/>
+
+        <ImageButton
+            android:id="@+id/camera_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/user_avatar_edit"
+            android:layout_centerHorizontal="true"
+            android:background="#ffffffff"
+            app:srcCompat="@android:drawable/ic_menu_camera"/>
+
+    </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_weight="2"
+        android:layout_height="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:background="#FFFFFFFF"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="#FFFFFFFF">
 
 
-            <RelativeLayout
+            <EditText
+                android:id="@+id/user_fullname_edit"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="12dp"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:hint="@string/profile_fullname"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-                <ImageView
-                    android:id="@+id/user_avatar_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:contentDescription="@string/profile_image"
-                    app:srcCompat="@drawable/user_icon" />
-
-                <ImageButton
-                    android:id="@+id/rotate_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@id/user_avatar_edit"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:backgroundTint="#00FFFFFF"
-                    android:contentDescription="@string/rotate_button"
-                    android:visibility="visible"
-                    app:srcCompat="@android:drawable/ic_menu_rotate" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
+            <EditText
+                android:id="@+id/user_nickname_edit"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3">
+                android:layout_height="wrap_content"
+                android:hint="@string/profile_nickname"
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <EditText
-                    android:id="@+id/user_fullname_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:hint="@string/profile_fullname"
-                    android:imeOptions="actionDone"
-                    android:inputType="textCapWords"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:importantForAutofill="no" />
+            <EditText
+                android:id="@+id/user_email_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/profile_email"
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionDone"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <EditText
-                    android:id="@+id/user_nickname_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/user_fullname_edit"
-                    android:layout_alignStart="@+id/user_fullname_edit"
-                    android:layout_alignEnd="@+id/user_fullname_edit"
-                    android:layout_marginBottom="24dp"
-                    android:hint="@string/profile_nickname"
-                    android:imeOptions="actionDone"
-                    android:inputType="text"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:importantForAutofill="no" />
+            <EditText
+                android:id="@+id/user_location_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/profile_area"
+                android:inputType="textCapSentences"
+                android:imeOptions="actionDone"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <EditText
-                    android:id="@+id/user_email_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/user_nickname_edit"
-                    android:layout_alignStart="@+id/user_fullname_edit"
-                    android:layout_alignEnd="@+id/user_fullname_edit"
-                    android:layout_marginBottom="24dp"
-                    android:hint="@string/profile_email"
-                    android:imeOptions="actionDone"
-                    android:inputType="textEmailAddress"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:importantForAutofill="no" />
+            <EditText
+                android:id="@+id/user_address_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/profile_address"
+                android:imeOptions="actionDone"
+                android:inputType="textPostalAddress"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <EditText
-                    android:id="@+id/user_location_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/user_email_edit"
-                    android:layout_alignStart="@+id/user_fullname_edit"
-                    android:layout_alignEnd="@+id/user_fullname_edit"
-                    android:layout_marginBottom="24dp"
-                    android:hint="@string/profile_area"
-                    android:imeOptions="actionDone"
-                    android:inputType="textCapSentences"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/user_address_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/user_location_edit"
-                    android:layout_alignStart="@+id/user_fullname_edit"
-                    android:layout_alignEnd="@+id/user_fullname_edit"
-                    android:layout_marginBottom="24dp"
-                    android:hint="@string/profile_address"
-                    android:imeOptions="actionDone"
-                    android:inputType="textPostalAddress"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/user_telephone_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/user_address_edit"
-                    android:layout_alignStart="@+id/user_fullname_edit"
-                    android:layout_alignEnd="@+id/user_fullname_edit"
-                    android:layout_marginBottom="24dp"
-                    android:hint="@string/profile_telephone"
-                    android:imeOptions="actionDone"
-                    android:inputType="phone"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:importantForAutofill="no" />
-            </RelativeLayout>
+            <EditText
+                android:id="@+id/user_telephone_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/profile_telephone"
+                android:imeOptions="actionDone"
+                android:inputType="phone"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -13,7 +13,6 @@ import com.google.gson.Gson
 
 class ItemAdapter(val items: ArrayList<Item>): RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
-
     interface ClickListener {
         fun onItemClick(position: Int)
         fun onItemEdit(position:Int)
@@ -58,15 +57,12 @@ class ItemAdapter(val items: ArrayList<Item>): RecyclerView.Adapter<ItemAdapter.
 
         fun bind(item: Item){
             name.text = item.title
-            price.text = item.price.toString()
+            price.text = item.price
+
             //val itemImage = Gson().fromJson(item.getFile(), Item::class.java)
             //image.setImageResource()
 
         }
     }
 
-    fun addItem(i: Item){
-        items.add(i)
-        this.notifyItemChanged(items.size-1)
-    }
 }

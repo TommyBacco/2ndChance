@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_show_profile.*
 
@@ -26,7 +25,6 @@ class ShowProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         populateTextView()
         populateImageView()
-        activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)?.hide()
     }
 
     private fun populateTextView() {

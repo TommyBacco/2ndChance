@@ -21,7 +21,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 import java.io.ByteArrayOutputStream
@@ -39,17 +38,14 @@ class EditProfileFragment : Fragment() {
     private val REQUEST_SELECT_GALLERY_PHOTO = 20
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 21
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
-        // ?? TROVARE MODO MIGLIORE PER GESTIRE VALORE DI RITORNO DA onSaveInstanceState
         return inflater.inflate(R.layout.fragment_edit_profile,container,false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // ?? TROVARE MODO MIGLIORE PER GESTIRE VALORE DI RITORNO DA onSaveInstanceState
         retainInstance = true
         super.onCreate(savedInstanceState)
     }
@@ -57,10 +53,8 @@ class EditProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        registerForContextMenu(activity!!.findViewById(R.id.user_avatar_edit))
-        user_avatar_edit.setOnClickListener {v -> activity!!.openContextMenu(v)}
-
-        activity?.findViewById<FloatingActionButton>(R.id.fab_new_item)?.hide()
+        registerForContextMenu(activity!!.findViewById(R.id.camera_button))
+        camera_button.setOnClickListener {v -> activity!!.openContextMenu(v)}
 
         if(savedInstanceState == null) {
             rotation = arguments?.getFloat("group15.lab2.AVATAR_ROTATION") ?: 0F
@@ -72,7 +66,7 @@ class EditProfileFragment : Fragment() {
             user_address_edit.setText(arguments?.getString("group15.lab2.ADDRESS"))
             user_telephone_edit.setText(arguments?.getString("group15.lab2.TELEPHONE"))
         } else {
-            rotation = savedInstanceState.getFloat("ROTATION_E", 0F)
+            rotation=savedInstanceState.getFloat("ROTATION_E", 0F)
             showImage(savedInstanceState.getByteArray("AVATAR_E"),rotation)
         }
 
