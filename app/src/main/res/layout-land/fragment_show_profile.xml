@@ -36,22 +36,26 @@
                 android:id="@+id/user_fullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="12dp"
                 android:hint="@string/profile_fullname"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="#f0000000"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:drawableStart="@drawable/ic_person"
+                android:drawablePadding="4dp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/user_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="12dp"
                 android:hint="@string/profile_nickname"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:drawableStart="@drawable/ic_person_outline"
+                android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#f0000000" />
 
@@ -59,10 +63,12 @@
                 android:id="@+id/user_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="12dp"
                 android:hint="@string/profile_email"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#f0000000" />
 
@@ -70,10 +76,12 @@
                 android:id="@+id/user_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="12dp"
                 android:hint="@string/profile_area"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:drawableStart="@drawable/ic_area_of_interest"
+                android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#f0000000" />
 
@@ -81,10 +89,12 @@
                 android:id="@+id/user_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="12dp"
                 android:hint="@string/profile_address"
                 android:ellipsize="end"
                 android:maxLines="3"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#f0000000" />
 
@@ -96,6 +106,8 @@
                 android:hint="@string/profile_telephone"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#f0000000" />
 
