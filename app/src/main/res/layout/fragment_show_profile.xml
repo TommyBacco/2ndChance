@@ -34,67 +34,79 @@
                 android:id="@+id/user_fullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="12dp"
                 android:hint="@string/profile_fullname"
                 android:textStyle="bold"
-                android:textColor="#f0000000"
+                android:textColor="@android:color/black"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <TextView
                 android:id="@+id/user_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="12dp"
                 android:hint="@string/profile_nickname"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textColor="#f0000000"
+                android:drawableLeft="@drawable/ic_person_outline"
+                android:drawablePadding="4dp"
+                android:textColor="@android:color/black"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
                 android:id="@+id/user_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="12dp"
                 android:hint="@string/profile_email"
-                android:textColor="#f0000000"
+                android:textColor="@android:color/black"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:drawableLeft="@drawable/ic_email"
+                android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
                 android:id="@+id/user_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:textColor="#f0000000"
+                android:layout_marginBottom="12dp"
+                android:textColor="@android:color/black"
                 android:hint="@string/profile_area"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:drawableLeft="@drawable/ic_area_of_interest"
+                android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
                 android:id="@+id/user_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:textColor="#f0000000"
+                android:layout_marginBottom="12dp"
+                android:textColor="@android:color/black"
                 android:hint="@string/profile_address"
                 android:ellipsize="end"
                 android:maxLines="3"
+                android:drawableLeft="@drawable/ic_location"
+                android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
                 android:id="@+id/user_telephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:textColor="#f0000000"
+                android:layout_marginBottom="12dp"
+                android:textColor="@android:color/black"
                 android:hint="@string/profile_telephone"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:drawableLeft="@drawable/ic_phone"
+                android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         </LinearLayout>

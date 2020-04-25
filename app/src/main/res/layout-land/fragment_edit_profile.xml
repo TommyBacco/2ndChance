@@ -57,59 +57,120 @@
             android:background="#FFFFFFFF"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/user_fullname_edit"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:hint="@string/profile_fullname"
-                android:imeOptions="actionDone|flagNoFullscreen"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                app:endIconMode="clear_text">
 
-            <EditText
-                android:id="@+id/user_nickname_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/profile_nickname"
-                android:inputType="text"
-                android:imeOptions="actionDone|flagNoFullscreen"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                <EditText
+                    android:id="@+id/user_fullname_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/profile_fullname"
+                    android:drawableStart="@drawable/ic_person"
+                    android:drawablePadding="4dp"
+                    android:imeOptions="actionDone|flagNoFullscreen"
+                    android:inputType="textCapWords"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <EditText
-                android:id="@+id/user_email_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/profile_email"
-                android:inputType="textEmailAddress"
-                android:imeOptions="actionDone|flagNoFullscreen"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <EditText
-                android:id="@+id/user_location_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/profile_area"
-                android:inputType="textCapSentences"
-                android:imeOptions="actionDone|flagNoFullscreen"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/user_address_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/profile_address"
-                android:imeOptions="actionDone|flagNoFullscreen"
-                android:inputType="textPostalAddress"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <EditText
-                android:id="@+id/user_telephone_edit"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/profile_telephone"
-                android:imeOptions="actionDone|flagNoFullscreen"
-                android:inputType="phone"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/user_nickname_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/profile_nickname"
+                    android:drawableStart="@drawable/ic_person_outline"
+                    android:drawablePadding="4dp"
+                    android:inputType="text"
+                    android:imeOptions="actionDone|flagNoFullscreen"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/user_email_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/profile_email"
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawablePadding="4dp"
+                    android:inputType="textEmailAddress"
+                    android:imeOptions="actionDone|flagNoFullscreen"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/user_location_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/profile_area"
+                    android:inputType="textCapSentences"
+                    android:drawableStart="@drawable/ic_area_of_interest"
+                    android:drawablePadding="4dp"
+                    android:imeOptions="actionDone|flagNoFullscreen"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/user_address_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/profile_address"
+                    android:imeOptions="actionDone|flagNoFullscreen"
+                    android:drawableStart="@drawable/ic_location"
+                    android:drawablePadding="4dp"
+                    android:inputType="textPostalAddress"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/user_telephone_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/profile_telephone"
+                    android:imeOptions="actionDone|flagNoFullscreen"
+                    android:inputType="phone"
+                    android:drawableStart="@drawable/ic_phone"
+                    android:drawablePadding="4dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
