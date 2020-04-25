@@ -2,12 +2,14 @@ package com.example.group15_lab2
 
 import android.Manifest
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.media.ExifInterface
 import android.net.Uri
@@ -16,29 +18,46 @@ import android.os.Bundle
 import android.os.storage.StorageManager
 import android.provider.MediaStore
 import android.view.*
+import android.widget.DatePicker
+import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_item_details.*
+import kotlinx.android.synthetic.main.fragment_item_edit.*
 import kotlinx.android.synthetic.main.fragment_item_edit2.*
+import kotlinx.android.synthetic.main.fragment_item_edit2.item_camera_button
+import kotlinx.android.synthetic.main.fragment_item_edit2.item_category_edit
+import kotlinx.android.synthetic.main.fragment_item_edit2.item_delivery_edit
+import kotlinx.android.synthetic.main.fragment_item_edit2.item_description_edit
+import kotlinx.android.synthetic.main.fragment_item_edit2.item_image_edit
+import kotlinx.android.synthetic.main.fragment_item_edit2.item_location_edit
+import kotlinx.android.synthetic.main.fragment_item_edit2.item_price_edit
+import kotlinx.android.synthetic.main.fragment_item_edit2.item_rotate_button
+import kotlinx.android.synthetic.main.fragment_item_edit2.item_sub_category_edit
+import kotlinx.android.synthetic.main.fragment_item_edit2.item_title_edit
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
+import java.text.SimpleDateFormat
 import java.util.*
+
 
 class ItemEditFragment : Fragment() {
 
-    private var itemID:Int = -1
-    private var new_item:Boolean = false
+    private var itemID: Int = -1
+    private var new_item: Boolean = false
     private var imageByteArray: ByteArray? = null
     private var rotation: Float = 0F
     private val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
-
     private val REQUEST_IMAGE_CAPTURE = 10
     private val REQUEST_SELECT_GALLERY_PHOTO = 20
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 21
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,7 +78,37 @@ class ItemEditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         registerForContextMenu(activity!!.findViewById(R.id.item_camera_button))
-        item_camera_button.setOnClickListener {v -> activity!!.openContextMenu(v)}
+        item_camera_button.setOnClickListener { v -> activity!!.openContextMenu(v) }
+
+        var cal = Calendar.getInstance()
+
+
+        textView_date!!.text = "--/--/----"
+
+
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+
+                textView_date.setText("" + dayOfMonth + "/" + monthOfYear + "/" + year)
+            }
+
+
+        item_expire_date_edit.setOnClickListener {
+
+            DatePickerDialog(
+                activity!!,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+
+
+            ).show()
+
+
+        }
+
 
         item_rotate_button.setOnClickListener{
             rotation += 90
@@ -91,10 +140,12 @@ class ItemEditFragment : Fragment() {
 
     }
 
+
+
     private fun populateTextView(item:Item) {
         item_title_edit.setText(item.title)
         item_price_edit.setText(item.price)
-        item_category_edit.setText(item.expireDate)
+        textView_date.text = item.expireDate
         item_category_edit.setText(item.category)
         item_sub_category_edit.setText(item.subcategory)
         item_location_edit.setText(item.location)
@@ -153,6 +204,9 @@ class ItemEditFragment : Fragment() {
     }
 
 
+
+
+
     private fun savePreferences(){
         if(new_item)
             sharedPref.edit().putInt(KEY_ItemLastID,++itemID).apply()
@@ -160,7 +214,7 @@ class ItemEditFragment : Fragment() {
         val item = Item(
             item_title_edit.text.toString(),
             item_price_edit.text.toString(),
-            item_expire_date_edit.text.toString(),
+            textView_date.text.toString(),
             item_category_edit.text.toString(),
             item_sub_category_edit.text.toString(),
             item_location_edit.text.toString(),

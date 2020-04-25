@@ -47,5 +47,6 @@
 
     <string name="currency">€</string>
     <string name="emptyMessage">No advertisements have been posted yet!</string>
+    <string name="default_ExpireDate_button">Change</string>
 
 </resources>
