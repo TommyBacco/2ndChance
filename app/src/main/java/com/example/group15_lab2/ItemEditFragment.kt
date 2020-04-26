@@ -17,6 +17,9 @@ import android.os.Bundle
 import android.os.storage.StorageManager
 import android.provider.MediaStore
 import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -40,6 +43,10 @@ class ItemEditFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 10
     private val REQUEST_SELECT_GALLERY_PHOTO = 20
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 21
+    private var category = "--Category--"
+    private var subcategory = "--Subcategory--"
+    private var subcategories : Array<String>? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -102,6 +109,116 @@ class ItemEditFragment : Fragment() {
             DatePickerDialog(context!!,dateSetListener,year,month,day).show()
 
             }
+        val categories = resources.getStringArray(R.array.Category)
+        val spinner : Spinner = activity!!.findViewById(R.id.item_category_edit)
+        if (spinner != null) {
+            val adapter = ArrayAdapter(
+                context!!,
+                android.R.layout.simple_spinner_item, categories
+            )
+            spinner.adapter = adapter
+            spinner.setSelection(categories.indexOf(category), true)
+            spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View, position: Int, id: Long
+                ) {
+
+                    category = categories[position]
+                    when(category){
+                        "Arts & Crafts" ->  subcategories = resources.getStringArray(R.array.SubcategoryArt)
+                        "Sports & Hobby" -> subcategories = resources.getStringArray(R.array.SubcategorySport)
+                        "Baby" -> subcategories = resources.getStringArray(R.array.SubcategoryBaby)
+                        "Women's fashion" ->subcategories = resources.getStringArray(R.array.SubcategoryWomen)
+                        "Men's fashion" ->subcategories = resources.getStringArray(R.array.SubcategoryMen)
+                        "Electronics" ->subcategories = resources.getStringArray(R.array.SubcategoryElectronic)
+                        "Games & Videogames"->subcategories = resources.getStringArray(R.array.SubcategoryGame)
+                        "Automotive"-> subcategories = resources.getStringArray(R.array.SubcategoryAuto)
+                        else -> {subcategories = resources.getStringArray(R.array.SubcategoryDefault)
+
+                        }
+                    }
+                    val spinner2 : Spinner = activity!!.findViewById(R.id.item_sub_category_edit)
+                    if (spinner2 != null) {
+                        val adapter2 = subcategories?.let {
+                            ArrayAdapter(
+                                context!!,
+                                android.R.layout.simple_spinner_item, it
+                            )
+                        }
+
+                        spinner2.adapter = adapter2
+
+
+                        spinner2.onItemSelectedListener = object :
+                            AdapterView.OnItemSelectedListener {
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                            }
+
+                            override fun onItemSelected(
+                                parent: AdapterView<*>?,
+                                view: View?,
+                                position: Int,
+                                id: Long
+                            ) {
+
+                                subcategory = subcategories?.get(position) ?: "--Subcategory--"
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        when(category){
+            "Arts & Crafts" ->  subcategories = resources.getStringArray(R.array.SubcategoryArt)
+            "Sports & Hobby" -> subcategories = resources.getStringArray(R.array.SubcategorySport)
+            "Baby" -> subcategories = resources.getStringArray(R.array.SubcategoryBaby)
+            "Women's fashion" ->subcategories = resources.getStringArray(R.array.SubcategoryWomen)
+            "Men's fashion" ->subcategories = resources.getStringArray(R.array.SubcategoryMen)
+            "Electronics" ->subcategories = resources.getStringArray(R.array.SubcategoryElectronic)
+            "Games & Videogames"->subcategories = resources.getStringArray(R.array.SubcategoryGame)
+            "Automotive"-> subcategories = resources.getStringArray(R.array.SubcategoryAuto)
+            else -> {
+                subcategories = resources.getStringArray(R.array.SubcategoryDefault)
+            }
+        }
+        val spinner2 : Spinner = activity!!.findViewById(R.id.item_sub_category_edit)
+        if (spinner2 != null) {
+            val adapter2 = subcategories?.let {
+                ArrayAdapter(
+                    context!!,
+                    android.R.layout.simple_spinner_item, it
+                )
+            }
+
+            spinner2.adapter = adapter2
+            subcategories?.indexOf(subcategory)?.let { spinner2.setSelection(it, true) }
+
+            spinner2.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+
+                    subcategory = subcategories?.get(position) ?: "--Subcategory--"
+
+                }
+            }
+        }
 
     }
 
@@ -109,9 +226,8 @@ class ItemEditFragment : Fragment() {
         item_title_edit.setText(item.title)
         item_price_edit.setText(item.price)
         item_expire_date_edit.setText(item.expireDate)
-        item_category_edit.setText(item.expireDate)
-        item_category_edit.setText(item.category)
-        item_sub_category_edit.setText(item.subcategory)
+        category = item.category!!
+        subcategory = item.subcategory!!
         item_location_edit.setText(item.location)
         item_delivery_edit.setText(item.delivery)
         item_description_edit.setText(item.description)
@@ -171,13 +287,17 @@ class ItemEditFragment : Fragment() {
     private fun savePreferences(){
         if(new_item)
             sharedPref.edit().putInt(KEY_ItemLastID,++itemID).apply()
+        if(category=="--Category--")
+            category = "--"
+        if(subcategory == "--Subcategory--")
+            subcategory = "--"
 
         val item = Item(
             item_title_edit.text.toString(),
             item_price_edit.text.toString(),
             item_expire_date_edit.text.toString(),
-            item_category_edit.text.toString(),
-            item_sub_category_edit.text.toString(),
+            category,
+            subcategory,
             item_location_edit.text.toString(),
             item_delivery_edit.text.toString(),
             item_description_edit.text.toString(),
