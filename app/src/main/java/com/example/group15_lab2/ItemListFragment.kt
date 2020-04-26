@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_item_list.*
@@ -31,7 +32,7 @@ class ItemListFragment : Fragment() {
 
         populateItemList()
 
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false)
         val myAdapter = ItemAdapter(items)
         recyclerView.adapter = myAdapter
 

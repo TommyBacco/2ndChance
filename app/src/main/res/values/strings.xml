@@ -36,7 +36,7 @@
 
     <string name="default_title">Title</string>
     <string name="default_price">Price</string>
-    <string name="default_ExpireDate">30/04/2020</string>
+    <string name="default_ExpireDate">Expire Date</string>
     <string name="default_category">Category</string>
     <string name="default_subcategory">Sub-category</string>
     <string name="default_location">Location</string>

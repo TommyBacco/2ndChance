@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
 
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_profile,R.id.nav_advertisements,R.id.nav_itemDetails), drawerLayout)
+            R.id.nav_profile,R.id.nav_advertisements), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

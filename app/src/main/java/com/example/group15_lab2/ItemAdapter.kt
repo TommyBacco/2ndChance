@@ -52,12 +52,14 @@ class ItemAdapter(val items: ArrayList<Item>): RecyclerView.Adapter<ItemAdapter.
 
         val name: TextView = v.findViewById(R.id.cardview_name)
         private val price: TextView = v.findViewById(R.id.cardview_price)
+        val expire_date: TextView = v.findViewById(R.id.cardview_date)
         val image: ImageView = v.findViewById(R.id.cardview_image)
 
 
         fun bind(item: Item){
             name.text = item.title
             price.text = item.price
+            expire_date.text = item.expireDate
 
             //val itemImage = Gson().fromJson(item.getFile(), Item::class.java)
             //image.setImageResource()

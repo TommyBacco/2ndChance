@@ -88,7 +88,8 @@ class ItemEditFragment : Fragment() {
 
         //Date Picker
         val dateSetListener =DatePickerDialog.OnDateSetListener { _ , year,month,day ->
-                item_expire_date_edit.setText("$day/$month/$year")
+            val myMonth = month +1
+                item_expire_date_edit.setText("$day/$myMonth/$year")
             }
 
         val cal = Calendar.getInstance()
@@ -107,6 +108,7 @@ class ItemEditFragment : Fragment() {
     private fun populateTextView(item:Item) {
         item_title_edit.setText(item.title)
         item_price_edit.setText(item.price)
+        item_expire_date_edit.setText(item.expireDate)
         item_category_edit.setText(item.expireDate)
         item_category_edit.setText(item.category)
         item_sub_category_edit.setText(item.subcategory)
