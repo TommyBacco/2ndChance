@@ -181,8 +181,8 @@ class EditProfileFragment : Fragment() {
                         PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
                 } else {
                     // Permission has already been granted
-                    var photoPickerIntent =  Intent(Intent.ACTION_PICK);
-                    photoPickerIntent.type = "image/*";
+                    var photoPickerIntent =  Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    photoPickerIntent.type = "image/*"
                     startActivityForResult(photoPickerIntent, REQUEST_SELECT_GALLERY_PHOTO)
                 }
                 true
@@ -199,8 +199,8 @@ class EditProfileFragment : Fragment() {
             PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     // permission was granted, yay!
-                    var photoPickerIntent =  Intent(Intent.ACTION_PICK);
-                    photoPickerIntent.type = "image/*";
+                    var photoPickerIntent =  Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    photoPickerIntent.type = "image/*"
                     startActivityForResult(photoPickerIntent, REQUEST_SELECT_GALLERY_PHOTO)
 
                 } else {

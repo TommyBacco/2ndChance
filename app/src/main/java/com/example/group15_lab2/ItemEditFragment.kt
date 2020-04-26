@@ -2,6 +2,7 @@ package com.example.group15_lab2
 
 import android.Manifest
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -22,7 +23,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_item_edit2.*
+import kotlinx.android.synthetic.main.fragment_item_edit.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
@@ -40,13 +41,10 @@ class ItemEditFragment : Fragment() {
     private val REQUEST_SELECT_GALLERY_PHOTO = 20
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 21
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_item_edit2, container, false)
+        return inflater.inflate(R.layout.fragment_item_edit, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,6 +86,21 @@ class ItemEditFragment : Fragment() {
             showImage(savedInstanceState.getByteArray("IMAGE_E"), rotation)
         }
 
+        //Date Picker
+        val dateSetListener =DatePickerDialog.OnDateSetListener { _ , year,month,day ->
+                item_expire_date_edit.setText("$day/$month/$year")
+            }
+
+        val cal = Calendar.getInstance()
+        item_expire_date_edit.setOnClickListener {
+
+            val day = cal.get(Calendar.DAY_OF_MONTH)
+            val month = cal.get(Calendar.MONTH)
+            val year = cal.get(Calendar.YEAR)
+
+            DatePickerDialog(context!!,dateSetListener,year,month,day).show()
+
+            }
 
     }
 
@@ -225,8 +238,8 @@ class ItemEditFragment : Fragment() {
                         PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
                 } else {
                     // Permission has already been granted
-                    val photoPickerIntent =  Intent(Intent.ACTION_PICK);
-                    photoPickerIntent.type = "image/*";
+                    val photoPickerIntent =  Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    photoPickerIntent.type = "image/*"
                     startActivityForResult(photoPickerIntent, REQUEST_SELECT_GALLERY_PHOTO)
                 }
                 true
@@ -243,8 +256,8 @@ class ItemEditFragment : Fragment() {
             PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     // permission was granted, yay!
-                    val photoPickerIntent =  Intent(Intent.ACTION_PICK);
-                    photoPickerIntent.type = "image/*";
+                    val photoPickerIntent =  Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    photoPickerIntent.type = "image/*"
                     startActivityForResult(photoPickerIntent, REQUEST_SELECT_GALLERY_PHOTO)
 
                 } else {

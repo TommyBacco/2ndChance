@@ -7,8 +7,8 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_advertisements">Advertisements</string>
 
     <string name="profile_fullname">Full Name</string>
     <string name="profile_image">Image</string>
@@ -24,8 +24,6 @@
 
     <string name="menu_gallery">Select an image from the gallery</string>
     <string name="menu_camera">Use the camera to take a picture</string>
-
-    <string name="home_second">Home Second</string>
 
     <string name="item_image">Image:</string>
     <string name="item_price">Price:</string>
