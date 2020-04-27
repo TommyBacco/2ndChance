@@ -61,8 +61,7 @@
                     android:layout_toRightOf="@id/kind_category"
                     android:hint="@string/default_subcategory"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/myColorPrimaryText"
-                    android:textColorHint="@android:color/black" />
+                    android:textColor="@color/myColorPrimaryText" />
             </RelativeLayout>
         </HorizontalScrollView>
 
