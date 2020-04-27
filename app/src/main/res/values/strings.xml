@@ -40,7 +40,7 @@
     <string name="default_category">Category</string>
     <string name="default_subcategory">Sub-category</string>
     <string name="default_location">Location</string>
-    <string name="default_delivery">Standard</string>
+    <string name="default_delivery">Delivery type</string>
     <string name="default_description">Description</string>
 
     <string name="currency">€</string>

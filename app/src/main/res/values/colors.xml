@@ -2,13 +2,13 @@
 <resources>
 
     <!-- App theme colors -->
-    <color name="myColorPrimary">#009688</color>
-    <color name="myColorPrimaryDark">#00796B</color>
-    <color name="myColorPrimaryLight">#B2DFDB</color>
+    <color name="myColorPrimary">#3F51B5</color>
+    <color name="myColorPrimaryDark">#303F9F</color>
+    <color name="myColorPrimaryLight">#B3E5FC</color>
     <color name="myColorPrimaryText">#212121</color>
     <color name="myColorSecondaryText">#757575</color>
     <color name="myColorTextIcons">#FFFFFF</color>
     <color name="myColorDivider">#BDBDBD</color>
-    <color name="myColorAccent">#FF9800</color>
+    <color name="myColorAccent">#FF5722</color>
 
 </resources>

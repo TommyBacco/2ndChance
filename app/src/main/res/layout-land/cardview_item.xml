@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/cardview_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginBottom="4dp"
@@ -36,10 +36,12 @@
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@string/default_title"
+            android:hint="@string/default_title"
+            android:textColorHint="@android:color/black"
+
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/myColorPrimaryText"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/cardview_price"
@@ -50,9 +52,10 @@
             android:layout_marginEnd="4dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@string/default_price"
+            android:hint="0"
+            android:textColorHint="@android:color/holo_red_dark"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@android:color/holo_red_light" />
+            android:textColor="@android:color/holo_red_dark" />
 
 
         <TextView
@@ -63,9 +66,9 @@
             android:layout_marginLeft="2dp"
             android:layout_marginEnd="4dp"
             android:layout_toRightOf="@id/cardview_price"
-            android:text="@string/currency"
+            android:text="€"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@android:color/holo_red_light" />
+            android:textColor="@android:color/holo_red_dark" />
 
         <TextView
             android:id="@+id/cardview_date"
@@ -77,9 +80,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textStyle="italic"
-            android:text="@string/default_ExpireDate"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            />
+            android:hint="@string/default_ExpireDate"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
 
         <ImageView
