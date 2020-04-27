@@ -1,6 +1,7 @@
 package com.example.group15_lab2
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
@@ -60,6 +61,7 @@ class ItemEditFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
