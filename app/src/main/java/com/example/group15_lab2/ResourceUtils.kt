@@ -27,7 +27,6 @@ data class Item(
     var subcategory: String?,
     var location: String?,
     var delivery: String?,
-    //var description: String? = "Description",
     var description: String? = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
             "Ut semper viverra nunc ut aliquet. Vestibulum fermentum ex at ante mollis " +
             "venenatis. Fusce non neque et velit aliquam placerat vitae at metus. Donec ac " +
@@ -35,7 +34,7 @@ data class Item(
             "consequat nec lectus in dictum. In lacinia risus in ex fringilla, sed bibendum" +
             " felis suscipit. Suspendisse rhoncus libero ipsum, eu pharetra nisl laoreet ut.",
     var imageRotation: Float = 0F,
-    var itemID:Int = -1
+    var image:Bitmap? = null
 )
 
 fun rotateImage(startBitmap: Bitmap, degree:Float): Bitmap {

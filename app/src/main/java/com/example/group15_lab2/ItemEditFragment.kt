@@ -303,8 +303,7 @@ class ItemEditFragment : Fragment() {
             item_location_edit.text.toString(),
             item_delivery_edit.text.toString(),
             item_description_edit.text.toString(),
-            rotation,
-            itemID)
+            rotation)
 
         val jsonString:String = Gson().toJson(item)
 

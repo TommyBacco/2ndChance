@@ -2,6 +2,8 @@ package com.example.group15_lab2
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -74,11 +76,26 @@ class ItemListFragment : Fragment() {
                 val jsonString: String? = sharedPref.getString(key, null)
                 if (jsonString != null) {
                     val item: Item = Gson().fromJson(jsonString, Item::class.java)
+                    val imageBitmap = setItemImage(i,item.imageRotation)
+                    item.image = imageBitmap
                     items.add(item)
                 }
             }
         }
     }
 
+    private fun setItemImage(id:Int, rotation:Float) : Bitmap?{
+        val fileName = FILE_ItemImage + id
+
+        return try{
+            val byteArray = activity!!.openFileInput(fileName).readBytes()
+            var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+            if(rotation!=0F)
+                imageBitmap = rotateImage(imageBitmap, rotation)
+            imageBitmap
+        } catch (exc:Exception){
+            null
+        }
+    }
 
 }
