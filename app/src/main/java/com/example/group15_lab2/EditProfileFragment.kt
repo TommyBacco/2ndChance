@@ -104,6 +104,7 @@ class EditProfileFragment : Fragment() {
             R.id.save_button -> {
                 savePreferences()
                 saveImage(imageByteArray)
+                (activity as MainActivity).setUserData()
                 findNavController().popBackStack()
                 true
             }

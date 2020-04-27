@@ -13,24 +13,33 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/nav_user_avatar"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@drawable/user_icon" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/nav_user_nickname"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/nav_header_title"
+        android:text="@string/profile_nickname"
+        android:hint="@string/profile_nickname"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColorHint="@android:color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nav_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nav_header_subtitle" />
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:hint="@string/profile_email"
+        android:text="@string/profile_email" />
 
 </LinearLayout>

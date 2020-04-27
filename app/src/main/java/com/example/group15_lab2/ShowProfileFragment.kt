@@ -25,6 +25,7 @@ class ShowProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         populateTextView()
         populateImageView()
+
     }
 
     private fun populateTextView() {

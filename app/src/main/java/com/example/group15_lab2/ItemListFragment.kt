@@ -38,6 +38,7 @@ class ItemListFragment : Fragment() {
         val myAdapter = ItemAdapter(items)
         recyclerView.adapter = myAdapter
 
+
         myAdapter.setOnItemClickListener(object : ItemAdapter.ClickListener{
             override fun onItemClick(position: Int) {
                 Toast.makeText(context,"SHOW on ${items[position].title}",Toast.LENGTH_SHORT).show()
