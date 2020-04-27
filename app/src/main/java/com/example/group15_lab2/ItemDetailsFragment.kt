@@ -15,9 +15,7 @@ import kotlinx.android.synthetic.main.fragment_item_details.*
 class ItemDetailsFragment : Fragment() {
 
     private var itemID: Int = 0
-    private var rotation:Float = 0F
     private val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
-    private var imageByteArray: ByteArray? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -28,26 +26,22 @@ class ItemDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(savedInstanceState == null) {
+        if(savedInstanceState == null)
             itemID = arguments?.getInt("group15.lab2.ITEM_ID") ?: -1
+        else
+            itemID = savedInstanceState.getInt("group15.lab2.ITEM_ID",-1)
 
-            if(itemID != -1){
-                val key:String = KEY_ItemDetails + itemID
-                val jsonString: String? = sharedPref.getString(key, null)
-                if (jsonString != null) {
-                    val item: Item = Gson().fromJson(jsonString, Item::class.java)
-                    populateTextView(item)
-                    populateImageView(rotation)
-                }
+        if(itemID != -1){
+            val key:String = KEY_ItemDetails + itemID
+            val jsonString: String? = sharedPref.getString(key, null)
+            if (jsonString != null) {
+                val item: Item = Gson().fromJson(jsonString, Item::class.java)
+                populateViews(item)
             }
-
-        } else {
-            rotation = savedInstanceState.getFloat("ITEM_IMAGE_ROTATION", 0F)
-            showImage(savedInstanceState.getByteArray("ITEM_IMAGE"), rotation)
         }
     }
 
-    private fun populateTextView(itemShow: Item) {
+    private fun populateViews(itemShow: Item) {
         item_title.text = itemShow.title
         item_price.text = itemShow.price
         item_date.text = itemShow.expireDate
@@ -56,7 +50,7 @@ class ItemDetailsFragment : Fragment() {
         item_location.text = itemShow.location
         item_delivery.text = itemShow.delivery
         item_description.text = itemShow.description
-        rotation = itemShow.imageRotation
+        populateImageView(itemShow.imageRotation)
     }
 
     private fun populateImageView(rotation: Float){
@@ -64,7 +58,6 @@ class ItemDetailsFragment : Fragment() {
             val fileName = FILE_ItemImage + itemID
             val byteArray: ByteArray? = context!!.openFileInput(fileName).readBytes()
             if(byteArray != null){
-                imageByteArray = byteArray
                 var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
                 if(rotation != 0F)
                     imageBitmap = rotateImage(imageBitmap, rotation)
@@ -75,18 +68,6 @@ class ItemDetailsFragment : Fragment() {
         } catch (exc:Exception){
             item_image.setImageResource(R.drawable.item_icon)
         }
-    }
-
-    private fun showImage(byteArray: ByteArray?, rotation:Float){
-        if(byteArray != null){
-            imageByteArray=byteArray
-            var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            if(rotation != 0F)
-                imageBitmap = rotateImage(imageBitmap, rotation)
-            item_image.setImageBitmap(imageBitmap)
-        }
-        else
-            item_image.setImageResource(R.drawable.item_icon)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -111,9 +92,6 @@ class ItemDetailsFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        with(outState){
-            putByteArray("ITEM_IMAGE",imageByteArray)
-            putFloat("ITEM_IMAGE_ROTATION", rotation)
-        }
+        outState.putInt("group15.lab2.ITEM_ID",itemID)
     }
 }
