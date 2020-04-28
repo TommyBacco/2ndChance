@@ -33,21 +33,23 @@ class EditProfileFragment : Fragment() {
     private var imageByteArray:ByteArray?=null
     private var rotation:Float = 0F
     private val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
+    private var saveBundle:Bundle? = null
 
     private val REQUEST_IMAGE_CAPTURE = 10
     private val REQUEST_SELECT_GALLERY_PHOTO = 20
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 21
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if(savedInstanceState != null)
+            saveBundle = savedInstanceState.getBundle("group15.lab2.SAVED_STATE")
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_edit_profile,container,false)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        // ?? TROVARE MODO MIGLIORE PER GESTIRE VALORE DI RITORNO DA onSaveInstanceState
-        retainInstance = true
-        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,9 +67,6 @@ class EditProfileFragment : Fragment() {
             user_location_edit.setText(arguments?.getString("group15.lab2.LOCATION"))
             user_address_edit.setText(arguments?.getString("group15.lab2.ADDRESS"))
             user_telephone_edit.setText(arguments?.getString("group15.lab2.TELEPHONE"))
-        } else {
-            rotation=savedInstanceState.getFloat("ROTATION_E", 0F)
-            showImage(savedInstanceState.getByteArray("AVATAR_E"),rotation)
         }
 
         rotate_button.setOnClickListener{
@@ -312,11 +311,45 @@ class EditProfileFragment : Fragment() {
         return null
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        with(outState){
+    private fun saveState(): Bundle{
+        val bundle = Bundle()
+        with(bundle){
+            putString("FULL_NAME_E", user_fullname_edit.text.toString())
+            putString("NICKNAME_E", user_nickname_edit.text.toString())
+            putString("EMAIL_E", user_email_edit.text.toString())
+            putString("LOCATION_E", user_location_edit.text.toString())
+            putString("ADDRESS_E", user_address_edit.text.toString())
+            putString("TELEPHONE_E", user_telephone_edit.text.toString())
             putByteArray("AVATAR_E",imageByteArray)
             putFloat("ROTATION_E", rotation)
+        }
+        return bundle
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        saveBundle = saveState()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBundle("group15.lab2.SAVED_STATE", saveBundle ?: saveState() )
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        if(savedInstanceState != null){
+            with(savedInstanceState.getBundle("group15.lab2.SAVED_STATE")){
+                rotation=this?.getFloat("ROTATION_E") ?: 0F
+                showImage(this?.getByteArray("AVATAR_E"),rotation)
+                user_fullname_edit.setText(this?.getString("FULL_NAME_E"))
+                user_nickname_edit.setText(this?.getString("NICKNAME_E"))
+                user_email_edit.setText(this?.getString("EMAIL_E"))
+                user_location_edit.setText(this?.getString("LOCATION_E"))
+                user_address_edit.setText(this?.getString("ADDRESS_E"))
+                user_telephone_edit.setText(this?.getString("TELEPHONE_E"))
+            }
         }
     }
 }

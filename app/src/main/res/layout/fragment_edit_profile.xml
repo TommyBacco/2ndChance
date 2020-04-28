@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 app:endIconMode="clear_text">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_fullname_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 app:endIconMode="clear_text">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_nickname_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 app:endIconMode="clear_text">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_email_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 app:endIconMode="clear_text">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_location_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 app:endIconMode="clear_text">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_address_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 app:endIconMode="clear_text">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_telephone_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
