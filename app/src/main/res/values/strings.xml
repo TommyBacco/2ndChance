@@ -48,7 +48,7 @@
 
 
     <string-array name="Categories">
-        <item>-Category-</item>
+        <item>- Category -</item>
         <item>Arts &amp; Crafts</item>
         <item>Sports &amp; Hobby</item>
         <item>Baby</item>
@@ -60,7 +60,7 @@
     </string-array>
 
     <string-array name="SubcategoryArt">
-        <item>--Subcategory--</item>
+        <item>- Subcategory -</item>
         <item>Painting, Drawing &amp; Art Supplies</item>
         <item>Sewing</item>
         <item>Scrapbooking &amp; Stamping</item>
@@ -68,7 +68,7 @@
     </string-array>
 
     <string-array name="SubcategorySport">
-        <item>--Subcategory--</item>
+        <item>- Subcategory -</item>
         <item>Sports and Outdoors</item>
         <item>Outdoor Recreation</item>
         <item> Sports &amp; Fitness</item>
@@ -76,7 +76,7 @@
     </string-array>
 
     <string-array name="SubcategoryBaby">
-        <item>--Subcategory--</item>
+        <item>- Subcategory -</item>
         <item>Apparel &amp; Accessories</item>
         <item>Baby &amp; Toddler Toys</item>
         <item>Car Seats &amp; Accessories</item>
@@ -85,7 +85,7 @@
     </string-array>
 
     <string-array name="SubcategoryWomen">
-        <item>--Subcategory--</item>
+        <item>- Subcategory -</item>
         <item>Clothing</item>
         <item>Shoes</item>
         <item>Watches</item>
@@ -94,7 +94,7 @@
     </string-array>
 
     <string-array name="SubcategoryMen">
-        <item>--Subcategory--</item>
+        <item>- Subcategory -</item>
         <item>Clothing</item>
         <item>Shoes</item>
         <item>Watches</item>
@@ -102,7 +102,7 @@
     </string-array>
 
     <string-array name="SubcategoryElectronic">
-        <item>--Subcategory--</item>
+        <item>- Subcategory -</item>
         <item>Computers</item>
         <item>Monitors</item>
         <item>Printers &amp; Scanners</item>
@@ -118,7 +118,7 @@
     </string-array>
 
     <string-array name="SubcategoryGame">
-        <item>--Subcategory--</item>
+        <item>- Subcategory -</item>
         <item>Action Figures &amp; Statues</item>
         <item>Arts &amp; Crafts</item>
         <item>Building Toys</item>
@@ -130,7 +130,7 @@
     </string-array>
 
     <string-array name="SubcategoryAuto">
-        <item>--Subcategory--</item>
+        <item>- Subcategory -</item>
         <item>Car Electronics &amp; Accessories</item>
         <item>Accessories</item>
         <item>Motorcycle &amp; Powersports</item>
@@ -141,7 +141,7 @@
 
 
     <string-array name="SubcategoryDefault">
-        <item>-Subcategory-</item>
+        <item>- Subcategory -</item>
     </string-array>
     
     
@@ -152,9 +152,9 @@
     </string-array>
 
     <string-array name="Delivery_type">
-        <item>-Delivery Type-</item>
+        <item>- Delivery Type -</item>
         <item>Standard</item>
         <item>Express</item>
-        <item>Indirect</item>
+        <item>Premium</item>
     </string-array>
 </resources>

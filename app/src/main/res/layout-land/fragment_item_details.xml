@@ -30,13 +30,13 @@
 
             <TextView
                 android:id="@+id/item_title"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:hint="@string/default_title"
-                android:textColorHint="@android:color/black"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@color/myColorPrimaryText"
+                android:textColorHint="@android:color/black"
                 android:textStyle="bold" />
 
             <HorizontalScrollView
@@ -65,8 +65,8 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/item_category"
                         android:text="  >  "
-                        android:textColor="@android:color/black"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@android:color/black" />
 
                     <TextView
                         android:id="@+id/item_sub_category"
@@ -99,8 +99,7 @@
                         android:layout_marginBottom="6dp"
                         android:drawableStart="@drawable/ic_price"
                         android:drawablePadding="4dp"
-                        android:hint="0"
-                        android:text="@string/default_price"
+                        android:hint="-"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="@android:color/holo_red_dark"
                         android:textColorHint="@android:color/holo_red_dark"
@@ -113,20 +112,22 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginBottom="6dp"
                         android:layout_toEndOf="@+id/item_price"
+                        android:hint="@string/currency"
                         android:text="@string/currency"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="@android:color/holo_red_dark"
+                        android:textColorHint="@android:color/holo_red_dark"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/item_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
                         android:layout_below="@id/item_price"
-                        android:text="@string/default_ExpireDate"
-                        android:drawablePadding="4dp"
+                        android:layout_marginBottom="8dp"
                         android:drawableStart="@drawable/ic_date"
+                        android:drawablePadding="4dp"
+                        android:hint="@string/default_ExpireDate"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/myColorPrimaryDark"
                         android:textStyle="bold" />
@@ -136,11 +137,11 @@
                         android:id="@+id/item_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
                         android:layout_below="@+id/item_date"
-                        android:hint="@string/default_location"
+                        android:layout_marginBottom="8dp"
                         android:drawableStart="@drawable/ic_area_of_interest"
                         android:drawablePadding="4dp"
+                        android:hint="@string/default_location"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/myColorPrimaryText" />
 
@@ -150,9 +151,9 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/item_location"
                         android:layout_marginBottom="8dp"
-                        android:hint="@string/default_delivery"
                         android:drawableStart="@drawable/ic_delivery"
                         android:drawablePadding="4dp"
+                        android:hint="@string/default_delivery"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/myColorPrimaryText" />
 
@@ -163,9 +164,9 @@
                         android:layout_below="@+id/item_delivery"
                         android:layout_alignParentStart="true"
                         android:layout_marginBottom="4dp"
-                        android:text="@string/item_description"
-                        android:drawablePadding="4dp"
                         android:drawableStart="@drawable/ic_description"
+                        android:drawablePadding="4dp"
+                        android:text="@string/item_description"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black"
                         android:textStyle="bold|italic" />
@@ -185,8 +186,6 @@
 
                 </RelativeLayout>
             </androidx.core.widget.NestedScrollView>
-
-
 
 
         </LinearLayout>

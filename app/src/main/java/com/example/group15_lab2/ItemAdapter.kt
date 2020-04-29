@@ -50,16 +50,17 @@ class ItemAdapter(val items: ArrayList<Item>): RecyclerView.Adapter<ItemAdapter.
         }
     }
 
-        val name: TextView = v.findViewById(R.id.cardview_name)
+        private val name: TextView = v.findViewById(R.id.cardview_name)
         private val price: TextView = v.findViewById(R.id.cardview_price)
         private val expire_date: TextView = v.findViewById(R.id.cardview_date)
         private val image: ImageView = v.findViewById(R.id.cardview_image)
-
+        private val currency:TextView = v.findViewById(R.id.cardview_currency)
 
         fun bind(item: Item){
             name.text = item.title
             price.text = item.price
             expire_date.text = item.expireDate
+            currency.text = item.currency
             if(item.image != null)
                 image.setImageBitmap(item.image)
             else

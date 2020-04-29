@@ -50,6 +50,7 @@ class ItemDetailsFragment : Fragment() {
         item_location.text = itemShow.location
         item_delivery.text = itemShow.delivery
         item_description.text = itemShow.description
+        currency.text = itemShow.currency
         populateImageView(itemShow.imageRotation)
     }
 

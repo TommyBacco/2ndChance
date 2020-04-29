@@ -14,16 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardview_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="4dp"
-            android:contentDescription="@string/item_image"
             android:layout_marginTop="4dp"
-            app:srcCompat="@drawable/item_icon" />
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/item_icon"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@android:color/black"/>
 
         <TextView
             android:id="@+id/cardview_name"
@@ -49,7 +50,7 @@
             android:layout_marginBottom="4dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:hint="0"
+            android:hint="-"
             android:textColorHint="@android:color/holo_red_dark"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@android:color/holo_red_dark"/>

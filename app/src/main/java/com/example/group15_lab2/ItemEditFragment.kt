@@ -17,6 +17,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.storage.StorageManager
 import android.provider.MediaStore
+import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -25,6 +26,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_item_edit.*
 import java.io.ByteArrayOutputStream
@@ -39,6 +41,8 @@ class ItemEditFragment : Fragment() {
     private var imageByteArray: ByteArray? = null
     private var rotation: Float = 0F
     private val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
+    private var saveBundle:Bundle? = null
+    private var categoryPosition:Int = -1
 
     private val REQUEST_IMAGE_CAPTURE = 10
     private val REQUEST_SELECT_GALLERY_PHOTO = 20
@@ -51,11 +55,11 @@ class ItemEditFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // todo Serve metodo per gestire onSaveInstanceState
         super.onCreate(savedInstanceState)
+        if(savedInstanceState != null)
+            saveBundle = savedInstanceState.getBundle("group15.lab2.SAVED_STATE")
     }
 
-    @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -70,17 +74,17 @@ class ItemEditFragment : Fragment() {
             item_image_edit.setImageBitmap(source)
         }
 
-        //TODO Aggiustare e riposizionare spinner SubCategory
+
         //Spinners
-        val currency_adapter = ArrayAdapter.createFromResource(context!!,R.array.Currencies,R.layout.spinner_currency)
+        val currency_adapter = ArrayAdapter.createFromResource(activity!!,R.array.Currencies,R.layout.spinner_currency)
         currency_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_currency.adapter = currency_adapter
 
-        val delivery_adapter = ArrayAdapter.createFromResource(context!!,R.array.Delivery_type,R.layout.spinner_item)
+        val delivery_adapter = ArrayAdapter.createFromResource(activity!!,R.array.Delivery_type,R.layout.spinner_item)
         currency_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_delivery_type.adapter = delivery_adapter
 
-        val category_adapter = ArrayAdapter.createFromResource(context!!,R.array.Categories,R.layout.spinner_category)
+        val category_adapter = ArrayAdapter.createFromResource(activity!!,R.array.Categories,R.layout.spinner_category)
         currency_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_item_category.adapter = category_adapter
 
@@ -90,11 +94,12 @@ class ItemEditFragment : Fragment() {
 
             override fun onItemSelected(
                 parent: AdapterView<*>,
-                view: View, position: Int, id: Long
+                view: View?, position: Int, id: Long
             ) {
                 setSubCategorySpinner(position,null)
             }
         }
+
 
         //PopulateViews
 
@@ -112,11 +117,7 @@ class ItemEditFragment : Fragment() {
                 }
             }
 
-        } else {
-            rotation = savedInstanceState.getFloat("ROTATION_E", 0F)
-            showImage(savedInstanceState.getByteArray("IMAGE_E"), rotation)
         }
-
         //Date Picker
         val dateSetListener =DatePickerDialog.OnDateSetListener { _ , year,month,day ->
             val myMonth = month +1
@@ -130,7 +131,7 @@ class ItemEditFragment : Fragment() {
             val month = cal.get(Calendar.MONTH)
             val year = cal.get(Calendar.YEAR)
 
-            DatePickerDialog(context!!,dateSetListener,year,month,day).show()
+            DatePickerDialog(activity!!,dateSetListener,year,month,day).show()
             }
     }
 
@@ -141,8 +142,17 @@ class ItemEditFragment : Fragment() {
         item_location_edit.setText(item.location)
         item_description_edit.setText(item.description)
         populateCategorySpinners(item.category,item.subcategory)
-        //todo Setting Spinner for delivery + currency
         rotation = item.imageRotation
+
+        //Currency spinner
+            val currencyPosition = resources.getStringArray(R.array.Currencies).indexOf(item.currency)
+            spinner_currency.setSelection(currencyPosition)
+
+        //Delivery spinner
+        if(item.delivery != null){
+            val deliveryPosition = resources.getStringArray(R.array.Currencies).indexOf(item.delivery)
+            spinner_delivery_type.setSelection(deliveryPosition)
+        }
      }
 
     private fun populateCategorySpinners(category:String?,subCategory:String?){
@@ -152,40 +162,46 @@ class ItemEditFragment : Fragment() {
             categoryPosition = resources.getStringArray(R.array.Categories).indexOf(category)
         spinner_item_category.setSelection(categoryPosition)
 
-        val subCategoryPosition = setSubCategorySpinner(categoryPosition,subCategory)
-        spinner_item_sub_category.setSelection(subCategoryPosition)
+        setSubCategorySpinner(categoryPosition,subCategory)
+
     }
 
 
-    private fun setSubCategorySpinner(categoryPosition:Int, subCategory:String?) :Int{
+    private fun setSubCategorySpinner(position:Int, subCategory:String?){
 
-        val array = when(categoryPosition){
-            1 -> R.array.SubcategoryArt
-            2 -> R.array.SubcategorySport
-            3 -> R.array.SubcategoryBaby
-            4 -> R.array.SubcategoryWomen
-            5 -> R.array.SubcategoryMen
-            6 -> R.array.SubcategoryElectronic
-            7 -> R.array.SubcategoryGame
-            8 -> R.array.SubcategoryAuto
-            else -> R.array.SubcategoryDefault
+        if(position != categoryPosition) {
+
+            categoryPosition = position
+
+            val array = when (position) {
+                1 -> R.array.SubcategoryArt
+                2 -> R.array.SubcategorySport
+                3 -> R.array.SubcategoryBaby
+                4 -> R.array.SubcategoryWomen
+                5 -> R.array.SubcategoryMen
+                6 -> R.array.SubcategoryElectronic
+                7 -> R.array.SubcategoryGame
+                8 -> R.array.SubcategoryAuto
+                else -> R.array.SubcategoryDefault
+            }
+
+            val adapter =
+                ArrayAdapter.createFromResource(activity!!, array, R.layout.spinner_subcategory)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner_item_sub_category.adapter = adapter
+
+            if (subCategory != null){
+                val subCategoryPosition = resources.getStringArray(array).indexOf(subCategory)
+                spinner_item_sub_category.setSelection(subCategoryPosition)
+            }
+
         }
-
-        val adapter = ArrayAdapter.createFromResource(context!!,array,R.layout.spinner_subcategory)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner_item_sub_category.adapter = adapter
-
-        var subCategoryPosition = 0
-        if(subCategory != null)
-            subCategoryPosition = resources.getStringArray(array).indexOf(subCategory)
-
-        return subCategoryPosition
     }
 
     private fun populateImageView(rotation: Float){
         try{
             val fileName = FILE_ItemImage + itemID
-            val byteArray = context!!.openFileInput(fileName)?.readBytes()
+            val byteArray = activity!!.openFileInput(fileName)?.readBytes()
             if(byteArray != null){
                 imageByteArray = byteArray
                 var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
@@ -222,9 +238,14 @@ class ItemEditFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.save_button -> {
-                savePreferences()
-                saveImage(imageByteArray)
-                findNavController().popBackStack()
+                if(item_title_edit.text.toString().length > 15){
+                    Snackbar.make(item_title_edit,"Too many characters in the Title",Snackbar.LENGTH_SHORT)
+                        .show()
+                } else {
+                    savePreferences()
+                    saveImage(imageByteArray)
+                    findNavController().popBackStack()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -238,14 +259,18 @@ class ItemEditFragment : Fragment() {
 
         var category:String? = null
         var subCategory:String? = null
+        var delivery:String? = null
 
         val categoryPosition = spinner_item_category.selectedItemPosition
         val subCategoryPosition = spinner_item_sub_category.selectedItemPosition
+        val deliveryPosition = spinner_delivery_type.selectedItemPosition
 
         if(categoryPosition != 0)
             category = spinner_item_category.selectedItem.toString()
         if(subCategoryPosition != 0)
             subCategory = spinner_item_sub_category.selectedItem.toString()
+        if(deliveryPosition != 0)
+            delivery = spinner_delivery_type.selectedItem.toString()
 
         val item = Item(
             item_title_edit.text.toString(),
@@ -254,9 +279,10 @@ class ItemEditFragment : Fragment() {
             category,
             subCategory,
             item_location_edit.text.toString(),
-            spinner_delivery_type.selectedItem.toString(),
+            delivery,
             item_description_edit.text.toString(),
-            rotation)
+            rotation,
+            currency = spinner_currency.selectedItem.toString())
 
         val jsonString:String = Gson().toJson(item)
 
@@ -444,13 +470,59 @@ class ItemEditFragment : Fragment() {
         return null
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        with(outState){
-            putByteArray("IMAGE_E",imageByteArray)
-            putFloat("ROTATION_E", rotation)
+
+    private fun saveState(): Bundle{
+        val bundle = Bundle()
+        with(bundle){
+            putInt("ITEM_ID_E",itemID)
+            putBoolean("NEW_ITEM_E",new_item)
+            putString("ITEM_TITLE_E",item_title_edit.text.toString())
+            putString("ITEM_PRICE_E",item_price_edit.text.toString())
+            putString("ITEM_EXPIRE_DATE_E",item_expire_date_edit.text.toString())
+            putString("ITEM_LOCATION_E",item_location_edit.text.toString())
+            putString("ITEM_DESCRIPTION_E",item_description_edit.text.toString())
+            putInt("ITEM_CURRENCY_E",spinner_currency.selectedItemPosition)
+            putString("ITEM_CATEGORY_E",spinner_item_category.selectedItem.toString())
+            putString("ITEM_SUB_CATEGORY_E",spinner_item_sub_category.selectedItem.toString())
+            putInt("ITEM_DELIVERY_E",spinner_delivery_type.selectedItemPosition)
+            putByteArray("ITEM_IMAGE_E",imageByteArray)
+            putFloat("ITEM_IMAGE_ROTATION_E", rotation)
         }
+        return bundle
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        saveBundle = saveState()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if(item_title_edit != null) saveBundle = null
+        outState.putBundle("group15.lab2.SAVED_STATE", saveBundle ?: saveState() )
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        if(savedInstanceState != null){
+            with(savedInstanceState.getBundle("group15.lab2.SAVED_STATE")){
+                itemID=this?.getInt("ITEM_ID_E") ?: -1
+                new_item=this?.getBoolean("NEW_ITEM_E") ?: false
+                rotation=this?.getFloat("ITEM_IMAGE_ROTATION_E") ?: 0F
+                showImage(this?.getByteArray("ITEM_IMAGE_E"),rotation)
+                item_title_edit.setText(this?.getString("ITEM_TITLE_E"))
+                item_price_edit.setText(this?.getString("ITEM_PRICE_E"))
+                item_expire_date_edit.setText(this?.getString("ITEM_EXPIRE_DATE_E"))
+                item_location_edit.setText(this?.getString("ITEM_LOCATION_E"))
+                item_description_edit.setText(this?.getString("ITEM_DESCRIPTION_E"))
+                val category = this?.getString("ITEM_CATEGORY_E")
+                val subCategory = this?.getString("ITEM_SUB_CATEGORY_E")
+                populateCategorySpinners(category,subCategory)
+                spinner_currency.setSelection(this?.getInt("ITEM_CURRENCY_E") ?: 0)
+                spinner_delivery_type.setSelection(this?.getInt("ITEM_DELIVERY_E") ?: 0)
+            }
+        }
+    }
 
 }

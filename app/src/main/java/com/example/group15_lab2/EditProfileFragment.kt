@@ -15,6 +15,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.storage.StorageManager
 import android.provider.MediaStore
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -223,6 +224,7 @@ class EditProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+
         //New image via camera
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap?
@@ -333,12 +335,12 @@ class EditProfileFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        if(user_fullname_edit != null) saveBundle = null
         outState.putBundle("group15.lab2.SAVED_STATE", saveBundle ?: saveState() )
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         if(savedInstanceState != null){
             with(savedInstanceState.getBundle("group15.lab2.SAVED_STATE")){
                 rotation=this?.getFloat("ROTATION_E") ?: 0F

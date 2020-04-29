@@ -34,7 +34,8 @@ data class Item(
             "consequat nec lectus in dictum. In lacinia risus in ex fringilla, sed bibendum" +
             " felis suscipit. Suspendisse rhoncus libero ipsum, eu pharetra nisl laoreet ut.",
     var imageRotation: Float = 0F,
-    var image:Bitmap? = null
+    var image:Bitmap? = null,
+    val currency:String = "€"
 )
 
 fun rotateImage(startBitmap: Bitmap, degree:Float): Bitmap {

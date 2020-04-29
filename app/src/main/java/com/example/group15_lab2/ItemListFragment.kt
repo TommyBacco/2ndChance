@@ -8,12 +8,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_item_list.*
 
@@ -41,20 +39,17 @@ class ItemListFragment : Fragment() {
 
         myAdapter.setOnItemClickListener(object : ItemAdapter.ClickListener{
             override fun onItemClick(position: Int) {
-                Toast.makeText(context,"SHOW on ${items[position].title}",Toast.LENGTH_SHORT).show()
                 val bundle = bundleOf(Pair("group15.lab2.ITEM_ID",position))
                 findNavController().navigate(R.id.action_itemListFragment_to_itemDetailsFragment,bundle)
             }
 
             override fun onItemEdit(position: Int) {
-                Toast.makeText(context,"EDIT on ${items[position].title}",Toast.LENGTH_SHORT).show()
                 val bundle = bundleOf(Pair("group15.lab2.ITEM_ID",position))
                 findNavController().navigate(R.id.action_itemListFragment_to_itemEditFragment,bundle)
             }
         })
 
         fab_new_item.setOnClickListener {
-            Toast.makeText(context,"ADD item",Toast.LENGTH_SHORT).show()
             val bundle = Bundle()
             with(bundle){
                 putInt("group15.lab2.ITEM_ID",itemLastID)
