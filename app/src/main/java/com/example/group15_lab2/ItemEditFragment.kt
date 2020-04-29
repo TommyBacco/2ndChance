@@ -20,7 +20,6 @@ import android.provider.MediaStore
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -44,10 +43,6 @@ class ItemEditFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 10
     private val REQUEST_SELECT_GALLERY_PHOTO = 20
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 21
-    private var category = "--Category--"
-    private var subcategory = "--Subcategory--"
-    private var subcategories : Array<String>? = null
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -56,8 +51,7 @@ class ItemEditFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // todo Serve metodo per gestire meglio onSaveInstanceState
-        retainInstance = true
+        // todo Serve metodo per gestire onSaveInstanceState
         super.onCreate(savedInstanceState)
     }
 
@@ -75,6 +69,34 @@ class ItemEditFragment : Fragment() {
             source = rotateImage(source, 90F)
             item_image_edit.setImageBitmap(source)
         }
+
+        //TODO Aggiustare e riposizionare spinner SubCategory
+        //Spinners
+        val currency_adapter = ArrayAdapter.createFromResource(context!!,R.array.Currencies,R.layout.spinner_currency)
+        currency_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_currency.adapter = currency_adapter
+
+        val delivery_adapter = ArrayAdapter.createFromResource(context!!,R.array.Delivery_type,R.layout.spinner_item)
+        currency_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_delivery_type.adapter = delivery_adapter
+
+        val category_adapter = ArrayAdapter.createFromResource(context!!,R.array.Categories,R.layout.spinner_category)
+        currency_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_item_category.adapter = category_adapter
+
+        spinner_item_category.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?){}
+
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View, position: Int, id: Long
+            ) {
+                setSubCategorySpinner(position,null)
+            }
+        }
+
+        //PopulateViews
 
         if(savedInstanceState == null) {
             itemID = arguments?.getInt("group15.lab2.ITEM_ID") ?: -1
@@ -109,132 +131,56 @@ class ItemEditFragment : Fragment() {
             val year = cal.get(Calendar.YEAR)
 
             DatePickerDialog(context!!,dateSetListener,year,month,day).show()
-
             }
-        val categories = resources.getStringArray(R.array.Category)
-        val spinner : Spinner = activity!!.findViewById(R.id.item_category_edit)
-        if (spinner != null) {
-            val adapter = ArrayAdapter(
-                context!!,
-                android.R.layout.simple_spinner_item, categories
-            )
-            spinner.adapter = adapter
-            spinner.setSelection(categories.indexOf(category), true)
-            spinner.onItemSelectedListener = object :
-                AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View, position: Int, id: Long
-                ) {
-
-                    category = categories[position]
-                    when(category){
-                        "Arts & Crafts" ->  subcategories = resources.getStringArray(R.array.SubcategoryArt)
-                        "Sports & Hobby" -> subcategories = resources.getStringArray(R.array.SubcategorySport)
-                        "Baby" -> subcategories = resources.getStringArray(R.array.SubcategoryBaby)
-                        "Women's fashion" ->subcategories = resources.getStringArray(R.array.SubcategoryWomen)
-                        "Men's fashion" ->subcategories = resources.getStringArray(R.array.SubcategoryMen)
-                        "Electronics" ->subcategories = resources.getStringArray(R.array.SubcategoryElectronic)
-                        "Games & Videogames"->subcategories = resources.getStringArray(R.array.SubcategoryGame)
-                        "Automotive"-> subcategories = resources.getStringArray(R.array.SubcategoryAuto)
-                        else -> {subcategories = resources.getStringArray(R.array.SubcategoryDefault)
-
-                        }
-                    }
-                    val spinner2 : Spinner = activity!!.findViewById(R.id.item_sub_category_edit)
-                    if (spinner2 != null) {
-                        val adapter2 = subcategories?.let {
-                            ArrayAdapter(
-                                context!!,
-                                android.R.layout.simple_spinner_item, it
-                            )
-                        }
-
-                        spinner2.adapter = adapter2
-
-
-                        spinner2.onItemSelectedListener = object :
-                            AdapterView.OnItemSelectedListener {
-                            override fun onNothingSelected(parent: AdapterView<*>?) {
-                                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                            }
-
-                            override fun onItemSelected(
-                                parent: AdapterView<*>?,
-                                view: View?,
-                                position: Int,
-                                id: Long
-                            ) {
-
-                                subcategory = subcategories?.get(position) ?: "--Subcategory--"
-
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        when(category){
-            "Arts & Crafts" ->  subcategories = resources.getStringArray(R.array.SubcategoryArt)
-            "Sports & Hobby" -> subcategories = resources.getStringArray(R.array.SubcategorySport)
-            "Baby" -> subcategories = resources.getStringArray(R.array.SubcategoryBaby)
-            "Women's fashion" ->subcategories = resources.getStringArray(R.array.SubcategoryWomen)
-            "Men's fashion" ->subcategories = resources.getStringArray(R.array.SubcategoryMen)
-            "Electronics" ->subcategories = resources.getStringArray(R.array.SubcategoryElectronic)
-            "Games & Videogames"->subcategories = resources.getStringArray(R.array.SubcategoryGame)
-            "Automotive"-> subcategories = resources.getStringArray(R.array.SubcategoryAuto)
-            else -> {
-                subcategories = resources.getStringArray(R.array.SubcategoryDefault)
-            }
-        }
-        val spinner2 : Spinner = activity!!.findViewById(R.id.item_sub_category_edit)
-        if (spinner2 != null) {
-            val adapter2 = subcategories?.let {
-                ArrayAdapter(
-                    context!!,
-                    android.R.layout.simple_spinner_item, it
-                )
-            }
-
-            spinner2.adapter = adapter2
-            subcategories?.indexOf(subcategory)?.let { spinner2.setSelection(it, true) }
-
-            spinner2.onItemSelectedListener = object :
-                AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-
-                    subcategory = subcategories?.get(position) ?: "--Subcategory--"
-
-                }
-            }
-        }
-
     }
 
     private fun populateTextView(item:Item) {
         item_title_edit.setText(item.title)
         item_price_edit.setText(item.price)
         item_expire_date_edit.setText(item.expireDate)
-        category = item.category!!
-        subcategory = item.subcategory!!
         item_location_edit.setText(item.location)
-        item_delivery_edit.setText(item.delivery)
         item_description_edit.setText(item.description)
+        populateCategorySpinners(item.category,item.subcategory)
+        //todo Setting Spinner for delivery + currency
         rotation = item.imageRotation
      }
+
+    private fun populateCategorySpinners(category:String?,subCategory:String?){
+
+        var categoryPosition = 0
+        if(category != null)
+            categoryPosition = resources.getStringArray(R.array.Categories).indexOf(category)
+        spinner_item_category.setSelection(categoryPosition)
+
+        val subCategoryPosition = setSubCategorySpinner(categoryPosition,subCategory)
+        spinner_item_sub_category.setSelection(subCategoryPosition)
+    }
+
+
+    private fun setSubCategorySpinner(categoryPosition:Int, subCategory:String?) :Int{
+
+        val array = when(categoryPosition){
+            1 -> R.array.SubcategoryArt
+            2 -> R.array.SubcategorySport
+            3 -> R.array.SubcategoryBaby
+            4 -> R.array.SubcategoryWomen
+            5 -> R.array.SubcategoryMen
+            6 -> R.array.SubcategoryElectronic
+            7 -> R.array.SubcategoryGame
+            8 -> R.array.SubcategoryAuto
+            else -> R.array.SubcategoryDefault
+        }
+
+        val adapter = ArrayAdapter.createFromResource(context!!,array,R.layout.spinner_subcategory)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_item_sub_category.adapter = adapter
+
+        var subCategoryPosition = 0
+        if(subCategory != null)
+            subCategoryPosition = resources.getStringArray(array).indexOf(subCategory)
+
+        return subCategoryPosition
+    }
 
     private fun populateImageView(rotation: Float){
         try{
@@ -289,19 +235,26 @@ class ItemEditFragment : Fragment() {
     private fun savePreferences(){
         if(new_item)
             sharedPref.edit().putInt(KEY_ItemLastID,++itemID).apply()
-        if(category=="--Category--")
-            category = "--"
-        if(subcategory == "--Subcategory--")
-            subcategory = "--"
+
+        var category:String? = null
+        var subCategory:String? = null
+
+        val categoryPosition = spinner_item_category.selectedItemPosition
+        val subCategoryPosition = spinner_item_sub_category.selectedItemPosition
+
+        if(categoryPosition != 0)
+            category = spinner_item_category.selectedItem.toString()
+        if(subCategoryPosition != 0)
+            subCategory = spinner_item_sub_category.selectedItem.toString()
 
         val item = Item(
             item_title_edit.text.toString(),
             item_price_edit.text.toString(),
             item_expire_date_edit.text.toString(),
             category,
-            subcategory,
+            subCategory,
             item_location_edit.text.toString(),
-            item_delivery_edit.text.toString(),
+            spinner_delivery_type.selectedItem.toString(),
             item_description_edit.text.toString(),
             rotation)
 

@@ -45,16 +45,18 @@
 
     <string name="currency">€</string>
     <string name="emptyMessage">No advertisements have been posted yet!</string>
-    <string-array name="Category">
-        <item>--Category--</item>
+
+
+    <string-array name="Categories">
+        <item>-Category-</item>
         <item>Arts &amp; Crafts</item>
-        <item> Sports &amp; Hobby</item>
+        <item>Sports &amp; Hobby</item>
         <item>Baby</item>
         <item>Women\'s fashion</item>
         <item>Men\'s fashion</item>
         <item>Electronics</item>
         <item>Games &amp; Videogames</item>
-        <item>Automotives</item>
+        <item>Automotive</item>
     </string-array>
 
     <string-array name="SubcategoryArt">
@@ -136,7 +138,23 @@
         <item>RV Parts &amp; Accessories</item>
         <item>Tools &amp; Equipment</item>
     </string-array>
+
+
     <string-array name="SubcategoryDefault">
-        <item>--Subcategory--</item>
+        <item>-Subcategory-</item>
+    </string-array>
+    
+    
+    <string-array name="Currencies">
+        <item>€</item>
+        <item>$</item>
+        <item>£</item>
+    </string-array>
+
+    <string-array name="Delivery_type">
+        <item>-Delivery Type-</item>
+        <item>Standard</item>
+        <item>Express</item>
+        <item>Indirect</item>
     </string-array>
 </resources>

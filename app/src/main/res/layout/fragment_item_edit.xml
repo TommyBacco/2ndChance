@@ -1,170 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ItemEditFragment"
-    android:padding="16dp">
+    android:padding="8dp">
 
-    <RelativeLayout
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@id/title"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="16dp">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="15">
 
-        <ImageView
-            android:id="@+id/item_image_edit"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/item_title_edit"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:contentDescription="@string/item_image"
-            app:srcCompat="@drawable/item_icon" />
+            android:gravity="center_horizontal"
+            android:hint="@string/default_title"
+            android:imeOptions="actionDone"
+            android:inputType="textCapSentences"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColorHint="@android:color/black"
+            android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/item_rotate_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/item_image_edit"
-            android:background="#ffffffff"
-            android:visibility="visible"
-            app:srcCompat="@android:drawable/ic_menu_rotate"/>
-
-        <ImageButton
-            android:id="@+id/item_camera_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/item_image_edit"
-            android:layout_centerHorizontal="true"
-            android:background="#ffffffff"
-            app:srcCompat="@android:drawable/ic_menu_camera"/>
-
-
-    </RelativeLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/item_title_edit"
-                android:layout_width="match_parent"
+            <HorizontalScrollView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_title"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                android:layout_below="@id/title"
+                android:layout_marginBottom="12dp">
 
-            <EditText
-                android:id="@+id/item_price_edit"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp">
+
+                    <Spinner
+                        android:id="@+id/spinner_item_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/kind_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/spinner_item_category"
+                        android:text="  >  "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@android:color/black" />
+
+                    <Spinner
+                        android:id="@+id/spinner_item_sub_category"
+                        android:layout_toRightOf="@id/kind_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"/>
+
+                </RelativeLayout>
+            </HorizontalScrollView>
+
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_price"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="numberDecimal"/>
+                android:layout_height="0dp"
+                android:layout_weight="0.4">
 
-            <com.google.android.material.textfield.TextInputLayout
+                <ImageView
+                    android:id="@+id/item_image_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/item_icon" />
+
+                <ImageButton
+                    android:id="@+id/item_rotate_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/item_image_edit"
+                    android:layout_alignRight="@id/item_image_edit"
+                    android:background="#ffffffff"
+                    android:visibility="visible"
+                    app:srcCompat="@android:drawable/ic_menu_rotate" />
+
+                <ImageButton
+                    android:id="@+id/item_camera_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/item_image_edit"
+                    android:layout_centerHorizontal="true"
+                    android:background="#ffffffff"
+                    app:srcCompat="@android:drawable/ic_menu_camera" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:helperText="Day/Month/Year"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:background="#00FFFFFF">
 
-                <EditText
-                    android:id="@+id/item_expire_date_edit"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_date"
-                   android:drawablePadding="4dp"
-                    android:hint="@string/default_ExpireDate"
-                    android:clickable="true"
-                    android:focusable="false"
-                    android:inputType="none" />
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="8dp"
+                        android:hint="@string/default_price"
+                        app:hintTextColor="@android:color/holo_red_dark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/item_price_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_price"
+                            android:drawablePadding="4dp"
+                            android:text="@string/default_price"
+                            android:inputType="numberDecimal"
+                            android:imeOptions="actionDone"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textStyle="bold" />
 
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Spinner
+                        android:id="@+id/spinner_currency"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"/>
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:helperText="Day/Month/Year">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/item_expire_date_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_date"
+                        android:drawablePadding="4dp"
+                        android:hint="@string/default_ExpireDate"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:inputType="none" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/item_location_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:drawableStart="@drawable/ic_area_of_interest"
+                        android:drawablePadding="4dp"
+                        android:hint="@string/default_location"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapWords"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"/>
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:drawableStart="@drawable/ic_delivery"
+                        android:drawablePadding="4dp"/>
+
+                    <Spinner
+                        android:id="@+id/spinner_delivery_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
 
 
 
-            <Spinner
-                android:id="@+id/item_category_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_category"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:imeOptions="actionDone">
 
-            <Spinner
-                android:id="@+id/item_sub_category_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_subcategory"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/item_description_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/description"
+                        android:inputType="text"
+                        android:drawableStart="@drawable/ic_description"
+                        android:drawablePadding="4dp"
+                        android:hint="@string/default_description"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"/>
 
-            <EditText
-                android:id="@+id/item_location_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_location"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/item_delivery_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_delivery"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/item_description_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:hint="@string/default_description"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="textImeMultiLine" />
+            </LinearLayout>
 
         </LinearLayout>
-
-
     </androidx.core.widget.NestedScrollView>
-
-
-
 </LinearLayout>
