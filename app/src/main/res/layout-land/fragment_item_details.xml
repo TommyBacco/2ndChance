@@ -166,7 +166,7 @@
                         android:layout_marginBottom="4dp"
                         android:drawableStart="@drawable/ic_description"
                         android:drawablePadding="4dp"
-                        android:text="@string/item_description"
+                        android:text="@string/default_description"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black"
                         android:textStyle="bold|italic" />

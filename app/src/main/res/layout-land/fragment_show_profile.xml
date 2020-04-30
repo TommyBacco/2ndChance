@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="#FFFFFFFF"
     android:padding="16dp">
 
     <ImageView
@@ -29,7 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFFFF"
+
             android:orientation="vertical">
 
             <TextView

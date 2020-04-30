@@ -11,10 +11,8 @@
         <action
             android:id="@+id/action_showProfileFragment_to_editProfileFragment"
             app:destination="@id/nav_editProfile"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
     </fragment>
     <fragment
         android:id="@+id/nav_editProfile"
@@ -26,7 +24,9 @@
         android:label="ItemDetailsFragment" >
         <action
             android:id="@+id/action_itemDetailsFragment_to_itemEditFragment"
-            app:destination="@id/nav_itemEdit" />
+            app:destination="@id/nav_itemEdit"
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
     </fragment>
     <fragment
         android:id="@+id/nav_advertisements"
@@ -34,10 +34,15 @@
         android:label="ItemListFragment" >
         <action
             android:id="@+id/action_itemListFragment_to_itemDetailsFragment"
-            app:destination="@id/nav_itemDetails" />
+            app:destination="@id/nav_itemDetails"
+            app:enterAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up" />
         <action
             android:id="@+id/action_itemListFragment_to_itemEditFragment"
-            app:destination="@id/nav_itemEdit" />
+            app:destination="@id/nav_itemEdit"
+            app:enterAnim="@anim/bounce_in"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/nav_itemEdit"

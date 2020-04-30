@@ -38,15 +38,15 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_profile,R.id.nav_advertisements), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.nav_profile, R.id.nav_advertisements), drawerLayout)
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         headView = navView.getHeaderView(0)
 
         setUserData()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -60,20 +60,20 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-     fun setUserData() {
+    fun setUserData() {
         val jsonString: String? = sharedPref.getString(KEY_UserProfile, null)
 
         if (jsonString != null) {
             val profile: Profile = Gson().fromJson(jsonString, Profile::class.java)
-            val user_nickname_view:TextView = headView.findViewById(R.id.nav_user_nickname)
-            val user_email_view:TextView = headView.findViewById(R.id.nav_user_email)
-            val user_avatar_view:ImageView = headView.findViewById(R.id.nav_user_avatar)
+            val user_nickname_view: TextView = headView.findViewById(R.id.nav_user_nickname)
+            val user_email_view: TextView = headView.findViewById(R.id.nav_user_email)
+            val user_avatar_view: ImageView = headView.findViewById(R.id.nav_user_avatar)
 
             with(profile) {
-                user_nickname_view.text= nickname
+                user_nickname_view.text = nickname
                 user_email_view.text = email
                 var imageBitmap = getUserAvatar(rotation)
-                if(imageBitmap != null)
+                if (imageBitmap != null)
                     user_avatar_view.setImageBitmap(imageBitmap)
                 else
                     user_avatar_view.setImageResource(R.drawable.user_icon)
@@ -81,16 +81,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUserAvatar(rotation:Float): Bitmap?{
+    private fun getUserAvatar(rotation: Float): Bitmap? {
         val fileName = FILE_UserProfile_Avatar
 
-        return try{
+        return try {
             val byteArray = this.openFileInput(fileName).readBytes()
             var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            if(rotation != 0F)
+            if (rotation != 0F)
                 imageBitmap = rotateImage(imageBitmap, rotation)
             imageBitmap
-        } catch (exc:Exception){
+        } catch (exc: Exception) {
             null
         }
     }

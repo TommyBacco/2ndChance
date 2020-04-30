@@ -8,6 +8,8 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.BitmapDrawable
 import android.media.ExifInterface
 import android.net.Uri
@@ -17,11 +19,13 @@ import android.os.storage.StorageManager
 import android.provider.MediaStore
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 import java.io.ByteArrayOutputStream
@@ -105,7 +109,15 @@ class EditProfileFragment : Fragment() {
                 savePreferences()
                 saveImage(imageByteArray)
                 (activity as MainActivity).setUserData()
+                //Snackbar
+                val snack: Snackbar = Snackbar.make(user_avatar_edit, "Profile has been updated", Snackbar.LENGTH_LONG)
+                val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
+                tv.setTextColor(Color.WHITE)
+                tv.typeface = Typeface.DEFAULT_BOLD
+                snack.view.setBackgroundColor(ContextCompat.getColor(context!!, R.color.editedItem))
+                snack.show()
                 findNavController().popBackStack()
+
                 true
             }
             else -> super.onOptionsItemSelected(item)
