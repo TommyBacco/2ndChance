@@ -35,14 +35,15 @@
         <action
             android:id="@+id/action_itemListFragment_to_itemDetailsFragment"
             app:destination="@id/nav_itemDetails"
-            app:enterAnim="@anim/slide_down"
-            app:popEnterAnim="@anim/slide_up" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_itemListFragment_to_itemEditFragment"
             app:destination="@id/nav_itemEdit"
-            app:enterAnim="@anim/bounce_in"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:enterAnim="@anim/slide_up"
+            app:popEnterAnim="@anim/slide_down" />
     </fragment>
     <fragment
         android:id="@+id/nav_itemEdit"
