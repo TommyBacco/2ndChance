@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Group15_lab2</string>
+    <string name="app_name">group15_lab3</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -37,7 +37,7 @@
     <string name="default_description">Description</string>
 
     <string name="currency">€</string>
-    <string name="emptyMessage">No advertisements have been posted yet!</string>
+    <string name="emptyMessage">You haven\'t posted any advertisements yet!</string>
 
     <string name="open_drawer">Drawer Opened</string>
     <string name="close_drawer">Drawer Closed</string>

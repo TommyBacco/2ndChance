@@ -55,7 +55,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@android:color/holo_red_dark"/>
 
-
         <TextView
             android:id="@+id/cardview_currency"
             android:layout_width="wrap_content"
@@ -70,7 +69,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@android:color/holo_red_dark" />
 
-
         <TextView
             android:id="@+id/cardview_date"
             android:layout_width="wrap_content"
@@ -84,15 +82,14 @@
             android:hint="@string/default_ExpireDate"
             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
-
-
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/cardview_edit"
+            android:id="@+id/cardview_bn_edit"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/cardview_date"
             android:contentDescription="@string/pencil_button"
+            android:backgroundTint="@color/myColorPrimaryLight"
             app:srcCompat="@drawable/ic_edit" />
 
     </RelativeLayout>

@@ -13,10 +13,11 @@
         android:id="@id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         app:counterEnabled="true"
-        app:counterMaxLength="15">
+        app:counterMaxLength="15"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/item_title_edit"
@@ -95,8 +96,8 @@
 
                 <ImageView
                     android:id="@+id/item_image_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
+                    android:layout_width="200dp"
+                    android:layout_height="185dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
@@ -136,7 +137,9 @@
                         android:layout_marginBottom="8dp"
                         android:layout_weight="1"
                         android:hint="@string/default_price"
-                        app:hintTextColor="@android:color/holo_red_dark">
+                        app:hintTextColor="@android:color/holo_red_dark"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/item_price_edit"
@@ -165,7 +168,9 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:helperText="Day/Month/Year">
+                    app:helperText="Day/Month/Year"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/item_expire_date_edit"
@@ -185,7 +190,10 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:endIconMode="clear_text">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/item_location_edit"
@@ -224,7 +232,10 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:endIconMode="clear_text">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/item_description_edit"

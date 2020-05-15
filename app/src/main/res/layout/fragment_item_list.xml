@@ -21,13 +21,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:padding="8dp"
         android:text="@string/emptyMessage"
         android:textAlignment="center"
-        android:visibility="visible"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#808080"
-        android:textStyle="italic|bold"
-        android:padding="16dp"/>
+        android:textStyle="italic|bold" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_new_item"

@@ -1,22 +1,43 @@
 package com.example.group15_lab2
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
+import com.example.group15_lab2.DataClass.Item
+import com.example.group15_lab2.DataClass.User
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.firebase.ui.firestore.ObservableSnapshotArray
+import com.google.firebase.firestore.DocumentSnapshot
+import com.squareup.picasso.Picasso
 
 
-class ItemAdapter(val items: ArrayList<Item>): RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class ItemAdapter(options: FirestoreRecyclerOptions<Item>) :
+    FirestoreRecyclerAdapter<Item, ItemAdapter.ViewHolder>(options) {
+
+    private val size : MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value=snapshots.size }}
 
     interface ClickListener {
-        fun onItemClick(position: Int)
-        fun onItemEdit(position:Int)
+        fun onItemClick(itemID:String?)
+        fun onItemEdit(itemID:String?)
     }
+
+    fun getSize() : LiveData<Int>{
+        return size
+    }
+
+    override fun onDataChanged() {
+        super.onDataChanged()
+        size.value = snapshots.size
+    }
+
 
     private lateinit var clickListener: ClickListener
 
@@ -24,32 +45,35 @@ class ItemAdapter(val items: ArrayList<Item>): RecyclerView.Adapter<ItemAdapter.
         clickListener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemAdapter.ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.cardview_item,parent,false)
-       return ViewHolder(v,clickListener)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+       val v = LayoutInflater.from(parent.context).inflate(R.layout.cardview_item,parent,false)
+       return ViewHolder(v,clickListener,snapshots)
     }
 
-    override fun getItemCount() = items.size
-
-    override fun onBindViewHolder(holder: ItemAdapter.ViewHolder, position: Int) {
-       holder.bind(items[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, model: Item) {
+        holder.bind(model)
     }
 
-    class ViewHolder(v: View,listener: ClickListener) : RecyclerView.ViewHolder(v) {
-        private val edit_image: ImageView
+    class ViewHolder(v: View, listener: ClickListener,
+                     snapshots: ObservableSnapshotArray<Item>) : RecyclerView.ViewHolder(v) {
 
         init {
-        v.setOnClickListener {
-            if(listener != null && adapterPosition != RecyclerView.NO_POSITION)
-                    listener.onItemClick(adapterPosition)
-        }
-        edit_image = v.findViewById(R.id.cardview_edit)
-        edit_image.setOnClickListener {
-            if(listener != null && adapterPosition != RecyclerView.NO_POSITION)
-                listener.onItemEdit(adapterPosition)
-        }
-    }
+            v.setOnClickListener {
+                if(adapterPosition != RecyclerView.NO_POSITION){
+                    val item = snapshots.getSnapshot(adapterPosition).toObject(Item::class.java)
+                    listener.onItemClick(item?.ID)
+                }
 
+            }
+            val bn_edit: ImageView =  v.findViewById(R.id.cardview_bn_edit)
+            bn_edit.setOnClickListener {
+                if(adapterPosition != RecyclerView.NO_POSITION){
+                    val item = snapshots.getSnapshot(adapterPosition).toObject(Item::class.java)
+                    listener.onItemEdit(item?.ID)
+                }
+            }
+
+    }
         private val name: TextView = v.findViewById(R.id.cardview_name)
         private val price: TextView = v.findViewById(R.id.cardview_price)
         private val expire_date: TextView = v.findViewById(R.id.cardview_date)
@@ -61,10 +85,13 @@ class ItemAdapter(val items: ArrayList<Item>): RecyclerView.Adapter<ItemAdapter.
             price.text = item.price
             expire_date.text = item.expireDate
             currency.text = item.currency
-            if(item.image != null)
-                image.setImageBitmap(item.image)
-            else
-                image.setImageResource(R.drawable.item_icon)
+            Picasso.get()
+                .load(item.imageURL.toUri())
+                .fit()
+                .centerInside()
+                .error(R.drawable.item_icon)
+                .into(image)
+
         }
     }
 

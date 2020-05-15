@@ -8,19 +8,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.group15_lab2.DataClass.Item
+import com.firebase.ui.common.ChangeEventType
+import com.firebase.ui.firestore.ChangeEventListener
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_item_list.*
 
 class ItemListFragment : Fragment() {
 
-    //QUANDO SI EFFETTUA UNA NAVIGAZIONE, AL SUCCESSIVO FRAGMENT VERRA' TRASFERITO SOLAMENTE L'ID DEL CORRISPETTIVO ITEM
-    private val sharedPref: SharedPreferences by lazy { this.activity!!.getPreferences(Context.MODE_PRIVATE) }
-    private var itemLastID: Int = -1
-    private var items = ArrayList<Item>()
+    private lateinit var myAdapter: ItemAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -30,68 +37,53 @@ class ItemListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        populateItemList()
+        val query = FirebaseFirestore.getInstance().collection("Items")
+        val options = FirestoreRecyclerOptions.Builder<Item>()
+            .setQuery(query,Item::class.java)
+            .build()
 
+        myAdapter = ItemAdapter(options)
+
+        recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false)
-        val myAdapter = ItemAdapter(items)
         recyclerView.adapter = myAdapter
 
 
         myAdapter.setOnItemClickListener(object : ItemAdapter.ClickListener{
-            override fun onItemClick(position: Int) {
-                val bundle = bundleOf(Pair("group15.lab2.ITEM_ID",position))
+
+            override fun onItemClick(itemID: String?) {
+                val bundle = bundleOf(Pair("group15.lab3.ITEM_ID",itemID))
                 findNavController().navigate(R.id.action_itemListFragment_to_itemDetailsFragment,bundle)
             }
 
-            override fun onItemEdit(position: Int) {
-                val bundle = bundleOf(Pair("group15.lab2.ITEM_ID",position))
+            override fun onItemEdit(itemID: String?) {
+                val bundle = bundleOf(Pair("group15.lab3.ITEM_ID",itemID))
                 findNavController().navigate(R.id.action_itemListFragment_to_itemEditFragment,bundle)
             }
+
+        })
+
+        myAdapter.getSize().observe(viewLifecycleOwner, Observer { size ->
+            if(size != 0)
+                emptyMessage.visibility = View.INVISIBLE
+            else
+                emptyMessage.visibility = View.VISIBLE
         })
 
         fab_new_item.setOnClickListener {
-            val bundle = Bundle()
-            with(bundle){
-                putInt("group15.lab2.ITEM_ID",itemLastID)
-                putBoolean("group15.lab2.NEW_ITEM",true)
-            }
-            findNavController().navigate(R.id.action_itemListFragment_to_itemEditFragment,bundle)
-        }
-
-    }
-
-    private fun populateItemList() {
-
-        itemLastID = sharedPref.getInt(KEY_ItemLastID,-1)
-        items.clear()
-
-        if (itemLastID != -1) {
-            emptyMessage.visibility = View.INVISIBLE
-            for (i in 0..itemLastID) {
-                val key:String = KEY_ItemDetails + i
-                val jsonString: String? = sharedPref.getString(key, null)
-                if (jsonString != null) {
-                    val item: Item = Gson().fromJson(jsonString, Item::class.java)
-                    val imageBitmap = setItemImage(i,item.imageRotation)
-                    item.image = imageBitmap
-                    items.add(item)
-                }
-            }
+            findNavController().navigate(R.id.action_itemListFragment_to_itemEditFragment)
         }
     }
 
-    private fun setItemImage(id:Int, rotation:Float) : Bitmap?{
-        val fileName = FILE_ItemImage + id
-
-        return try{
-            val byteArray = activity!!.openFileInput(fileName).readBytes()
-            var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            if(rotation!=0F)
-                imageBitmap = rotateImage(imageBitmap, rotation)
-            imageBitmap
-        } catch (exc:Exception){
-            null
-        }
+    override fun onStart() {
+        super.onStart()
+        myAdapter.startListening()
     }
+
+    override fun onStop() {
+        super.onStop()
+        myAdapter.stopListening()
+    }
+
 
 }

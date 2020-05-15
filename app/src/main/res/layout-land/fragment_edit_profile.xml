@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginRight="16dp">
@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/user_avatar_edit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             app:srcCompat="@drawable/user_icon"
@@ -58,7 +58,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_fullname_edit"
@@ -78,7 +80,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_nickname_edit"
@@ -98,7 +102,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_email_edit"
@@ -117,7 +123,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_location_edit"
@@ -136,7 +144,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_address_edit"
@@ -155,7 +165,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_telephone_edit"

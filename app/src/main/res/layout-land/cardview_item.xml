@@ -87,13 +87,14 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/cardview_edit"
+            android:id="@+id/cardview_bn_edit"
             android:layout_centerHorizontal="true"
             android:layout_alignBottom="@id/cardview_image"
             android:contentDescription="@string/pencil_button"
+            android:backgroundTint="@color/myColorPrimaryLight"
             app:srcCompat="@drawable/ic_edit" />
 
     </RelativeLayout>

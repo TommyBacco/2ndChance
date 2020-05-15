@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -58,4 +59,22 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.exifinterface:exifinterface:1.1.0-beta01'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-firestore:21.4.2'
+    //Firebase Authentication
+    implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
+    //Firebase Storage
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    //FireAdapter
+    implementation 'com.firebaseui:firebase-ui-firestore:6.2.1'
+
+    // Fragment (optional)
+    implementation 'androidx.fragment:fragment-ktx:1.2.4'
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+
 }

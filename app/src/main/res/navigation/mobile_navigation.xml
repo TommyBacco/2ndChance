@@ -6,7 +6,7 @@
     app:startDestination="@id/nav_advertisements">
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.example.group15_lab2.ShowProfileFragment"
+        android:name="com.example.group15_lab2.ShowProfile.ShowProfileFragment"
         android:label="ShowProfileFragment" >
         <action
             android:id="@+id/action_showProfileFragment_to_editProfileFragment"
@@ -16,11 +16,11 @@
     </fragment>
     <fragment
         android:id="@+id/nav_editProfile"
-        android:name="com.example.group15_lab2.EditProfileFragment"
+        android:name="com.example.group15_lab2.EditProfile.EditProfileFragment"
         android:label="EditProfileFragment" />
     <fragment
         android:id="@+id/nav_itemDetails"
-        android:name="com.example.group15_lab2.ItemDetailsFragment"
+        android:name="com.example.group15_lab2.ItemDetails.ItemDetailsFragment"
         android:label="ItemDetailsFragment" >
         <action
             android:id="@+id/action_itemDetailsFragment_to_itemEditFragment"
@@ -44,10 +44,17 @@
             app:destination="@id/nav_itemEdit"
             app:enterAnim="@anim/slide_up"
             app:popEnterAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_nav_advertisements_to_logInFragment"
+            app:destination="@id/logInFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_itemEdit"
-        android:name="com.example.group15_lab2.ItemEditFragment"
+        android:name="com.example.group15_lab2.ItemEdit.ItemEditFragment"
         android:label="fragment_item_edit"
         tools:layout="@layout/fragment_item_edit" />
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.group15_lab2.LogInFragment"
+        android:label="LogInFragment" />
 </navigation>
