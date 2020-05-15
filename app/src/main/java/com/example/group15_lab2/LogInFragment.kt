@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -38,6 +37,10 @@ class LogInFragment : Fragment() {
         //TODO MIGLIORARE VISTA FRAGMENT
 
         logIn()
+
+        bn_login.setOnClickListener {
+            logIn()
+        }
 
     }
 
@@ -67,7 +70,12 @@ class LogInFragment : Fragment() {
             findNavController().popBackStack()
         }
         else{
-            //TODO GESTIRE CASO ERRORE DI CONNESSIONE AL DB / ASSENZA CONNESSIONE
+            val snack: Snackbar = Snackbar.make(message_login, "Error while connecting,\nplease check your connection and try again", Snackbar.LENGTH_LONG)
+            val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
+            tv.setTextColor(Color.WHITE)
+            tv.typeface = Typeface.DEFAULT_BOLD
+            snack.view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.longTitle))
+            snack.show()
         }
     }
 }

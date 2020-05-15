@@ -295,7 +295,7 @@ class ItemEditFragment : Fragment() {
         val backgrount:Int
         when(tipe){
             "edited" -> {
-                text = "Profile has been updated"
+                text = "Item has been correctly updated"
                 backgrount = R.color.editedItem
             }
             "newItem" -> {
@@ -314,69 +314,6 @@ class ItemEditFragment : Fragment() {
         snack.view.setBackgroundColor(ContextCompat.getColor(requireContext(), backgrount))
         snack.show()
     }
-
-/*
-    private fun savePreferences(snack: Snackbar, tv: TextView) {
-
-        if (new_item) {
-            sharedPref.edit().putInt(KEY_ItemLastID, ++itemID).apply()
-            //Green Snackbar for new item
-            snack.setText("New item has been added")
-            tv.setTextColor(Color.WHITE)
-            tv.typeface = Typeface.DEFAULT_BOLD
-            snack.view.setBackgroundColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.newItem
-                )
-            )
-        } else {
-            //Yellow Snackbar for modify item
-            snack.setText("Item has been successfully edited")
-            tv.setTextColor(Color.WHITE)
-            tv.typeface = Typeface.DEFAULT_BOLD
-            snack.view.setBackgroundColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.editedItem
-                )
-            )
-        }
-
-        var category: String? = null
-        var subCategory: String? = null
-        var delivery: String? = null
-
-        val categoryPosition = spinner_item_category.selectedItemPosition
-        val subCategoryPosition = spinner_item_sub_category.selectedItemPosition
-        val deliveryPosition = spinner_delivery_type.selectedItemPosition
-
-        if (categoryPosition != 0)
-            category = spinner_item_category.selectedItem.toString()
-        if (subCategoryPosition != 0)
-            subCategory = spinner_item_sub_category.selectedItem.toString()
-        if (deliveryPosition != 0)
-            delivery = spinner_delivery_type.selectedItem.toString()
-
-        val item = Item(
-            item_title_edit.text.toString(),
-            item_price_edit.text.toString(),
-            item_expire_date_edit.text.toString(),
-            category,
-            subCategory,
-            item_location_edit.text.toString(),
-            delivery,
-            item_description_edit.text.toString(),
-            rotation,
-            currency = spinner_currency.selectedItem.toString()
-        )
-
-        val jsonString: String = Gson().toJson(item)
-
-        sharedPref.edit().putString(KEY_ItemDetails + itemID.toString(), jsonString).apply()
-    }
-
-*/
 
     override fun onCreateContextMenu(
         menu: ContextMenu,
