@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1099158243705",
+    "firebase_url": "https://mad-group15.firebaseio.com",
+    "project_id": "mad-group15",
+    "storage_bucket": "mad-group15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099158243705:android:d14a487caf5763cc5787a8",
+        "android_client_info": {
+          "package_name": "com.example.group15_lab2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099158243705-lr9h7pr5bmg6var7ncp2uobvkgkinihe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeEXBDYVupL7_wWpiHXTXGgNR9xLDoA2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099158243705-lr9h7pr5bmg6var7ncp2uobvkgkinihe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
