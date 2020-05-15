@@ -77,7 +77,7 @@ class ItemEditVM : ViewModel() {
             "subcategory" -> item.value?.subcategory=value
             "price" -> item.value?.price=value
             "currency" -> item.value?.currency=value
-            "exipreData" -> item.value?.expireDate = value
+            "expireData" -> item.value?.expireDate = value
             "location" -> item.value?.location=value
             "deliveryType" -> item.value?.deliveryType=value
             "description" -> item.value?.description=value

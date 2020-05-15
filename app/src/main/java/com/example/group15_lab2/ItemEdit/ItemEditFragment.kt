@@ -142,7 +142,9 @@ class ItemEditFragment : Fragment() {
         //Date Picker
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
             val myMonth = month + 1
-            item_expire_date_edit.setText("$day/$myMonth/$year")
+            val date = "$day/$myMonth/$year"
+            myViewModel.editItemData("expireData",date)
+            item_expire_date_edit.setText(date)
         }
 
         val cal = Calendar.getInstance()
