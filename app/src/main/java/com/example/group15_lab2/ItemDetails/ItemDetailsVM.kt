@@ -1,15 +1,15 @@
 package com.example.group15_lab2.ItemDetails
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.group15_lab2.DataClass.Item
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.group15_lab2.FirebaseRepository
 
 class ItemDetailsVM : ViewModel() {
 
     private val item: MutableLiveData<Item> by lazy { MutableLiveData<Item>().also { loadItem() } }
-    private val db = FirebaseFirestore.getInstance()
     private val itemID:MutableLiveData<String> by lazy { MutableLiveData<String>().apply { value = null } }
 
     fun getItemData(): LiveData<Item> {
@@ -25,30 +25,13 @@ class ItemDetailsVM : ViewModel() {
     }
 
     private fun loadItem() {
-
-        db.collection("Items")
-            .document("item:${itemID.value}")
-            .get()
-            .addOnSuccessListener { res ->
-                item.value = res.toObject(Item::class.java) ?: Item()
+        FirebaseRepository.getItemData(itemID.value).addSnapshotListener { doc, err ->
+            if (err != null) {
+                Log.d("ERROR-TAG", "Listen ShowProfile failed")
+                item.value = Item()
+            } else {
+                item.value = doc?.toObject(Item::class.java) ?: Item()
             }
-
-        addListener()
+        }
     }
-
-    private fun addListener() {
-
-        db.collection("Items")
-            .document("item:${itemID.value}")
-            .addSnapshotListener { snap, e ->
-                if (e != null) {
-                    return@addSnapshotListener
-                }
-                if (snap != null && snap.exists()) {
-                    item.value = snap.toObject(Item::class.java)
-                }
-            }
-    }
-
-
 }

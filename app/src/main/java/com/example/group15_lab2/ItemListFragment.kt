@@ -37,11 +37,7 @@ class ItemListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val query = FirebaseFirestore.getInstance().collection("Items")
-        val options = FirestoreRecyclerOptions.Builder<Item>()
-            .setQuery(query,Item::class.java)
-            .build()
-
+        val options = FirebaseRepository.getMyItemsList()
         myAdapter = ItemAdapter(options)
 
         recyclerView.setHasFixedSize(true)

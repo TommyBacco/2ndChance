@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.group15_lab2.DataClass.Item
-import com.example.group15_lab2.Repository
+import com.example.group15_lab2.FirebaseRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
@@ -14,8 +14,6 @@ import java.util.*
 
 class ItemEditVM : ViewModel() {
     private val item : MutableLiveData<Item> by lazy { MutableLiveData<Item>().also { loadItem() }}
-    private val db = FirebaseFirestore.getInstance()
-    private val storageRef = FirebaseStorage.getInstance().reference
     private val itemID:MutableLiveData<String> by lazy { MutableLiveData<String>().apply { value = null } }
     private val image : MutableLiveData<Bitmap> by lazy { MutableLiveData<Bitmap>() }
     private var isOld = true
@@ -37,8 +35,7 @@ class ItemEditVM : ViewModel() {
 
     private fun loadItem() {
 
-        db.collection("Items")
-            .document("item:${itemID.value}")
+        FirebaseRepository.getItemData(itemID.value)
             .get()
             .addOnSuccessListener { res ->
                 item.value = res.toObject(Item::class.java) ?: Item()
@@ -85,36 +82,10 @@ class ItemEditVM : ViewModel() {
     }
 
     fun saveData(){
-        if(image.value != null)
-            saveImage()
-        else
-            saveUser()
+        val stream = ByteArrayOutputStream()
+        image.value?.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+
+        FirebaseRepository.saveItemData(item.value,stream.toByteArray())
     }
 
-    private fun saveImage() {
-        val byteArray = ByteArrayOutputStream()
-        image.value?.compress(Bitmap.CompressFormat.JPEG, 100, byteArray)
-
-        val imageRef = storageRef.child("ItemImages/item:"+itemID.value)
-        val uploadTask = imageRef.putBytes(byteArray.toByteArray())
-
-        uploadTask.addOnSuccessListener {
-            val downloadUrl = imageRef.downloadUrl
-            downloadUrl.addOnSuccessListener {
-                item.value?.imageURL = it.toString()
-                saveUser()
-            }
-        }
-            .addOnFailureListener {
-                //TODO GESTIRE CASO ERRORE
-            }
-    }
-
-    private fun saveUser(){
-        item.value?.ownerID = Repository.userID?.uid
-
-        db.collection("Items")
-            .document("item:"+itemID.value)
-            .set(item.value ?: Item())
-    }
 }

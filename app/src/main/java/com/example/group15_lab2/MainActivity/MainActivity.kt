@@ -1,9 +1,7 @@
-package com.example.group15_lab2
+package com.example.group15_lab2.MainActivity
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.Menu
@@ -13,23 +11,28 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.net.toUri
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.group15_lab2.FirebaseRepository
+import com.example.group15_lab2.R
 import com.google.android.material.navigation.NavigationView
-import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private val sharedPref: SharedPreferences by lazy { this.getPreferences(Context.MODE_PRIVATE) }
     private lateinit var headView: View
+    private val myViewModel: MainActivityVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,18 +46,27 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_profile, R.id.nav_advertisements), drawerLayout)
+            setOf(
+                R.id.nav_profile,
+                R.id.nav_advertisements
+            ), drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         headView = navView.getHeaderView(0)
 
-        //TODO INSERT IMAGE AND DATA OF NAV DRAWER
-        //setUserData()
+        if(FirebaseRepository.getUserID().value == null)
+            findNavController(R.id.nav_host_fragment).navigate(
+                R.id.action_nav_advertisements_to_logInFragment
+            )
 
-        if(Repository.userID == null)
-            findNavController(R.id.nav_host_fragment).navigate(R.id.action_nav_advertisements_to_logInFragment)
+        //TODO INSERT IMAGE AND DATA OF NAV DRAWER
+        FirebaseRepository.getUserID().observe(this, Observer {
+            if(it != null)
+                setUserDataIntoDrawer()
+        })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -68,44 +80,22 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    /*
+    private fun setUserDataIntoDrawer() {
+        val user_nickname_view: TextView = headView.findViewById(R.id.nav_user_nickname)
+        val user_email_view: TextView = headView.findViewById(R.id.nav_user_email)
+        val user_avatar_view: ImageView = headView.findViewById(R.id.nav_user_avatar)
 
-    fun setUserData() {
-        val jsonString: String? = sharedPref.getString(KEY_UserProfile, null)
-
-        if (jsonString != null) {
-            val profile: Profile = Gson().fromJson(jsonString, Profile::class.java)
-            val user_nickname_view: TextView = headView.findViewById(R.id.nav_user_nickname)
-            val user_email_view: TextView = headView.findViewById(R.id.nav_user_email)
-            val user_avatar_view: ImageView = headView.findViewById(R.id.nav_user_avatar)
-
-            with(profile) {
-                user_nickname_view.text = nickname
-                user_email_view.text = email
-                var imageBitmap = getUserAvatar(rotation)
-                if (imageBitmap != null)
-                    user_avatar_view.setImageBitmap(imageBitmap)
-                else
-                    user_avatar_view.setImageResource(R.drawable.user_icon)
-            }
-        }
+        myViewModel.getUserData().observe(this, Observer { profile ->
+                user_nickname_view.text = profile.nickname
+                user_email_view.text = profile.email
+                Picasso.get()
+                    .load(profile.avatarURL.toUri())
+                    .fit()
+                    .centerInside()
+                    .error(R.drawable.user_icon)
+                    .into(user_avatar_view)
+        })
     }
-
-    private fun getUserAvatar(rotation: Float): Bitmap? {
-        val fileName = FILE_UserProfile_Avatar
-
-        return try {
-            val byteArray = this.openFileInput(fileName).readBytes()
-            var imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            if (rotation != 0F)
-                imageBitmap = rotateImage(imageBitmap, rotation)
-            imageBitmap
-        } catch (exc: Exception) {
-            null
-        }
-    }
-
-     */
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {

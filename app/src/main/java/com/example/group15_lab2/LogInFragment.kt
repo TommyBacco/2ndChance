@@ -32,7 +32,6 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("KKK","onViewCreatedLOG")
 
         //TODO MIGLIORARE VISTA FRAGMENT
 
@@ -46,7 +45,8 @@ class LogInFragment : Fragment() {
 
     private fun logIn(){
 
-        val provider = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
+        val provider = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build(),
+        AuthUI.IdpConfig.EmailBuilder().build())
 
         startActivityForResult(
             AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(provider).build(),
@@ -58,7 +58,7 @@ class LogInFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == AUTH_REQUEST_CODE && resultCode == Activity.RESULT_OK){
-            Repository.userID = FirebaseAuth.getInstance().currentUser
+           FirebaseRepository.setUserID(FirebaseAuth.getInstance().currentUser)
             //SNACKBAR
             val snack: Snackbar = Snackbar.make(message_login, "You have been successfully logged", Snackbar.LENGTH_LONG)
             val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
@@ -66,7 +66,6 @@ class LogInFragment : Fragment() {
             tv.typeface = Typeface.DEFAULT_BOLD
             snack.view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.editedItem))
             snack.show()
-
             findNavController().popBackStack()
         }
         else{

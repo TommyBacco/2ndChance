@@ -1,4 +1,4 @@
-package com.example.group15_lab2.ShowProfile
+package com.example.group15_lab2.MainActivity
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,9 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.group15_lab2.DataClass.User
 import com.example.group15_lab2.FirebaseRepository
-import com.google.firebase.firestore.FirebaseFirestore
 
-class ShowProfileVM : ViewModel() {
+class MainActivityVM : ViewModel() {
 
     private val user: MutableLiveData<User> by lazy { MutableLiveData<User>().also { loadUser() } }
 

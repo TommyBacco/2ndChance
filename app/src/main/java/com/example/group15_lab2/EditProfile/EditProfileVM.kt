@@ -6,16 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.group15_lab2.DataClass.User
-import com.example.group15_lab2.Repository
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
+import com.example.group15_lab2.FirebaseRepository
 import java.io.ByteArrayOutputStream
 
 class EditProfileVM : ViewModel() {
 
     private val user : MutableLiveData<User> by lazy {MutableLiveData<User>().also { loadUser() }}
-    private val db = FirebaseFirestore.getInstance()
-    private val storageRef = FirebaseStorage.getInstance().getReference()
     private val image : MutableLiveData<Bitmap> by lazy {MutableLiveData<Bitmap>()}
     private var isOld = true
     fun isImageOld() = isOld
@@ -26,8 +22,7 @@ class EditProfileVM : ViewModel() {
 
     private fun loadUser() {
 
-        db.collection("Users")
-            .document("user:" + Repository.userID?.uid)
+        FirebaseRepository.getUserData()
             .get()
             .addOnSuccessListener { res ->
                 user.value = res.toObject(User::class.java) ?: User()
@@ -65,36 +60,10 @@ class EditProfileVM : ViewModel() {
     }
 
     fun saveData(){
-        if(image.value != null)
-            saveImage()
-        else
-            saveUser()
+        val stream = ByteArrayOutputStream()
+        image.value?.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+
+        FirebaseRepository.saveUserData(user.value,stream.toByteArray())
     }
 
-    private fun saveImage() {
-        val byteArray = ByteArrayOutputStream()
-        image.value?.compress(Bitmap.CompressFormat.JPEG, 100, byteArray)
-
-        val imageRef = storageRef.child("UsersImages/user:"+Repository.userID?.uid)
-        val uploadTask = imageRef.putBytes(byteArray.toByteArray())
-
-        uploadTask.addOnSuccessListener {
-            val downloadUrl = imageRef.downloadUrl
-            downloadUrl.addOnSuccessListener {
-                user.value?.avatarURL = it.toString()
-                saveUser()
-            }
-        }
-            .addOnFailureListener {
-                //TODO GESTIRE CASO ERRORE
-            }
-    }
-
-    private fun saveUser(){
-        user.value?.ID = Repository.userID?.uid
-
-        db.collection("Users")
-            .document("user:"+Repository.userID?.uid)
-            .set(user.value ?: User())
-    }
 }
