@@ -58,7 +58,7 @@ class LogInFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == AUTH_REQUEST_CODE && resultCode == Activity.RESULT_OK){
-           FirebaseRepository.setUserID(FirebaseAuth.getInstance().currentUser)
+           FirebaseRepository.setUserAccount(FirebaseAuth.getInstance().currentUser)
             //SNACKBAR
             val snack: Snackbar = Snackbar.make(message_login, "You have been successfully logged", Snackbar.LENGTH_LONG)
             val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)

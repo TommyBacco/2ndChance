@@ -15,6 +15,8 @@
     <color name="myColorDivider">#BDBDBD</color>
     <color name="myColorAccent">#FF5722</color>
 
+    <color name="interestedItem">#FFCCBC</color>
+
     <color name="longTitle">#e61919</color>
     <color name="newItem">#00b600</color>
     <color name="editedItem">#0d730d</color>

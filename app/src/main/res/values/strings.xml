@@ -9,6 +9,7 @@
 
     <string name="menu_profile">Profile</string>
     <string name="menu_advertisements">Advertisements</string>
+    <string name="menu_myAdvertisements">My items</string>
 
     <string name="profile_fullname">Full Name</string>
     <string name="profile_image">Image</string>
@@ -21,6 +22,7 @@
     <string name="pencil_button">Edit</string>
     <string name="save_button">Save</string>
     <string name="rotate_button">Rotate</string>
+    <string name="show_interested_button">Show interested users</string>
 
     <string name="menu_gallery">Select an image from the gallery</string>
     <string name="menu_camera">Use the camera to take a picture</string>
@@ -37,7 +39,8 @@
     <string name="default_description">Description</string>
 
     <string name="currency">€</string>
-    <string name="emptyMessage">You haven\'t posted any advertisements yet!</string>
+    <string name="emptyMyItemsMessage">You haven\'t posted any advertisements yet!</string>
+    <string name="emptyMessage">No advertisements have been published yet!</string>
 
     <string name="open_drawer">Drawer Opened</string>
     <string name="close_drawer">Drawer Closed</string>

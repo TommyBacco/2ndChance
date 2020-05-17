@@ -1,7 +1,6 @@
 package com.example.group15_lab2.MainActivity
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.Menu
@@ -48,7 +47,8 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_profile,
-                R.id.nav_advertisements
+                R.id.nav_advertisements,
+                R.id.nav_myItems
             ), drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -56,13 +56,13 @@ class MainActivity : AppCompatActivity() {
 
         headView = navView.getHeaderView(0)
 
-        if(FirebaseRepository.getUserID().value == null)
+        if(FirebaseRepository.getUserAccount().value == null)
             findNavController(R.id.nav_host_fragment).navigate(
                 R.id.action_nav_advertisements_to_logInFragment
             )
 
         //TODO INSERT IMAGE AND DATA OF NAV DRAWER
-        FirebaseRepository.getUserID().observe(this, Observer {
+        FirebaseRepository.getUserAccount().observe(this, Observer {
             if(it != null)
                 setUserDataIntoDrawer()
         })
@@ -81,19 +81,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUserDataIntoDrawer() {
+        val user_fullname_view: TextView = headView.findViewById(R.id.nav_user_fullName)
         val user_nickname_view: TextView = headView.findViewById(R.id.nav_user_nickname)
         val user_email_view: TextView = headView.findViewById(R.id.nav_user_email)
         val user_avatar_view: ImageView = headView.findViewById(R.id.nav_user_avatar)
 
         myViewModel.getUserData().observe(this, Observer { profile ->
-                user_nickname_view.text = profile.nickname
-                user_email_view.text = profile.email
-                Picasso.get()
-                    .load(profile.avatarURL.toUri())
-                    .fit()
-                    .centerInside()
-                    .error(R.drawable.user_icon)
-                    .into(user_avatar_view)
+            user_fullname_view.text = profile.fullName
+            user_nickname_view.text = profile.nickname
+            user_email_view.text = profile.email
+            Picasso.get()
+                .load(profile.avatarURL.toUri())
+                .fit()
+                .centerInside()
+                .error(R.drawable.user_icon)
+                .into(user_avatar_view)
         })
     }
 

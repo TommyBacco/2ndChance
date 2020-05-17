@@ -85,11 +85,26 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#00FFFFFF"
-            android:padding="16dp">
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/bn_show_interested"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/myColorAccent"
+                android:textColor="@color/myColorTextIcons"
+                android:text="@string/show_interested_button"
+                android:layout_marginBottom="8dp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/item_price"
@@ -121,11 +136,12 @@
                 android:textColorHint="@android:color/holo_red_dark"
                 android:textStyle="bold" />
 
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/item_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/item_price"
                 android:layout_marginBottom="8dp"
                 android:drawableStart="@drawable/ic_date"
                 android:drawablePadding="4dp"
@@ -139,7 +155,6 @@
                 android:id="@+id/item_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/item_date"
                 android:layout_marginBottom="8dp"
                 android:drawableStart="@drawable/ic_area_of_interest"
                 android:drawablePadding="4dp"
@@ -151,7 +166,6 @@
                 android:id="@+id/item_delivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/item_location"
                 android:layout_marginBottom="8dp"
                 android:drawableStart="@drawable/ic_delivery"
                 android:drawablePadding="4dp"
@@ -163,8 +177,6 @@
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/item_delivery"
-                android:layout_alignParentStart="true"
                 android:layout_marginBottom="4dp"
                 android:drawableStart="@drawable/ic_description"
                 android:drawablePadding="4dp"
@@ -177,15 +189,22 @@
                 android:id="@+id/item_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/description"
-                android:layout_alignParentStart="true"
                 android:layout_marginStart="5dp"
-
                 android:hint="@string/default_description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/myColorSecondaryText" />
 
-
-        </RelativeLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_item_interested"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/myColorAccent"
+        android:layout_gravity="end|bottom"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_interested"
+        android:visibility="visible"/>
 </LinearLayout>

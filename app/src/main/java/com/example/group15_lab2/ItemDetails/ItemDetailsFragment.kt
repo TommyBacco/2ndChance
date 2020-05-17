@@ -1,7 +1,9 @@
 package com.example.group15_lab2.ItemDetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -9,13 +11,20 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.group15_lab2.*
+import com.example.group15_lab2.DataClass.User
+import com.example.group15_lab2.MainActivity.MainActivity
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_item_details.*
+import kotlinx.android.synthetic.main.fragment_item_list.*
 
 class ItemDetailsFragment : Fragment() {
 
     private val myViewModel: ItemDetailsVM by viewModels()
     private var itemID:String? = null
+    private lateinit var menuItem:MenuItem
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,6 +45,27 @@ class ItemDetailsFragment : Fragment() {
             itemID = it
         })
 
+
+
+        fab_item_interested.setOnClickListener {
+            FirebaseFirestore.getInstance().collection("Users")
+                .document("user:"+FirebaseRepository.getUserAccount().value?.uid)
+                .update("itemsOfInterest",FieldValue.arrayUnion(itemID))
+        }
+
+
+        bn_show_interested.setOnClickListener {
+            //TODO
+            FirebaseFirestore.getInstance().collection("Users")
+                .whereArrayContains("itemsOfInterest",itemID ?: "")
+                .get()
+                .addOnSuccessListener { res ->
+                    for(doc in res){
+                        val u = doc.toObject(User::class.java)
+                        Toast.makeText(context,"TO DO",Toast.LENGTH_SHORT).show()
+                    }
+                }
+                }
     }
 
     private fun populateItemViews() {
@@ -56,12 +86,23 @@ class ItemDetailsFragment : Fragment() {
                 .centerInside()
                 .error(R.drawable.item_icon)
                 .into(item_image)
+
+            if(i.ownerID != FirebaseRepository.getUserAccount().value?.uid){
+                menuItem.isVisible = false
+                fab_item_interested.visibility = View.VISIBLE
+                bn_show_interested.visibility = View.GONE
+            } else{
+                menuItem.isVisible = true
+                fab_item_interested.visibility = View.GONE
+                bn_show_interested.visibility = View.VISIBLE
+            }
         })
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_pencil, menu)
+        menuItem = menu.findItem(R.id.pencil_button)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

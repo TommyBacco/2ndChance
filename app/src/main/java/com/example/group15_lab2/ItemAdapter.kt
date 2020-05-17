@@ -1,5 +1,6 @@
 package com.example.group15_lab2
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,33 +12,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.group15_lab2.DataClass.Item
-import com.example.group15_lab2.DataClass.User
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.firebase.ui.firestore.ObservableSnapshotArray
-import com.google.firebase.firestore.DocumentSnapshot
 import com.squareup.picasso.Picasso
 
+class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
-class ItemAdapter(options: FirestoreRecyclerOptions<Item>) :
-    FirestoreRecyclerAdapter<Item, ItemAdapter.ViewHolder>(options) {
+    private var items = mutableListOf<Item>()
+    private val size : MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value=items.size }}
 
-    private val size : MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value=snapshots.size }}
+    fun setItemsList(newList:List<Item>){
+        items.clear()
+        items.addAll(newList)
+        size.value = items.size
+    }
 
     interface ClickListener {
         fun onItemClick(itemID:String?)
-        fun onItemEdit(itemID:String?)
     }
-
-    fun getSize() : LiveData<Int>{
-        return size
-    }
-
-    override fun onDataChanged() {
-        super.onDataChanged()
-        size.value = snapshots.size
-    }
-
 
     private lateinit var clickListener: ClickListener
 
@@ -45,54 +35,58 @@ class ItemAdapter(options: FirestoreRecyclerOptions<Item>) :
         clickListener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-       val v = LayoutInflater.from(parent.context).inflate(R.layout.cardview_item,parent,false)
-       return ViewHolder(v,clickListener,snapshots)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemAdapter.ViewHolder {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.cardview_item,parent,false)
+        return ViewHolder(v,clickListener)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int, model: Item) {
-        holder.bind(model)
+    override fun getItemCount() = size.value ?: 0
+    fun getSize() : LiveData<Int> = size
+
+    override fun onBindViewHolder(holder: ItemAdapter.ViewHolder, position: Int) {
+        holder.bind(items[position])
     }
 
-    class ViewHolder(v: View, listener: ClickListener,
-                     snapshots: ObservableSnapshotArray<Item>) : RecyclerView.ViewHolder(v) {
+    inner class ViewHolder(v: View, listener: ClickListener) : RecyclerView.ViewHolder(v) {
+
 
         init {
             v.setOnClickListener {
-                if(adapterPosition != RecyclerView.NO_POSITION){
-                    val item = snapshots.getSnapshot(adapterPosition).toObject(Item::class.java)
-                    listener.onItemClick(item?.ID)
-                }
-
+                if(adapterPosition != RecyclerView.NO_POSITION)
+                    listener.onItemClick(items[adapterPosition].ID)
             }
-            val bn_edit: ImageView =  v.findViewById(R.id.cardview_bn_edit)
-            bn_edit.setOnClickListener {
-                if(adapterPosition != RecyclerView.NO_POSITION){
-                    val item = snapshots.getSnapshot(adapterPosition).toObject(Item::class.java)
-                    listener.onItemEdit(item?.ID)
-                }
-            }
+        }
 
-    }
         private val name: TextView = v.findViewById(R.id.cardview_name)
         private val price: TextView = v.findViewById(R.id.cardview_price)
         private val expire_date: TextView = v.findViewById(R.id.cardview_date)
         private val image: ImageView = v.findViewById(R.id.cardview_image)
-        private val currency:TextView = v.findViewById(R.id.cardview_currency)
+        private val currency: TextView = v.findViewById(R.id.cardview_currency)
+        private val bn_edit:ImageButton = v.findViewById(R.id.cardview_bn_edit)
+        private val card:View =v.findViewById(R.id.cardview)
 
         fun bind(item: Item){
             name.text = item.title
             price.text = item.price
             expire_date.text = item.expireDate
             currency.text = item.currency
+            bn_edit.visibility = View.GONE
+
+            //TODO SET DIFFERENT BACKGROUND COLOR IF USER IS INTERESTED
+           // card.setBackgroundColor(Color.parseColor("#FFF9C4"))
+
             Picasso.get()
                 .load(item.imageURL.toUri())
                 .fit()
                 .centerInside()
                 .error(R.drawable.item_icon)
                 .into(image)
-
         }
     }
+
+
+
+
+
 
 }
