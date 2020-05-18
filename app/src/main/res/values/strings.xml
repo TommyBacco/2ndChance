@@ -20,6 +20,8 @@
     <string name="profile_telephone">Telephone number</string>
 
     <string name="pencil_button">Edit</string>
+    <string name="search">Search</string>
+
     <string name="save_button">Save</string>
     <string name="rotate_button">Rotate</string>
     <string name="show_interested_button">Show interested users</string>
