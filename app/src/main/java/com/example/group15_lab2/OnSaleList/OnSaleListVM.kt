@@ -11,7 +11,7 @@ class OnSaleListVM: ViewModel() {
 
     private val items: MutableLiveData<List<Item>> by lazy { MutableLiveData<List<Item>>().also { loadItem() } }
 
-    fun getAdvertisements(): LiveData<List<Item>> {
+    fun getAdvertisements(): MutableLiveData<List<Item>> {
         return items
     }
 
