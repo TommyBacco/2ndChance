@@ -9,5 +9,5 @@ data class User (
     var location:String? = null,
     var address:String? = null,
     var telephone:String? = null,
-    var itemsOfIterest:ArrayList<String> = ArrayList()
+    var itemsOfInterest:ArrayList<String> = ArrayList()
 )

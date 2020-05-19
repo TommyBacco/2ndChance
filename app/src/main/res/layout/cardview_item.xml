@@ -13,7 +13,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="4dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,7 +22,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/item_icon"
             app:civ_border_width="2dp"
@@ -36,6 +37,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:hint="@string/default_title"
+            android:layout_centerHorizontal="true"
             android:textColorHint="@android:color/black"
             android:layout_marginLeft="4dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -43,10 +45,23 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/cardview_price"
+            android:id="@+id/cardview_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cardview_name"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:hint="@string/default_category"
+            android:layout_marginLeft="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/myColorPrimaryText"/>
+
+        <TextView
+            android:id="@+id/cardview_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardview_category"
             android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
             android:ellipsize="end"
@@ -60,7 +75,7 @@
             android:id="@+id/cardview_currency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cardview_name"
+            android:layout_below="@+id/cardview_category"
             android:layout_toRightOf="@id/cardview_price"
             android:layout_marginLeft="2dp"
             android:layout_marginBottom="4dp"
@@ -76,7 +91,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/cardview_price"
             android:layout_marginLeft="4dp"
-            android:layout_marginBottom="4dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:textStyle="italic"

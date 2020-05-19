@@ -72,15 +72,15 @@ class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
             currency.text = item.currency
             bn_edit.visibility = View.GONE
 
-            //TODO SET DIFFERENT BACKGROUND COLOR IF USER IS INTERESTED
-           // card.setBackgroundColor(Color.parseColor("#FFF9C4"))
-
             Picasso.get()
                 .load(item.imageURL.toUri())
                 .fit()
                 .centerInside()
                 .error(R.drawable.item_icon)
                 .into(image)
+
+            if(item.interestedUsers.contains(FirebaseRepository.getUserAccount().value?.uid))
+                card.setBackgroundColor(Color.parseColor("#FFF9C4"))
         }
     }
 

@@ -92,6 +92,18 @@
             android:orientation="vertical"
             android:padding="8dp">
 
+            <TextView
+                android:id="@+id/message_interest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/itemInterest"
+                android:textStyle="bold|italic"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/myColorAccent"/>
+
             <Button
                 android:id="@+id/bn_show_interested"
                 android:layout_width="wrap_content"

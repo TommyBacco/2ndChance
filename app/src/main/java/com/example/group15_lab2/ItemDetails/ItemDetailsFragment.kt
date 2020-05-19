@@ -24,7 +24,6 @@ class ItemDetailsFragment : Fragment() {
 
     private val myViewModel: ItemDetailsVM by viewModels()
     private var itemID:String? = null
-    private lateinit var menuItem:MenuItem
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -45,27 +44,22 @@ class ItemDetailsFragment : Fragment() {
             itemID = it
         })
 
-
+        myViewModel.getInterest().observe(viewLifecycleOwner, Observer { interested ->
+            message_interest.visibility =
+                if(interested) View.VISIBLE
+                else View.GONE
+        })
 
         fab_item_interested.setOnClickListener {
-            FirebaseFirestore.getInstance().collection("Users")
-                .document("user:"+FirebaseRepository.getUserAccount().value?.uid)
-                .update("itemsOfInterest",FieldValue.arrayUnion(itemID))
+            myViewModel.modifyInterest()
         }
 
 
         bn_show_interested.setOnClickListener {
-            //TODO
-            FirebaseFirestore.getInstance().collection("Users")
-                .whereArrayContains("itemsOfInterest",itemID ?: "")
-                .get()
-                .addOnSuccessListener { res ->
-                    for(doc in res){
-                        val u = doc.toObject(User::class.java)
-                        Toast.makeText(context,"TO DO",Toast.LENGTH_SHORT).show()
-                    }
-                }
-                }
+            val bundle = bundleOf(Pair("group15.lab3.ITEM_ID",itemID))
+           findNavController().navigate(R.id.action_nav_itemDetails_to_iterestedUserListFragment,bundle)
+        }
+
     }
 
     private fun populateItemViews() {
@@ -88,11 +82,10 @@ class ItemDetailsFragment : Fragment() {
                 .into(item_image)
 
             if(i.ownerID != FirebaseRepository.getUserAccount().value?.uid){
-                menuItem.isVisible = false
+                setHasOptionsMenu(false)
                 fab_item_interested.visibility = View.VISIBLE
                 bn_show_interested.visibility = View.GONE
             } else{
-                menuItem.isVisible = true
                 fab_item_interested.visibility = View.GONE
                 bn_show_interested.visibility = View.VISIBLE
             }
@@ -102,7 +95,6 @@ class ItemDetailsFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_pencil, menu)
-        menuItem = menu.findItem(R.id.pencil_button)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

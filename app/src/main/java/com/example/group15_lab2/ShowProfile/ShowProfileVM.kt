@@ -11,13 +11,18 @@ import com.google.firebase.firestore.FirebaseFirestore
 class ShowProfileVM : ViewModel() {
 
     private val user: MutableLiveData<User> by lazy { MutableLiveData<User>().also { loadUser() } }
+    private var userID:String? = null
+
+    fun setUserID(id:String?){
+        userID=id
+    }
 
     fun getUserData(): LiveData<User> {
         return user
     }
 
     private fun loadUser() {
-        FirebaseRepository.getUserData().addSnapshotListener { doc, err ->
+        FirebaseRepository.getUserData(userID).addSnapshotListener { doc, err ->
             if (err != null) {
                 Log.d("ERROR-TAG", "Listen ShowProfile failed")
                 user.value = User()

@@ -11,6 +11,7 @@ class ItemDetailsVM : ViewModel() {
 
     private val item: MutableLiveData<Item> by lazy { MutableLiveData<Item>().also { loadItem() } }
     private val itemID:MutableLiveData<String> by lazy { MutableLiveData<String>().apply { value = null } }
+    private val isInterested:MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>().apply { value = false } }
 
     fun getItemData(): LiveData<Item> {
         return item
@@ -24,14 +25,32 @@ class ItemDetailsVM : ViewModel() {
         return itemID
     }
 
+    fun getInterest():LiveData<Boolean>{
+        return isInterested
+    }
+
     private fun loadItem() {
         FirebaseRepository.getItemData(itemID.value).addSnapshotListener { doc, err ->
             if (err != null) {
                 Log.d("ERROR-TAG", "Listen ShowProfile failed")
                 item.value = Item()
             } else {
-                item.value = doc?.toObject(Item::class.java) ?: Item()
+                val i = doc?.toObject(Item::class.java) ?: Item()
+                item.value = i
+                if(i.interestedUsers.contains(FirebaseRepository.getUserAccount().value?.uid)){
+                    isInterested.value = true
+                }
             }
+        }
+    }
+
+    fun modifyInterest(){
+        if(isInterested.value!!){
+            FirebaseRepository.removeItemInterest(itemID.value ?: "")
+            isInterested.value = false
+        } else {
+            FirebaseRepository.addItemInterest(itemID.value ?: "")
+            isInterested.value = true
         }
     }
 }

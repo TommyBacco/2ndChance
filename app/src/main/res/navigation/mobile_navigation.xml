@@ -27,6 +27,11 @@
             app:destination="@id/nav_itemEdit"
             app:enterAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in" />
+        <action
+            android:id="@+id/action_nav_itemDetails_to_iterestedUserListFragment"
+            app:destination="@id/iterestedUserListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in" />
     </fragment>
     <fragment
         android:id="@+id/nav_myItems"
@@ -67,6 +72,18 @@
             app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_nav_advertisements_to_logInFragment"
-            app:destination="@id/logInFragment" />
+            app:destination="@id/logInFragment"
+            app:enterAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in" />
+    </fragment>
+    <fragment
+        android:id="@+id/iterestedUserListFragment"
+        android:name="com.example.group15_lab2.InterestedUserList.InterestedUserListFragment"
+        android:label="IterestedUserListFragment" >
+        <action
+            android:id="@+id/action_iterestedUserListFragment_to_nav_profile"
+            app:destination="@id/nav_profile"
+            app:enterAnim="@anim/slide_up"
+            app:popEnterAnim="@anim/slide_down" />
     </fragment>
 </navigation>
