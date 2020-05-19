@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.group15_lab2.DataClass.Item
+import com.example.group15_lab2.DataClass.User
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.firebase.ui.firestore.ObservableSnapshotArray
@@ -75,12 +76,14 @@ class ItemFirestoreAdapter(options: FirestoreRecyclerOptions<Item>) :
         private val expire_date: TextView = v.findViewById(R.id.cardview_date)
         private val image: ImageView = v.findViewById(R.id.cardview_image)
         private val currency:TextView = v.findViewById(R.id.cardview_currency)
+        private val category:TextView = v.findViewById(R.id.cardview_category)
 
         fun bind(item: Item){
             name.text = item.title
             price.text = item.price
             expire_date.text = item.expireDate
             currency.text = item.currency
+            category.text = item.category
 
             Picasso.get()
                 .load(item.imageURL.toUri())

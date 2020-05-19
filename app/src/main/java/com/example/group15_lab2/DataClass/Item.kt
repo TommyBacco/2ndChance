@@ -12,6 +12,6 @@ data class Item (
     var subcategory: String? = null,
     var location: String? = null,
     var deliveryType: String? = null,
-    var description: String? = null
-
+    var description: String? = null,
+    var interestedUsers:ArrayList<String> = ArrayList()
 )

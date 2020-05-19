@@ -8,10 +8,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
 
 
@@ -28,8 +25,16 @@ object FirebaseRepository {
         userAccount.value = id
     }
 
-    fun getUserData(): DocumentReference {
-        return db.document("Users/user:" + userAccount.value?.uid)
+    fun getUserData(userID:String? = null): DocumentReference {
+
+        db.document("Users/user:")
+
+        val userToGet:String?
+        if(userID == null)
+            userToGet = userAccount.value?.uid
+        else
+            userToGet = userID
+        return db.document("Users/user:$userToGet")
     }
 
     fun saveUserData(user: User?, image: ByteArray) {
@@ -98,14 +103,52 @@ object FirebaseRepository {
     }
 
     fun getMyItemsOptions():FirestoreRecyclerOptions<Item>{
-        val query = db.collection("Items").whereEqualTo("ownerID", userAccount.value?.uid)
+        val query = db.collection("Items")
+            .whereEqualTo("ownerID", userAccount.value?.uid)
+
         return FirestoreRecyclerOptions.Builder<Item>()
             .setQuery(query,Item::class.java)
             .build()
     }
 
+    fun getInterestedUsersOptions(itemID:String?):FirestoreRecyclerOptions<User>{
+        val query = db.collection("Users")
+            .whereArrayContains("itemsOfInterest",itemID ?: "No item id")
+
+        return FirestoreRecyclerOptions.Builder<User>()
+            .setQuery(query,User::class.java)
+            .build()
+    }
+
     fun getAdvertisements(): CollectionReference {
         return db.collection("Items")
+    }
+
+    fun addItemInterest(itemID:String){
+       db.collection("Users")
+            .document("user:"+ userAccount.value?.uid)
+            .update("itemsOfInterest", FieldValue.arrayUnion(itemID))
+            .addOnFailureListener {
+                val u = User()
+                u.ID = userAccount.value?.uid
+                u.itemsOfInterest.add(itemID)
+                saveUser(u)
+            }
+
+        db.collection("Items")
+            .document("item:$itemID")
+            .update("interestedUsers", FieldValue.arrayUnion(userAccount.value?.uid))
+    }
+
+    fun removeItemInterest(itemID:String){
+        db.collection("Users")
+            .document("user:"+ userAccount.value?.uid)
+            .update("itemsOfInterest", FieldValue.arrayRemove(itemID))
+
+        db.collection("Items")
+            .document("item:$itemID")
+            .update("interestedUsers", FieldValue.arrayRemove(userAccount.value?.uid))
+
     }
 
 

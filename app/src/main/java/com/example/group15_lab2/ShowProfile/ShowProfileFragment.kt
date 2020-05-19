@@ -23,17 +23,33 @@ class ShowProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if(savedInstanceState == null) {
+            val id = arguments?.getString("group15.lab3.USER_ID",null)
+            myViewModel.setUserID(id)
+        }
         populateUserView()
     }
 
     private fun populateUserView() {
         myViewModel.getUserData().observe(viewLifecycleOwner, Observer { u ->
-            user_fullname.text = u.fullName
+
+            if(u.ID == null || u.ID == FirebaseRepository.getUserAccount().value?.uid){
+                user_fullname.text = u.fullName
+                user_address.text = u.address
+                user_telephone.text = u.telephone
+
+            } else {
+                // Fields not shown for privacy reasons
+                user_fullname.visibility = View.GONE
+                user_address.visibility = View.GONE
+                user_telephone.visibility = View.GONE
+                setHasOptionsMenu(false)
+            }
+
             user_nickname.text = u.nickname
             user_email.text = u.email
             user_location.text = u.location
-            user_address.text = u.address
-            user_telephone.text = u.telephone
 
             Picasso.get()
                 .load(u.avatarURL.toUri())

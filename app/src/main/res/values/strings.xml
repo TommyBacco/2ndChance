@@ -37,10 +37,13 @@
     <string name="default_location">Location</string>
     <string name="default_delivery">Delivery type</string>
     <string name="default_description">Description</string>
-
+    <string name="itemInterest">You are interested in this item!</string>
     <string name="currency">€</string>
-    <string name="emptyMyItemsMessage">You haven\'t posted any advertisements yet!</string>
+
     <string name="emptyMessage">No advertisements have been published yet!</string>
+    <string name="emptyMyItemsMessage">You haven\'t posted any advertisements yet!</string>
+    <string name="emptyMessage_userList">Unluckily, no user is interested in this item</string>
+
 
     <string name="open_drawer">Drawer Opened</string>
     <string name="close_drawer">Drawer Closed</string>

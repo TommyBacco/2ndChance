@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
@@ -12,7 +13,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="4dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -37,24 +39,38 @@
             android:layout_toRightOf="@+id/cardview_image"
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
+            android:layout_centerHorizontal="true"
             android:ellipsize="end"
             android:maxLines="1"
             android:hint="@string/default_title"
             android:textColorHint="@android:color/black"
-
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/myColorPrimaryText"
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/cardview_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardview_name"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginBottom="4dp"
+            android:hint="@string/default_category"
+            android:layout_toRightOf="@id/cardview_image"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/myColorPrimaryText"/>
+
+        <TextView
             android:id="@+id/cardview_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cardview_name"
+            android:layout_below="@id/cardview_category"
             android:layout_toRightOf="@id/cardview_image"
             android:layout_marginEnd="4dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:layout_marginBottom="4dp"
             android:hint="-"
             android:textColorHint="@android:color/holo_red_dark"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -91,8 +107,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cardview_bn_edit"
-            android:layout_centerHorizontal="true"
-            android:layout_alignBottom="@id/cardview_image"
+            android:layout_alignBaseline="@id/cardview_name"
+            android:layout_alignParentEnd="true"
             android:contentDescription="@string/pencil_button"
             android:backgroundTint="@color/myColorPrimaryLight"
             app:srcCompat="@drawable/ic_edit" />

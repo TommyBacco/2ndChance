@@ -13,7 +13,8 @@
             android:layout_weight="1"
             android:contentDescription="@string/item_image"
             android:gravity="center"
-            app:srcCompat="@drawable/item_icon" />
+            app:srcCompat="@drawable/item_icon"
+            android:layout_marginRight="16dp"/>
 
 
         <LinearLayout
@@ -37,11 +38,10 @@
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/item_title"
                 android:layout_gravity="center">
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:padding="4dp">
 
@@ -73,15 +73,6 @@
                 </RelativeLayout>
 
             </HorizontalScrollView>
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_item_interested"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                app:backgroundTint="@color/myColorAccent"
-                android:layout_gravity="center"
-                app:fabSize="auto"
-                app:srcCompat="@drawable/ic_interested" />
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -94,6 +85,18 @@
                     android:orientation="vertical"
                     android:background="#00FFFFFF"
                     android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/message_interest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:textStyle="bold|italic"
+                        android:text="@string/itemInterest"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/myColorAccent"/>
 
                     <Button
                         android:id="@+id/bn_show_interested"
@@ -200,6 +203,14 @@
 
 
         </LinearLayout>
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_item_interested"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/myColorAccent"
+        android:layout_gravity="end|bottom"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_interested" />
     </LinearLayout>
 
