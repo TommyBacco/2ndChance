@@ -39,16 +39,13 @@ class OnSaleListFragment : Fragment() {
         if(searchItem != null){
             val searchView  = searchItem.actionView as SearchView
 
-            searchView.setOnCloseListener(object : SearchView.OnCloseListener {
-
-                override fun onClose(): Boolean {
-                    myViewModel.getAdvertisements().observe(viewLifecycleOwner, Observer {
-                        myAdapter.setItemsList(it)
-                        myAdapter.notifyDataSetChanged()
-                    })
-                    return true
-                }
-            })
+            searchView.setOnCloseListener {
+                myViewModel.getAdvertisements().observe(viewLifecycleOwner, Observer {
+                    myAdapter.setItemsList(it)
+                    myAdapter.notifyDataSetChanged()
+                })
+                true
+            }
 
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -95,7 +92,6 @@ class OnSaleListFragment : Fragment() {
                             myAdapter.notifyDataSetChanged()
                         })
                     }
-
                     return true
                 }
             })
