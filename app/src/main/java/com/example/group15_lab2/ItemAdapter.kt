@@ -13,6 +13,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.group15_lab2.DataClass.Item
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_item_details.view.*
 
 class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
@@ -20,9 +21,11 @@ class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
     private val size : MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value=items.size }}
 
     fun setItemsList(newList:List<Item>){
+
         items.clear()
         items.addAll(newList)
         size.value = items.size
+
     }
 
     interface ClickListener {
@@ -79,8 +82,10 @@ class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
                 .error(R.drawable.item_icon)
                 .into(image)
 
-            if(item.interestedUsers.contains(FirebaseRepository.getUserAccount().value?.uid))
+            if(item.interestedUsers.contains(FirebaseRepository.getUserAccount().value?.uid) ) {
                 card.setBackgroundColor(Color.parseColor("#FFF9C4"))
+            }        else card.setBackgroundColor(Color.parseColor("#BBDEFB"))
+
         }
     }
 

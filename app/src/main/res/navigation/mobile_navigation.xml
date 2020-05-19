@@ -29,9 +29,7 @@
             app:popEnterAnim="@anim/slide_in" />
         <action
             android:id="@+id/action_nav_itemDetails_to_iterestedUserListFragment"
-            app:destination="@id/iterestedUserListFragment"
-            app:enterAnim="@anim/fade_in"
-            app:popEnterAnim="@anim/fade_in" />
+            app:destination="@id/iterestedUserListFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_myItems"
@@ -39,11 +37,7 @@
         android:label="ItemListFragment" >
         <action
             android:id="@+id/action_itemListFragment_to_itemDetailsFragment"
-            app:destination="@id/nav_itemDetails"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:destination="@id/nav_itemDetails" />
         <action
             android:id="@+id/action_itemListFragment_to_itemEditFragment"
             app:destination="@id/nav_itemEdit"
@@ -65,11 +59,7 @@
         android:label="OnSaleListFragment" >
         <action
             android:id="@+id/action_nav_advertisements_to_nav_itemDetails"
-            app:destination="@id/nav_itemDetails"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:destination="@id/nav_itemDetails" />
         <action
             android:id="@+id/action_nav_advertisements_to_logInFragment"
             app:destination="@id/logInFragment"

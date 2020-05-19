@@ -48,6 +48,9 @@ class ItemDetailsFragment : Fragment() {
             message_interest.visibility =
                 if(interested) View.VISIBLE
                 else View.GONE
+            if(interested)
+                 fab_item_interested.setImageResource(R.drawable.ic_disinterest)
+            else fab_item_interested.setImageResource(R.drawable.ic_iteminterest)
         })
 
         fab_item_interested.setOnClickListener {

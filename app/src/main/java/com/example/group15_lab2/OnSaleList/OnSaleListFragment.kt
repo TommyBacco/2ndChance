@@ -47,6 +47,7 @@ class OnSaleListFragment : Fragment() {
                 true
             }
 
+            searchView.queryHint = "Search for title, category..."
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
 
