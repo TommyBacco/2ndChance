@@ -28,7 +28,6 @@ class OnSaleListVM: ViewModel() {
                 if(item.ownerID != FirebaseRepository.getUserAccount().value?.uid)
                 savedAddressList.add(item)
             }
-            if(savedAddressList.isNotEmpty())
                 items.value = savedAddressList
         }
     }

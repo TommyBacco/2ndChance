@@ -22,6 +22,7 @@
     <string name="pencil_button">Edit</string>
     <string name="save_button">Save</string>
     <string name="rotate_button">Rotate</string>
+    <string name="search">Search</string>
     <string name="show_interested_button">Show interested users</string>
 
     <string name="menu_gallery">Select an image from the gallery</string>
@@ -37,8 +38,10 @@
     <string name="default_location">Location</string>
     <string name="default_delivery">Delivery type</string>
     <string name="default_description">Description</string>
+    <string name="default_status">Status</string>
     <string name="itemInterest">You are interested in this item!</string>
     <string name="currency">€</string>
+    <string name="itemStatus">Status: </string>
 
     <string name="emptyMessage">No advertisements have been published yet!</string>
     <string name="emptyMyItemsMessage">You haven\'t posted any advertisements yet!</string>
@@ -47,6 +50,7 @@
 
     <string name="open_drawer">Drawer Opened</string>
     <string name="close_drawer">Drawer Closed</string>
+
 
 
     <string-array name="Categories">
@@ -144,6 +148,12 @@
 
     <string-array name="SubcategoryDefault">
         <item>- Subcategory -</item>
+    </string-array>
+
+    <string-array name="ItemStatus">
+        <item>On sale</item>
+        <item>Sold</item>
+        <item>No longer on sale</item>
     </string-array>
     
     

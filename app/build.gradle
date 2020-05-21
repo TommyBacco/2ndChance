@@ -52,6 +52,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
+    implementation 'com.google.firebase:firebase-messaging:20.1.7'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -63,12 +64,17 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-firestore:21.4.2'
     //Firebase Authentication
+    implementation 'com.firebaseui:firebase-ui-database:6.2.1'
     implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
     //Firebase Storage
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
-    //FireAdapter
+    //Firebase Adapter
     implementation 'com.firebaseui:firebase-ui-firestore:6.2.1'
+    //Firebase Messaging
+    implementation 'com.google.firebase:firebase-messaging:20.1.7'
+    //POST message to Firebase
+    implementation 'com.android.volley:volley:1.1.1'
 
     // Fragment (optional)
     implementation 'androidx.fragment:fragment-ktx:1.2.4'
@@ -76,5 +82,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+
 
 }

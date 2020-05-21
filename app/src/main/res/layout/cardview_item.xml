@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/cardview_name"
             android:layout_marginBottom="4dp"
+            android:layout_centerHorizontal="true"
             android:ellipsize="end"
             android:maxLines="1"
             android:hint="@string/default_category"
@@ -58,10 +59,24 @@
             android:textColor="@color/myColorPrimaryText"/>
 
         <TextView
-            android:id="@+id/cardview_price"
+            android:id="@+id/cardview_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cardview_category"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:hint="@string/default_status"
+            android:layout_marginLeft="4dp"
+            android:textStyle="bold|italic"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/myColorPrimaryText"/>
+
+        <TextView
+            android:id="@+id/cardview_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardview_status"
             android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
             android:ellipsize="end"
@@ -75,7 +90,7 @@
             android:id="@+id/cardview_currency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cardview_category"
+            android:layout_below="@+id/cardview_status"
             android:layout_toRightOf="@id/cardview_price"
             android:layout_marginLeft="2dp"
             android:layout_marginBottom="4dp"
@@ -104,7 +119,7 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/cardview_date"
             android:contentDescription="@string/pencil_button"
-            android:backgroundTint="@color/myColorPrimaryLight"
+            android:backgroundTint="@android:color/transparent"
             app:srcCompat="@drawable/ic_edit" />
 
     </RelativeLayout>

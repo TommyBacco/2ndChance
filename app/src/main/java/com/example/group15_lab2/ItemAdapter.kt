@@ -4,25 +4,28 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.group15_lab2.DataClass.Item
 import com.squareup.picasso.Picasso
+import java.util.*
 
-class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>(), Filterable {
 
     private var items = mutableListOf<Item>()
+    private var itemsFullList = mutableListOf<Item>()
     private val size : MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value=items.size }}
 
     fun setItemsList(newList:List<Item>){
         items.clear()
         items.addAll(newList)
+        itemsFullList.clear()
+        itemsFullList.addAll(newList)
         size.value = items.size
+        notifyDataSetChanged()
     }
 
     interface ClickListener {
@@ -64,6 +67,9 @@ class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
         private val currency: TextView = v.findViewById(R.id.cardview_currency)
         private val bn_edit:ImageButton = v.findViewById(R.id.cardview_bn_edit)
         private val card:View =v.findViewById(R.id.cardview)
+        private val category:TextView = v.findViewById(R.id.cardview_category)
+        private val status:TextView = v.findViewById(R.id.cardview_status)
+
 
         fun bind(item: Item){
             name.text = item.title
@@ -71,6 +77,8 @@ class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
             expire_date.text = item.expireDate
             currency.text = item.currency
             bn_edit.visibility = View.GONE
+            category.text = item.category
+            status.text = item.status
 
             Picasso.get()
                 .load(item.imageURL.toUri())
@@ -79,14 +87,55 @@ class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
                 .error(R.drawable.item_icon)
                 .into(image)
 
-            if(item.interestedUsers.contains(FirebaseRepository.getUserAccount().value?.uid))
-                card.setBackgroundColor(Color.parseColor("#FFF9C4"))
+            val color =
+                when {
+                    item.status == "Sold" -> Color.parseColor("#FFCDD2") //Red
+                    item.status == "No longer on sale" -> Color.parseColor("#F5F5F5") //Gray
+                    item.interestedUsers.contains(FirebaseRepository.getUserAccount().value?.uid) -> Color.parseColor("#FFF9C4") //Yellow
+                    else -> Color.parseColor("#BBDEFB") //Blue
+                }
+
+            card.setBackgroundColor(color)
+
         }
     }
 
+    private val myFilter:Filter = object : Filter(){
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filteredList = mutableListOf<Item>()
 
+            if(constraint == null || constraint.isEmpty())
+                filteredList.addAll(itemsFullList)
+            else {
+                val filterPattern = constraint.toString().toLowerCase(Locale.ROOT).trim()
 
+                for(item in itemsFullList){
+                    when {
+                        item.title?.toLowerCase(Locale.ROOT)?.startsWith(filterPattern) == true -> filteredList.add(item)
+                        item.category?.toLowerCase(Locale.ROOT)?.startsWith(filterPattern) == true -> filteredList.add(item)
+                        item.price?.toLowerCase(Locale.ROOT)?.startsWith(filterPattern) == true -> filteredList.add(item)
+                        item.status?.toLowerCase(Locale.ROOT)?.startsWith(filterPattern) == true -> filteredList.add(item)
+                        item.expireDate?.toLowerCase(Locale.ROOT)?.startsWith(filterPattern) == true -> filteredList.add(item)
+                    }
+                }
+            }
 
+            val results = FilterResults()
+            results.values = filteredList
+            return results
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            items.clear()
+            items.addAll((results?.values) as List<Item>)
+            size.value = items.size
+            notifyDataSetChanged()
+        }
+    }
+
+    override fun getFilter(): Filter {
+       return myFilter
+    }
 
 
 }

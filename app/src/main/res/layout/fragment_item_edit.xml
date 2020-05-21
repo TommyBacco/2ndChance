@@ -44,8 +44,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-
     <HorizontalScrollView
         android:id="@+id/category"
         android:layout_width="wrap_content"
@@ -124,6 +122,32 @@
                     app:srcCompat="@android:drawable/ic_menu_camera" />
 
             </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/itemStatus"
+                    android:layout_marginBottom="12dp"
+                    android:drawableStart="@drawable/ic_shopping_cart"
+                    android:drawablePadding="4dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold"
+                    android:layout_marginRight="8dp"/>
+
+                <Spinner
+                    android:id="@+id/spinner_item_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null" />
+
+            </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

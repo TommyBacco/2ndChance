@@ -27,6 +27,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.android.volley.toolbox.Volley
 import com.example.group15_lab2.*
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
@@ -73,6 +74,14 @@ class ItemEditFragment : Fragment() {
         currency_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_currency.adapter = currency_adapter
 
+        val item_status_adapter = ArrayAdapter.createFromResource(
+            requireActivity(),
+            R.array.ItemStatus,
+            R.layout.spinner_item_status
+        )
+        item_status_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_item_status.adapter = item_status_adapter
+
         val delivery_adapter = ArrayAdapter.createFromResource(
             requireActivity(),
             R.array.Delivery_type,
@@ -117,6 +126,13 @@ class ItemEditFragment : Fragment() {
                 myViewModel.editItemData("currency",spinner_currency.selectedItem.toString())
             }
         }
+        spinner_item_status.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                myViewModel.editItemData("status",spinner_item_status.selectedItem.toString())
+            }
+        }
         spinner_delivery_type.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -127,7 +143,6 @@ class ItemEditFragment : Fragment() {
                 myViewModel.editItemData("deliveryType",text)
             }
         }
-
         //##############################################################################
 
         if (savedInstanceState == null) {
@@ -177,10 +192,18 @@ class ItemEditFragment : Fragment() {
             item_description_edit.setText(item.description)
 
             populateCategorySpinners(item.category, item.subcategory)
+
             //Currency spinner
             val currencyPosition =
                 resources.getStringArray(R.array.Currencies).indexOf(item.currency)
             spinner_currency.setSelection(currencyPosition)
+
+            //Status spinner
+            if (item.status != null) {
+                val statusPosition =
+                    resources.getStringArray(R.array.ItemStatus).indexOf(item.status)
+                spinner_item_status.setSelection(statusPosition)
+            }
 
             //Delivery spinner
             if (item.deliveryType != null) {
@@ -275,12 +298,15 @@ class ItemEditFragment : Fragment() {
                     //Title too long, RED Snackbar
                    setSnackbar("longTitle")
                 } else {
-                    myViewModel.saveData()
+                   val request = myViewModel.saveData()
 
                     if(myViewModel.isNewItem())
                         setSnackbar("newItem")
                     else
                         setSnackbar("edited")
+
+                    if(request != null)
+                        Volley.newRequestQueue(context).add(request)
 
                     findNavController().popBackStack()
                 }

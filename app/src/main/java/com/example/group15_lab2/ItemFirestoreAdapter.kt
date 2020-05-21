@@ -1,5 +1,6 @@
 package com.example.group15_lab2
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,6 +78,8 @@ class ItemFirestoreAdapter(options: FirestoreRecyclerOptions<Item>) :
         private val image: ImageView = v.findViewById(R.id.cardview_image)
         private val currency:TextView = v.findViewById(R.id.cardview_currency)
         private val category:TextView = v.findViewById(R.id.cardview_category)
+        private val status:TextView = v.findViewById(R.id.cardview_status)
+        private val card:View =v.findViewById(R.id.cardview)
 
         fun bind(item: Item){
             name.text = item.title
@@ -84,6 +87,7 @@ class ItemFirestoreAdapter(options: FirestoreRecyclerOptions<Item>) :
             expire_date.text = item.expireDate
             currency.text = item.currency
             category.text = item.category
+            status.text = item.status
 
             Picasso.get()
                 .load(item.imageURL.toUri())
@@ -91,6 +95,15 @@ class ItemFirestoreAdapter(options: FirestoreRecyclerOptions<Item>) :
                 .centerInside()
                 .error(R.drawable.item_icon)
                 .into(image)
+
+            val color =
+                when (item.status) {
+                    "Sold" -> Color.parseColor("#FFCDD2") //Red
+                    "No longer on sale" -> Color.parseColor("#F5F5F5") //Gray
+                    else -> Color.parseColor("#BBDEFB") //Blue
+                }
+
+            card.setBackgroundColor(color)
 
         }
     }

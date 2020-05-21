@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.android.volley.toolbox.JsonObjectRequest
 import com.example.group15_lab2.DataClass.Item
 import com.example.group15_lab2.FirebaseRepository
 
@@ -44,13 +45,21 @@ class ItemDetailsVM : ViewModel() {
         }
     }
 
-    fun modifyInterest(){
+    fun modifyInterest(): JsonObjectRequest? {
+
+        var request:JsonObjectRequest? = null
+
         if(isInterested.value!!){
             FirebaseRepository.removeItemInterest(itemID.value ?: "")
+            FirebaseRepository.unsubscribeFromTopic(itemID.value ?: "")
             isInterested.value = false
         } else {
             FirebaseRepository.addItemInterest(itemID.value ?: "")
+            FirebaseRepository.subscribeToTopic(itemID.value ?: "")
+            request = FirebaseRepository.getNotificationRequest(item.value ?: Item(),"newInterest")
             isInterested.value = true
         }
+
+        return request
     }
 }

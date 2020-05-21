@@ -1,5 +1,6 @@
 package com.example.group15_lab2.ItemDetails
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.android.volley.toolbox.Volley
 import com.example.group15_lab2.*
 import com.example.group15_lab2.DataClass.User
 import com.example.group15_lab2.MainActivity.MainActivity
@@ -48,10 +50,17 @@ class ItemDetailsFragment : Fragment() {
             message_interest.visibility =
                 if(interested) View.VISIBLE
                 else View.GONE
+
+            val fabImage =
+                if(interested) R.drawable.ic_bookmark_remove
+                else R.drawable.ic_bookmark_add
+            fab_item_interested.setImageResource(fabImage)
         })
 
         fab_item_interested.setOnClickListener {
-            myViewModel.modifyInterest()
+           val request = myViewModel.modifyInterest()
+            if(request != null)
+                Volley.newRequestQueue(context).add(request)
         }
 
 
@@ -73,6 +82,16 @@ class ItemDetailsFragment : Fragment() {
             item_delivery.text = i.deliveryType
             item_description.text = i.description
             currency.text = i.currency
+            val status = i.status
+            var color = Color.DKGRAY
+
+            if(status == "Sold")
+                color = Color.RED
+            if(status == "On sale")
+                color = Color.parseColor("#00b600") //Green
+
+            item_status.text = status
+            item_status.setTextColor(color)
 
             Picasso.get()
                 .load(i.imageURL.toUri())

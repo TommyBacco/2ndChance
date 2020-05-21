@@ -8,8 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/item_title"
@@ -29,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/item_title"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="8dp"
+            android:layout_centerHorizontal="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -67,16 +67,6 @@
             </RelativeLayout>
         </HorizontalScrollView>
 
-        <ImageView
-            android:id="@+id/item_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/category"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:contentDescription="@string/item_image"
-            android:gravity="center"
-            app:srcCompat="@drawable/item_icon" />
 
     </RelativeLayout>
 
@@ -91,6 +81,15 @@
             android:background="#00FFFFFF"
             android:orientation="vertical"
             android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/item_image"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/item_image"
+                android:gravity="center"
+                app:srcCompat="@drawable/item_icon" />
 
             <TextView
                 android:id="@+id/message_interest"
@@ -118,35 +117,59 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/item_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="8dp"
-                android:drawableStart="@drawable/ic_price"
-                android:drawablePadding="4dp"
-                android:hint="-"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@android:color/holo_red_dark"
-                android:textColorHint="@android:color/holo_red_dark"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/itemStatus"
+                    android:layout_marginBottom="6dp"
+                    android:drawableStart="@drawable/ic_shopping_cart"
+                    android:drawablePadding="4dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic"
+                    android:layout_marginRight="8dp"/>
 
-            <TextView
-                android:id="@+id/currency"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="8dp"
-                android:layout_toEndOf="@+id/item_price"
-                android:hint="@string/currency"
-                android:text="@string/currency"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@android:color/holo_red_dark"
-                android:textColorHint="@android:color/holo_red_dark"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/item_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/status"
+                    android:layout_marginBottom="6dp"
+                    android:layout_toEndOf="@+id/status"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/item_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/status"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:drawableStart="@drawable/ic_price"
+                    android:drawablePadding="4dp"
+                    android:hint="-"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textColorHint="@android:color/holo_red_dark"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/currency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/item_price"
+                    android:layout_marginBottom="8dp"
+                    android:layout_toEndOf="@+id/item_price"
+                    android:hint="@string/currency"
+                    android:text="@string/currency"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textColorHint="@android:color/holo_red_dark"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -217,6 +240,6 @@
         app:backgroundTint="@color/myColorAccent"
         android:layout_gravity="end|bottom"
         app:fabSize="auto"
-        app:srcCompat="@drawable/ic_interested"
+        app:srcCompat="@drawable/ic_bookmark_add"
         android:visibility="visible"/>
 </LinearLayout>

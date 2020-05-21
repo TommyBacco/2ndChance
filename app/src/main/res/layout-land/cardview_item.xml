@@ -22,12 +22,12 @@
             android:layout_width="105dp"
             android:layout_height="105dp"
             android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="4dp"
             android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="true"
             android:src="@drawable/item_icon"
             app:civ_border_width="2dp"
             app:civ_border_color="@android:color/black"/>
@@ -62,10 +62,24 @@
             android:textColor="@color/myColorPrimaryText"/>
 
         <TextView
+            android:id="@+id/cardview_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardview_category"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:hint="@string/default_status"
+            android:layout_toRightOf="@id/cardview_image"
+            android:textStyle="bold|italic"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/myColorPrimaryText"/>
+
+        <TextView
             android:id="@+id/cardview_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cardview_category"
+            android:layout_below="@id/cardview_status"
             android:layout_toRightOf="@id/cardview_image"
             android:layout_marginEnd="4dp"
             android:ellipsize="end"
@@ -110,7 +124,7 @@
             android:layout_alignBaseline="@id/cardview_name"
             android:layout_alignParentEnd="true"
             android:contentDescription="@string/pencil_button"
-            android:backgroundTint="@color/myColorPrimaryLight"
+            android:backgroundTint="@android:color/transparent"
             app:srcCompat="@drawable/ic_edit" />
 
     </RelativeLayout>

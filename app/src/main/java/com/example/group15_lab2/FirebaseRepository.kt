@@ -1,21 +1,32 @@
 package com.example.group15_lab2
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.android.volley.DefaultRetryPolicy
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.example.group15_lab2.DataClass.Item
 import com.example.group15_lab2.DataClass.User
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.*
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
+import org.json.JSONException
+import org.json.JSONObject
 
 
 object FirebaseRepository {
     private val userAccount:MutableLiveData<FirebaseUser> by lazy { MutableLiveData<FirebaseUser>().apply { value = null } }
     private val db = FirebaseFirestore.getInstance()
     private val storageRef = FirebaseStorage.getInstance().reference
+
+    private const val googleApisURL = "https://fcm.googleapis.com/fcm/send"
+    private const val serverKey = "AAAA_-rvyXk:APA91bGyvWuLQCBYRNkquB4-ZJCeLpggy0tJaKlcHLGcPv3DHxBkaro3G515BuNoXaVZj7GcudN3G2p9EUFZM002oqfd469SAcVxcsP5Cqyq70awOVAMWcNDY4PWtgdHFpyu14tqxQd1"
 
     fun getUserAccount():LiveData<FirebaseUser>{
         return userAccount
@@ -57,7 +68,7 @@ object FirebaseRepository {
             }
         }
             .addOnFailureListener {
-                //TODO GESTIRE CASO ERRORE
+                Log.d("TAG-ERR","Error during uploading userImage into Storage")
             }
     }
 
@@ -91,12 +102,13 @@ object FirebaseRepository {
             }
         }
             .addOnFailureListener {
-                //TODO GESTIRE CASO ERRORE
+                Log.d("TAG-ERR","Error during uploading itemImage into Storage")
             }
     }
 
 
     private fun saveItem(item: Item?) {
+        subscribeToTopic(item?.ID ?: "")
         db.collection("Items")
             .document("item:" + item?.ID)
             .set(item ?: Item())
@@ -150,6 +162,95 @@ object FirebaseRepository {
             .update("interestedUsers", FieldValue.arrayRemove(userAccount.value?.uid))
 
     }
+
+    fun subscribeToTopic(itemID:String){
+        val topic = "item_$itemID"
+        FirebaseMessaging.getInstance().subscribeToTopic(topic)
+            .addOnCompleteListener { task ->
+                var msg = "Subscribe completed"
+                if (!task.isSuccessful) {
+                    msg = "Error during Subscribe!"
+                }
+                Log.d("TAG-ERR", msg)
+            }
+    }
+
+    fun unsubscribeFromTopic(itemID:String){
+        val topic = "item_$itemID"
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(topic)
+            .addOnCompleteListener { task ->
+                var msg = "Unsubscribe completed"
+                if (!task.isSuccessful) {
+                    msg = "Error during Unsubscribe!"
+                }
+                Log.d("TAG-ERR", msg)
+            }
+    }
+
+    fun getNotificationRequest(item:Item,notificationType:String): JsonObjectRequest {
+        val notjo = JSONObject()
+        val nojoBody = JSONObject()
+
+        val title = "Item: ${item.title}"
+        val owner = item.ownerID
+        val description = when (notificationType) {
+            "sold" -> "has been sold"
+            "block" -> "is no longer for sale"
+            else -> "there is a new interested user!"
+        }
+        val topic = "/topics/item_${item.ID}"
+
+
+
+        try {
+            nojoBody.put("sender", userAccount.value?.uid)
+            nojoBody.put("nTitle", title)
+            nojoBody.put("nDesc", description)
+            nojoBody.put("nType",notificationType)
+            nojoBody.put("itemOwner",owner)
+
+            notjo.put("to",topic)
+            notjo.put("data",nojoBody)
+
+        } catch (e: JSONException){
+            Log.d("TAG-ERR","Json error")
+        }
+
+       return getPOSTRequest(notjo)
+
+    }
+
+    private fun getPOSTRequest(notjo: JSONObject): JsonObjectRequest {
+
+        val request = object : JsonObjectRequest(
+            googleApisURL,
+            notjo,
+            Response.Listener { Log.d("TAG-ERR","Success Request") },
+            Response.ErrorListener { Log.d("TAG-ERR","Error during Request") }){
+
+            override fun getHeaders(): MutableMap<String, String> {
+                val map = mutableMapOf<String, String>()
+                map.put("Content-Type","application/json")
+                map.put("Authorization","key=$serverKey")
+                return map
+            }
+        }
+
+        request.retryPolicy = DefaultRetryPolicy(
+            DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2,
+            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+
+        return request
+    }
+
+
+
+
+
+
+
+
 
 
 }

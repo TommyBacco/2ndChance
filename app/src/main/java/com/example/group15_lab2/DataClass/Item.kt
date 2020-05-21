@@ -7,6 +7,7 @@ data class Item (
     var title:String? = null,
     var price:String? = null,
     var currency:String? = "€",
+    var status:String? = "On sale",
     var expireDate: String? = null,
     var category: String? = null,
     var subcategory: String? = null,

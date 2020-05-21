@@ -5,6 +5,7 @@ import android.graphics.Matrix
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.android.volley.toolbox.JsonObjectRequest
 import com.example.group15_lab2.DataClass.Item
 import com.example.group15_lab2.FirebaseRepository
 import com.google.firebase.firestore.FirebaseFirestore
@@ -78,14 +79,23 @@ class ItemEditVM : ViewModel() {
             "location" -> item.value?.location=value
             "deliveryType" -> item.value?.deliveryType=value
             "description" -> item.value?.description=value
+            "status" -> item.value?.status=value
         }
     }
 
-    fun saveData(){
+    fun saveData(): JsonObjectRequest? {
+        var request: JsonObjectRequest? = null
         val stream = ByteArrayOutputStream()
         image.value?.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-
         FirebaseRepository.saveItemData(item.value,stream.toByteArray())
+
+        val status = item.value?.status
+        if(status == "Sold")
+            request = FirebaseRepository.getNotificationRequest(item.value ?: Item(),"sold")
+        if(status == "No longer on sale")
+            request = FirebaseRepository.getNotificationRequest(item.value ?: Item(),"block")
+
+        return request
     }
 
 }

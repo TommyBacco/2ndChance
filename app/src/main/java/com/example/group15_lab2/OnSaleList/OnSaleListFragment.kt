@@ -1,20 +1,15 @@
 package com.example.group15_lab2.OnSaleList
 
-import android.content.ClipData
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.EditorInfo
 import androidx.core.os.bundleOf
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.group15_lab2.FirebaseRepository
 import com.example.group15_lab2.ItemAdapter
-import com.example.group15_lab2.ItemFirestoreAdapter
 import com.example.group15_lab2.R
 import kotlinx.android.synthetic.main.fragment_on_sale_list.*
 
@@ -25,6 +20,7 @@ class OnSaleListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_on_sale_list,container,false)
     }
 
@@ -38,7 +34,6 @@ class OnSaleListFragment : Fragment() {
 
         myViewModel.getAdvertisements().observe(viewLifecycleOwner, Observer {
             myAdapter.setItemsList(it)
-            myAdapter.notifyDataSetChanged()
         })
 
         myAdapter.getSize().observe(viewLifecycleOwner, Observer {size ->
@@ -56,6 +51,27 @@ class OnSaleListFragment : Fragment() {
             }
         })
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+
+        val searchItem = menu.findItem(R.id.search_button)
+        val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
+        searchView.imeOptions = EditorInfo.IME_ACTION_DONE
+        searchView.queryHint = "Search for title, category..."
+
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                myAdapter.filter.filter(newText)
+                return false
+            }
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+        })
     }
 
 }
