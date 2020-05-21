@@ -11,6 +11,12 @@ android {
             keyAlias = 'mykey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('mykey')
+            storePassword 'android'
+            keyAlias = 'mykey'
+            keyPassword 'android'
+        }
     }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -90,6 +96,4 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-
-
 }

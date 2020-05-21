@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.group15_lab2.*
+import com.example.group15_lab2.MainActivity.MainActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_show_profile.*
 
@@ -23,6 +24,8 @@ class ShowProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as MainActivity).setToolbarTitle("User Profile")
 
         if(savedInstanceState == null) {
             val id = arguments?.getString("group15.lab3.USER_ID",null)

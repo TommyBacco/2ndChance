@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.group15_lab2.ItemAdapter
+import com.example.group15_lab2.MainActivity.MainActivity
 import com.example.group15_lab2.R
 import kotlinx.android.synthetic.main.fragment_on_sale_list.*
 
@@ -26,6 +27,8 @@ class OnSaleListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as MainActivity).setToolbarTitle("Advertisements")
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager =

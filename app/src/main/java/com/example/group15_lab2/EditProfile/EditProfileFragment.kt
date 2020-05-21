@@ -25,6 +25,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.group15_lab2.*
+import com.example.group15_lab2.MainActivity.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
@@ -50,6 +51,8 @@ class EditProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as MainActivity).setToolbarTitle("Edit Profile")
 
         registerForContextMenu(requireActivity().findViewById(R.id.camera_button))
         camera_button.setOnClickListener { v -> requireActivity().openContextMenu(v) }

@@ -51,6 +51,8 @@
     <string name="open_drawer">Drawer Opened</string>
     <string name="close_drawer">Drawer Closed</string>
 
+    <string name="login_message">login in progress…</string>
+    <string name="login_message_error">Please, check your connection and then try again</string>
 
 
     <string-array name="Categories">

@@ -16,6 +16,8 @@ import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
+    private val ADMIN_CHANNEL_ID = "admin_channel"
+
     override fun onMessageReceived(p0: RemoteMessage) {
         super.onMessageReceived(p0)
 
@@ -44,8 +46,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val notID = System.currentTimeMillis().div(7).toInt()
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-            setChannel(nm)
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val notChannel = setChannel()
+            nm.createNotificationChannel(notChannel)
+        }
+
 
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -59,7 +64,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             else -> R.drawable.ic_bookmark_add
         }
 
-        val not = NotificationCompat.Builder(this)
+        val not = NotificationCompat.Builder(this,ADMIN_CHANNEL_ID)
         not.setSmallIcon(icon)
             .setContentTitle(msg.data.get("nTitle"))
             .setContentText(msg.data.get("nDesc"))
@@ -70,18 +75,20 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         nm.notify(notID,not.build())
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun setChannel(nm: NotificationManager) {
 
-        val adminChannel = NotificationChannel("Admin","new notification",
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private fun setChannel(): NotificationChannel {
+        val channelName = "New notification"
+        val channelDesc = "Device to device notification"
+
+        val notificationChannel = NotificationChannel(ADMIN_CHANNEL_ID,channelName,
             NotificationManager.IMPORTANCE_HIGH)
 
-        adminChannel.description = "device to device"
-        adminChannel.enableLights(true)
-        adminChannel.lightColor = (Color.RED)
-        adminChannel.enableVibration(true)
+        notificationChannel.description = channelDesc
+        notificationChannel.enableLights(true)
+        notificationChannel.lightColor = Color.RED
+        notificationChannel.enableVibration(true)
 
-        nm.createNotificationChannel(adminChannel)
-
+        return notificationChannel
     }
 }

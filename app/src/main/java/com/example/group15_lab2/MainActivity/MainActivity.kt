@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var headView: View
     private val myViewModel: MainActivityVM by viewModels()
 
+    fun setToolbarTitle(title:String){
+        supportActionBar?.title = title
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

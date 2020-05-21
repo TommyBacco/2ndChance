@@ -36,6 +36,8 @@ class ItemDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as MainActivity).setToolbarTitle("Item Details")
+
         if(savedInstanceState == null) {
             val id = arguments?.getString("group15.lab3.ITEM_ID")
             myViewModel.setItemID(id)

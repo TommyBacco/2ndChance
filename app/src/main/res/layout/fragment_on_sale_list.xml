@@ -28,6 +28,7 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#808080"
-        android:textStyle="italic|bold" />
+        android:textStyle="italic|bold"
+        android:visibility="gone"/>
 
 </RelativeLayout>
