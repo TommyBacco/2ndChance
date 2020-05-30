@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="@color/myColorPrimaryLight"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardview_image"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="4dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/item_icon"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/cardview_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/cardview_image"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:hint="@string/default_title"
+            android:textColorHint="@android:color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/myColorPrimaryText"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/cardview_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardview_name"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginBottom="4dp"
+            android:hint="@string/default_category"
+            android:layout_toRightOf="@id/cardview_image"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/myColorPrimaryText"/>
+
+        <TextView
+            android:id="@+id/cardview_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardview_category"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:hint="@string/default_status"
+            android:layout_toRightOf="@id/cardview_image"
+            android:textStyle="bold|italic"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/myColorPrimaryText"/>
+
+        <TextView
+            android:id="@+id/cardview_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardview_status"
+            android:layout_toRightOf="@id/cardview_image"
+            android:layout_marginEnd="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginBottom="4dp"
+            android:hint="-"
+            android:textColorHint="@android:color/holo_red_dark"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/holo_red_dark" />
+
+
+        <TextView
+            android:id="@+id/cardview_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/cardview_price"
+            android:layout_marginLeft="2dp"
+            android:layout_marginEnd="4dp"
+            android:layout_toRightOf="@id/cardview_price"
+            android:text="€"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/holo_red_dark" />
+
+        <TextView
+            android:id="@+id/cardview_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardview_price"
+            android:layout_toRightOf="@id/cardview_image"
+            android:layout_marginEnd="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textStyle="italic"
+            android:hint="@string/default_ExpireDate"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/cardview_bn_edit"
+            android:layout_alignBaseline="@id/cardview_name"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/pencil_button"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@android:drawable/ic_menu_edit" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="4dp"
+            android:id="@+id/cardview_bn_rating"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/review_button"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/ic_rating"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/cardview_price"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/ic_bookmark_border"
+            android:contentDescription="@string/cardview_bookmark"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/bought"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignBaseline="@id/cardview_price"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/ic_bought"
+            android:contentDescription="@string/cardview_bought"
+            android:visibility="gone"/>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
