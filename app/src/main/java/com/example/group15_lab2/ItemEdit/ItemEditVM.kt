@@ -22,6 +22,8 @@ class ItemEditVM : ViewModel() {
     fun isImageOld() = isOld
     private var newItem = false
     fun isNewItem() = newItem
+    fun isSold() = item.value?.status == "Sold"
+
 
     fun getItemData(): LiveData<Item> {
         return item

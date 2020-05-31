@@ -154,6 +154,19 @@
             app:srcCompat="@drawable/ic_rating"
             android:visibility="gone"/>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardview_rating_done"
+            android:layout_below="@id/cardview_date"
+            android:layout_toRightOf="@+id/cardview_bn_rating"
+            android:contentDescription="@string/review_button"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/ic_done"
+            android:visibility="gone"/>
+
+
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

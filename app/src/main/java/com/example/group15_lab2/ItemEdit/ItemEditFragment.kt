@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -196,6 +197,11 @@ class ItemEditFragment : Fragment() {
                 item_rotate_button.visibility = View.VISIBLE
             }
         })
+
+        bn_show_interested.setOnClickListener {
+            val bundle = bundleOf(Pair("group15.lab3.ITEM_ID",itemID))
+            findNavController().navigate(R.id.action_nav_itemEdit_to_iterestedUserListFragment,bundle)
+        }
     }
 
 
@@ -234,11 +240,16 @@ class ItemEditFragment : Fragment() {
                     .load(item.imageURL.toUri())
                     .fit()
                     .centerInside()
-                    .error(R.drawable.user_icon)
+                    .error(R.drawable.item_icon)
                     .into(item_image_edit)
 
                 item_rotate_button.visibility = View.INVISIBLE
             }
+
+            //Show interested users
+            val numOfInterest = item.interestedUsers.size
+            val text = "${resources.getString(R.string.default_interestedUsers)} $numOfInterest"
+            item_interested_users.text = text
         })
 
     }
@@ -247,6 +258,7 @@ class ItemEditFragment : Fragment() {
         var categoryPosition = 0
         if (category != null)
             categoryPosition = resources.getStringArray(R.array.Categories).indexOf(category)
+
         spinner_item_category.setSelection(categoryPosition)
 
         setSubCategorySpinner(categoryPosition, subCategory)
@@ -283,6 +295,11 @@ class ItemEditFragment : Fragment() {
                 spinner_item_sub_category.setSelection(subCategoryPosition)
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        categoryPosition = -1
     }
 
     private fun setSoldSpinner(status: String) {
@@ -355,10 +372,11 @@ class ItemEditFragment : Fragment() {
                 } else {
                    val request = myViewModel.saveData()
 
-                    if(myViewModel.isNewItem())
-                        setSnackbar("newItem")
-                    else
-                        setSnackbar("edited")
+                    when {
+                        myViewModel.isSold() -> setSnackbar("itemSold")
+                        myViewModel.isNewItem() -> setSnackbar("newItem")
+                        else -> setSnackbar("edited")
+                    }
 
                     if(request != null)
                         Volley.newRequestQueue(context).add(request)
@@ -373,26 +391,30 @@ class ItemEditFragment : Fragment() {
 
     private fun setSnackbar(tipe:String){
         val text:String
-        val backgrount:Int
+        val background:Int
         when(tipe){
             "edited" -> {
                 text = "Item has been correctly updated"
-                backgrount = R.color.editedItem
+                background = R.color.editedItem
             }
             "newItem" -> {
                 text = "New item has been added"
-                backgrount = R.color.newItem
+                background = R.color.newItem
+            }
+            "itemSold" -> {
+                text = "Item has been correctly sold!"
+                background = R.color.editedItem
             }
            else -> {
-                text = "Too many characters in the Title"
-                backgrount =  R.color.longTitle
+                text = "Too many characters in the Title!"
+               background =  R.color.longTitle
             }
         }
-        val snack: Snackbar = Snackbar.make(item_title_edit, text, Snackbar.LENGTH_LONG)
+        val snack: Snackbar = Snackbar.make(requireView(), text, Snackbar.LENGTH_LONG)
         val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
         tv.setTextColor(Color.WHITE)
         tv.typeface = Typeface.DEFAULT_BOLD
-        snack.view.setBackgroundColor(ContextCompat.getColor(requireContext(), backgrount))
+        snack.view.setBackgroundColor(ContextCompat.getColor(requireContext(), background))
         snack.show()
     }
 

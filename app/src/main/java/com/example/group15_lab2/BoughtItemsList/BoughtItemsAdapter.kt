@@ -34,7 +34,7 @@ class BoughtItemsAdapter: RecyclerView.Adapter<BoughtItemsAdapter.ViewHolder>() 
 
     interface ClickListener {
         fun onItemClick(itemID: String?)
-        fun onItemReview(itemID:String?)
+        fun onItemReview(itemID:String?,itemOwner:String?,isRated:Boolean)
     }
 
     private lateinit var clickListener: ClickListener
@@ -68,7 +68,8 @@ class BoughtItemsAdapter: RecyclerView.Adapter<BoughtItemsAdapter.ViewHolder>() 
             bn_review = v.findViewById(R.id.cardview_bn_rating)
             bn_review.setOnClickListener {
                 if(adapterPosition != RecyclerView.NO_POSITION){
-                    listener.onItemReview(items[adapterPosition].ID)
+                    val item = items[adapterPosition]
+                    listener.onItemReview(item.ID,item.ownerID,item.rated)
                 }
             }
         }
@@ -81,6 +82,7 @@ class BoughtItemsAdapter: RecyclerView.Adapter<BoughtItemsAdapter.ViewHolder>() 
         private val bn_edit: ImageView = v.findViewById(R.id.cardview_bn_edit)
         private val category: TextView = v.findViewById(R.id.cardview_category)
         private val status: TextView = v.findViewById(R.id.cardview_status)
+        private val rating_done:ImageView = v.findViewById(R.id.cardview_rating_done)
 
         fun bind(item: Item) {
             name.text = item.title
@@ -91,6 +93,11 @@ class BoughtItemsAdapter: RecyclerView.Adapter<BoughtItemsAdapter.ViewHolder>() 
             category.text = item.category
             status.text = item.status
             bn_review.visibility = View.VISIBLE
+
+            if(item.rated)
+                rating_done.visibility = View.VISIBLE
+            else
+                rating_done.visibility = View.GONE
 
             Picasso.get()
                 .load(item.imageURL.toUri())

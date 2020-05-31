@@ -7,6 +7,7 @@ import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.group15_lab2.DataClasses.Item
+import com.example.group15_lab2.DataClasses.Rating
 import com.example.group15_lab2.DataClasses.User
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
@@ -33,14 +34,7 @@ object FirebaseRepository {
     }
 
     fun getUserData(userID:String? = null): DocumentReference {
-
-        db.document("Users/user:")
-
-        val userToGet:String?
-        if(userID == null)
-            userToGet = userAccount.value?.uid
-        else
-            userToGet = userID
+        val userToGet = userID ?: userAccount.value?.uid
         return db.document("Users/user:$userToGet")
     }
 
@@ -240,6 +234,30 @@ object FirebaseRepository {
     fun getBoughtItems(): Query {
         return db.collection("Items")
             .whereEqualTo("soldTo",userAccount.value?.uid ?: "")
+    }
+
+    fun getUserRating(userID:String?):CollectionReference {
+        val userToGet = userID ?: userAccount.value?.uid
+
+        return db
+            .collection("Users")
+            .document("user:$userToGet")
+            .collection("Ratings")
+    }
+
+    fun sendUserRating(user:String?,rating: Rating){
+        rating.buyer = userAccount.value?.uid
+
+        db.collection("Users")
+            .document("user:$user")
+            .collection("Ratings")
+            .add(rating)
+    }
+
+    fun updateItemRating(itemID:String?){
+        db.collection("Items")
+            .document("item:$itemID")
+            .update("rated", true)
     }
 
 }

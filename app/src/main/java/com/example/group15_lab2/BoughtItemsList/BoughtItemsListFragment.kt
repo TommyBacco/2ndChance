@@ -1,17 +1,25 @@
 package com.example.group15_lab2.BoughtItemsList
 
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.group15_lab2.MainActivity.MainActivity
 import com.example.group15_lab2.R
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_bought_items_list.*
 
 class BoughtItemsListFragment : Fragment() {
@@ -52,9 +60,21 @@ class BoughtItemsListFragment : Fragment() {
                     R.id.action_nav_boughtItems_to_nav_itemDetails, bundle)
             }
 
-            override fun onItemReview(itemID: String?) {
-                val bundle = bundleOf(Pair("group15.lab3.ITEM_ID",itemID))
-                findNavController().navigate(R.id.action_nav_boughtItems_to_ratingUserFragment,bundle)
+            override fun onItemReview(itemID: String?, itemOwner: String?, isRated: Boolean) {
+                if(isRated){
+                    val snack: Snackbar = Snackbar.make(requireView(), "You have already rated the seller for this item!", Snackbar.LENGTH_LONG)
+                    val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
+                    tv.setTextColor(Color.WHITE)
+                    tv.typeface = Typeface.DEFAULT_BOLD
+                    snack.view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.longTitle))
+                    snack.show()
+                }
+                else{
+                    val bundle =
+                        bundleOf(Pair("group15.lab3.ITEM_ID",itemID),
+                            Pair("group15.lab3.ITEM_OWNER",itemOwner))
+                    findNavController().navigate(R.id.action_nav_boughtItems_to_ratingUserFragment,bundle)
+                }
             }
         })
 

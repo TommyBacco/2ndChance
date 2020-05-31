@@ -13,6 +13,11 @@
             app:destination="@id/nav_editProfile"
             app:enterAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in" />
+        <action
+            android:id="@+id/action_nav_profile_to_showUserRatingFragment"
+            app:destination="@id/showUserRatingFragment"
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
     </fragment>
     <fragment
         android:id="@+id/nav_editProfile"
@@ -34,7 +39,9 @@
             app:popEnterAnim="@anim/fade_in" />
         <action
             android:id="@+id/action_nav_itemDetails_to_ratingUserFragment"
-            app:destination="@id/ratingUserFragment" />
+            app:destination="@id/ratingUserFragment"
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
     </fragment>
     <fragment
         android:id="@+id/nav_myItems"
@@ -57,7 +64,13 @@
         android:id="@+id/nav_itemEdit"
         android:name="com.example.group15_lab2.ItemEdit.ItemEditFragment"
         android:label="fragment_item_edit"
-        tools:layout="@layout/fragment_item_edit" />
+        tools:layout="@layout/fragment_item_edit" >
+        <action
+            android:id="@+id/action_nav_itemEdit_to_iterestedUserListFragment"
+            app:destination="@id/iterestedUserListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in" />
+    </fragment>
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.example.group15_lab2.LogInFragment"
@@ -114,10 +127,16 @@
             app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_nav_boughtItems_to_ratingUserFragment"
-            app:destination="@id/ratingUserFragment" />
+            app:destination="@id/ratingUserFragment"
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
     </fragment>
     <fragment
         android:id="@+id/ratingUserFragment"
         android:name="com.example.group15_lab2.RatingUser.RatingUserFragment"
         android:label="RatingUserFragment" />
+    <fragment
+        android:id="@+id/showUserRatingFragment"
+        android:name="com.example.group15_lab2.ShowUserRating.ShowUserRatingFragment"
+        android:label="ShowUserRatingFragment" />
 </navigation>

@@ -28,19 +28,57 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/user_rating_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/myColorSecondaryText"
+                    android:layout_marginEnd="4dp"
+                    android:layout_centerVertical="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:id="@+id/user_ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/user_rating_value"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:isIndicator="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/user_number_ratings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginStart="4dp"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:drawableEnd="@drawable/ic_arrow_forward"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/myColorSecondaryText"
+                android:textStyle="italic" />
+
             <TextView
                 android:id="@+id/user_fullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:hint="@string/profile_fullname"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:ellipsize="end"
-                android:maxLines="2"
                 android:drawableLeft="@drawable/ic_person"
                 android:drawablePadding="4dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:ellipsize="end"
+                android:hint="@string/profile_fullname"
+                android:maxLines="2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/user_nickname"

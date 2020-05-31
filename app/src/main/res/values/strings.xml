@@ -25,7 +25,7 @@
     <string name="save_button">Save</string>
     <string name="rotate_button">Rotate</string>
     <string name="search">Search</string>
-    <string name="show_interested_button">Show interested users</string>
+    <string name="show_interested_button">Show all</string>
     <string name="filter_button">Edit</string>
     <string name="review_button">Review User</string>
 
@@ -45,9 +45,12 @@
     <string name="default_delivery">Delivery type</string>
     <string name="default_description">Description</string>
     <string name="default_status">Status</string>
-    <string name="itemInterest">You are interested in this item!</string>
+    <string name="default_interestedUsers">Interested users:</string>
+    <string name="item_userInterested">You are interested in this item!</string>
+    <string name="item_soldToUser">This item has been sold to you!</string>
     <string name="currency">€</string>
     <string name="itemStatus">Status: </string>
+    <string name="default_review">reviews</string>
 
     <string name="price_from">From</string>
     <string name="price_to">To</string>
@@ -59,6 +62,11 @@
     <string name="emptyMessage_userList">Unluckily, no user is interested in this item</string>
     <string name="emptyMessage_itemsOfInterest">You are not interested in any item yet!</string>
     <string name="emptyMessage_boughtItems">You have not bought any items yet!</string>
+    <string name="emptyMessage_userRatings">There is no review yet!</string>
+
+    <string name="rating_nickname">No Nickname</string>
+    <string name="rating_date">Date</string>
+    <string name="rating_comment">No comment</string>
 
 
     <string name="open_drawer">Drawer Opened</string>
