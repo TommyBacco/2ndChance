@@ -66,7 +66,7 @@
 
     <string name="login_message">login in progress…</string>
     <string name="login_message_error">Please, check your connection and then try again</string>
-
+    <string name="title_activity_maps">Map Current Location</string>
 
     <string-array name="Categories">
         <item>- Category -</item>

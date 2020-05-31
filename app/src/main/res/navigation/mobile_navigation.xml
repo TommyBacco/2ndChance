@@ -17,7 +17,11 @@
     <fragment
         android:id="@+id/nav_editProfile"
         android:name="com.example.group15_lab2.EditProfile.EditProfileFragment"
-        android:label="EditProfileFragment" />
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/action_nav_editProfile_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_itemDetails"
         android:name="com.example.group15_lab2.ItemDetails.ItemDetailsFragment"
@@ -120,4 +124,8 @@
         android:id="@+id/ratingUserFragment"
         android:name="com.example.group15_lab2.RatingUser.RatingUserFragment"
         android:label="RatingUserFragment" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="MapFragment"
+        android:label="MapFragment" />
 </navigation>

@@ -54,6 +54,12 @@ class EditProfileFragment : Fragment() {
 
         (activity as MainActivity).setToolbarTitle("Edit Profile")
 
+        user_address_edit.setOnClickListener(){
+
+            findNavController().navigate(R.id.action_nav_editProfile_to_mapFragment)
+
+        }
+
         registerForContextMenu(requireActivity().findViewById(R.id.camera_button))
         camera_button.setOnClickListener { v -> requireActivity().openContextMenu(v) }
 
@@ -104,12 +110,16 @@ class EditProfileFragment : Fragment() {
         user_location_edit.doOnTextChanged { text, _, _, _ ->
             myViewModel.editData("location",text.toString())
         }
+
         user_address_edit.doOnTextChanged { text, _, _, _ ->
             myViewModel.editData("address",text.toString())
         }
+
         user_telephone_edit.doOnTextChanged { text, _, _, _ ->
             myViewModel.editData("telephone",text.toString())
         }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -125,9 +135,14 @@ class EditProfileFragment : Fragment() {
                 findNavController().popBackStack()
                 true
             }
+
+
             else -> super.onOptionsItemSelected(item)
+
         }
     }
+
+
 
     private fun setSnackbar(){
         val snack: Snackbar = Snackbar.make(user_avatar_edit, "Profile has been updated", Snackbar.LENGTH_LONG)
@@ -192,6 +207,8 @@ class EditProfileFragment : Fragment() {
                 }
                 true
             }
+
+
             else -> super.onContextItemSelected(item)
         }
     }
