@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="@color/item_blocked"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp">
+
+
+        <TextView
+            android:id="@+id/rate_user_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:hint="@string/rating_nickname"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/myColorPrimaryText"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rate_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rate_user_nickname"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:hint="@string/rating_date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/myColorPrimaryText"/>
+
+        <RatingBar
+            android:id="@+id/rate_ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rate_date"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:layout_marginBottom="4dp"
+            android:isIndicator="true"/>
+
+        <TextView
+            android:id="@+id/rate_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rate_ratingBar"
+            android:hint="@string/rating_comment"
+            android:textStyle="italic"
+            android:layout_marginBottom="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

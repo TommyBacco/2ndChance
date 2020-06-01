@@ -3,6 +3,7 @@ package com.example.group15_lab2.ShowProfile
 import android.os.Bundle
 import android.view.*
 import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -10,7 +11,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.group15_lab2.*
 import com.example.group15_lab2.MainActivity.MainActivity
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_rating_user.*
 import kotlinx.android.synthetic.main.fragment_show_profile.*
+import java.math.RoundingMode
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 class ShowProfileFragment : Fragment() {
 
@@ -32,6 +37,13 @@ class ShowProfileFragment : Fragment() {
             myViewModel.setUserID(id)
         }
         populateUserView()
+        setUserRatings()
+
+        user_number_ratings.setOnClickListener {
+            val userID = myViewModel.getUserID()
+            val bundle = bundleOf(Pair("group15.lab4.USER_ID",userID))
+            findNavController().navigate(R.id.action_nav_profile_to_showUserRatingFragment,bundle)
+        }
     }
 
     private fun populateUserView() {
@@ -60,6 +72,22 @@ class ShowProfileFragment : Fragment() {
                 .centerInside()
                 .error(R.drawable.user_icon)
                 .into(user_avatar)
+        })
+    }
+
+    private fun setUserRatings(){
+        myViewModel.getUserRatings().observe(viewLifecycleOwner, Observer { ratingList->
+            var ratingAverage:Float=0F
+            if(ratingList.isNotEmpty()) {
+                for (rating in ratingList)
+                    ratingAverage += rating.rating
+                ratingAverage /= ratingList.size
+            }
+            user_rating_value.text = String.format("%.1f",ratingAverage)
+            user_ratingBar.rating = ratingAverage
+            val text = "${ratingList.size} ${resources.getString(R.string.default_review)}"
+            user_number_ratings.text = text
+
         })
     }
 

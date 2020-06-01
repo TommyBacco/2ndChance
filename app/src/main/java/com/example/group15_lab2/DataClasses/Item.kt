@@ -15,5 +15,6 @@ data class Item (
     var description: String? = null,
     var interestedUsers:ArrayList<String> = ArrayList(),
     var status:String? = "On sale",
-    var soldTo:String? = null
+    var soldTo:String? = null,
+    var rated:Boolean = false
 )

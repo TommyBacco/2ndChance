@@ -65,7 +65,7 @@ class LogInFragment : Fragment() {
                 // Successfully signed in
                 FirebaseRepository.setUserAccount(FirebaseAuth.getInstance().currentUser)
                 //Positive Snackbar
-                val snack: Snackbar = Snackbar.make(message_login, "You have been successfully logged", Snackbar.LENGTH_LONG)
+                val snack: Snackbar = Snackbar.make(requireView(), "You have been successfully logged", Snackbar.LENGTH_LONG)
                 val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
                 tv.setTextColor(Color.WHITE)
                 tv.typeface = Typeface.DEFAULT_BOLD
@@ -73,7 +73,7 @@ class LogInFragment : Fragment() {
                 snack.show()
                 findNavController().popBackStack()
             } else {
-                val snack: Snackbar = Snackbar.make(message_login, "Error while connecting :(", Snackbar.LENGTH_LONG)
+                val snack: Snackbar = Snackbar.make(requireView(), "Error while connecting :(", Snackbar.LENGTH_LONG)
                 val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
                 tv.setTextColor(Color.WHITE)
                 tv.typeface = Typeface.DEFAULT_BOLD

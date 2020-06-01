@@ -33,7 +33,7 @@ class OnSaleListVM: ViewModel() {
 
     fun getFilterParams():LiveData<FilterParams> = filterParams
 
-    fun setFilterParams(category:String,from:Int?,to:Int?){
+    fun setFilterParams(category:String,from:Float?,to:Float?){
         val params = FilterParams(category,from,to)
         filterParams.value = params
     }

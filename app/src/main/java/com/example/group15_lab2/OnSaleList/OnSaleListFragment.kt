@@ -117,12 +117,12 @@ class OnSaleListFragment : Fragment() {
                         val from = price_from.text.toString()
                         val int_from =
                             if(from == "") null
-                            else from.toInt()
+                            else from.toFloat()
 
                         val to = price_to.text.toString()
                         val int_to =
                             if(to == "") null
-                            else to.toInt()
+                            else to.toFloat()
 
                         myViewModel.setFilterParams(category,int_from,int_to)
                     }

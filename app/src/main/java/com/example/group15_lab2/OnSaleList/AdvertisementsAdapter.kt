@@ -156,14 +156,14 @@ class AdvertisementsAdapter: RecyclerView.Adapter<AdvertisementsAdapter.ViewHold
     }
 
     fun filterByCategoryAndPrice(filterParams: FilterParams){
-        val min = filterParams.from_price ?: 0
-        val max = filterParams.to_price ?: Int.MAX_VALUE
+        val min = filterParams.from_price ?: 0F
+        val max = filterParams.to_price ?: Float.MAX_VALUE
         val list = mutableListOf<Item>()
 
         for(item in itemsFullList){
-            val price =
-                if(item.price == null || item.price == "") 0
-                else item.price!!.toInt()
+            val price:Float =
+                if(item.price == null || item.price == "" || item.price == "-") 0F
+                else item.price!!.toFloat()
 
             if( (filterParams.category == "ALL" || item.category == filterParams.category) && price >= min && price <= max )
                 list.add(item)

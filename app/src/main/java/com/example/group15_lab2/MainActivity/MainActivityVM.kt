@@ -15,6 +15,8 @@ class MainActivityVM : ViewModel() {
         return user
     }
 
+    fun getUserNickname():String? = user.value?.nickname
+
     private fun loadUser() {
         FirebaseRepository.getUserData().addSnapshotListener { doc, err ->
             if (err != null) {

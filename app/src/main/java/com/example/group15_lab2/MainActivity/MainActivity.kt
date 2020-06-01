@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_nav_advertisements_to_logInFragment
             )
 
-        //TODO INSERT IMAGE AND DATA OF NAV DRAWER
         FirebaseRepository.getUserAccount().observe(this, Observer {
             if(it != null)
                 setUserDataIntoDrawer()
@@ -119,5 +118,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.dispatchTouchEvent(event)
+    }
+
+    fun getUserNickname():String?{
+        return myViewModel.getUserNickname()
     }
 }
