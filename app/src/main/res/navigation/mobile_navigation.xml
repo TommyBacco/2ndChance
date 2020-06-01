@@ -44,7 +44,12 @@
             android:id="@+id/action_nav_itemDetails_to_ratingUserFragment"
             app:destination="@id/ratingUserFragment"
             app:enterAnim="@anim/slide_out"
-            app:popEnterAnim="@anim/slide_in"/>
+            app:popEnterAnim="@anim/slide_in" />
+        <action
+            android:id="@+id/action_nav_itemDetails_to_nav_profile"
+            app:destination="@id/nav_profile"
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
     </fragment>
     <fragment
         android:id="@+id/nav_myItems"
@@ -146,5 +151,4 @@
         android:id="@+id/showUserRatingFragment"
         android:name="com.example.group15_lab2.ShowUserRating.ShowUserRatingFragment"
         android:label="ShowUserRatingFragment" />
-
 </navigation>

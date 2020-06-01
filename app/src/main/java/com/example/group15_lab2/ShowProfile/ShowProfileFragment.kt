@@ -11,11 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.group15_lab2.*
 import com.example.group15_lab2.MainActivity.MainActivity
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_rating_user.*
 import kotlinx.android.synthetic.main.fragment_show_profile.*
-import java.math.RoundingMode
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
 
 class ShowProfileFragment : Fragment() {
 
@@ -23,7 +19,6 @@ class ShowProfileFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_show_profile,container,false)
     }
 
@@ -53,7 +48,7 @@ class ShowProfileFragment : Fragment() {
                 user_fullname.text = u.fullName
                 user_address.text = u.address
                 user_telephone.text = u.telephone
-
+                setHasOptionsMenu(true)
             } else {
                 // Fields not shown for privacy reasons
                 user_fullname.visibility = View.GONE

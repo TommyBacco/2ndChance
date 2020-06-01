@@ -51,6 +51,7 @@
     <string name="currency">€</string>
     <string name="itemStatus">Status: </string>
     <string name="default_review">reviews</string>
+    <string name="show_seller_profile">Show seller profile</string>
 
     <string name="price_from">From</string>
     <string name="price_to">To</string>

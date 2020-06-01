@@ -30,7 +30,6 @@ class ItemDetailsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_item_details,container,false)
     }
 
@@ -94,6 +93,11 @@ class ItemDetailsFragment : Fragment() {
            findNavController().navigate(R.id.action_nav_itemDetails_to_iterestedUserListFragment,bundle)
         }
 
+        item_show_seller_profile.setOnClickListener {
+            val bundle = bundleOf(Pair("group15.lab3.USER_ID",itemOwner))
+            findNavController().navigate(R.id.action_nav_itemDetails_to_nav_profile,bundle)
+        }
+
     }
 
     private fun populateItemViews() {
@@ -133,9 +137,11 @@ class ItemDetailsFragment : Fragment() {
                 bn_show_interested.visibility = View.GONE
                 item_interested_users.visibility = View.GONE
                 fab_item_interested.visibility = View.VISIBLE
-
+                item_show_seller_profile.visibility = View.VISIBLE
             } else{
+                setHasOptionsMenu(true)
                 fab_item_interested.visibility = View.GONE
+                item_show_seller_profile.visibility = View.GONE
                 bn_show_interested.visibility = View.VISIBLE
                 item_interested_users.visibility = View.VISIBLE
                 val numOfInterest = i.interestedUsers.size
