@@ -30,7 +30,6 @@ class ItemDetailsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_item_details,container,false)
     }
 
@@ -140,6 +139,7 @@ class ItemDetailsFragment : Fragment() {
                 fab_item_interested.visibility = View.VISIBLE
                 item_show_seller_profile.visibility = View.VISIBLE
             } else{
+                setHasOptionsMenu(true)
                 fab_item_interested.visibility = View.GONE
                 item_show_seller_profile.visibility = View.GONE
                 bn_show_interested.visibility = View.VISIBLE
