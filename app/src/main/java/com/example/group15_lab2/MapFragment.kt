@@ -40,6 +40,20 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(torino).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomLevel))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(torino))
+        mMap.setOnMarkerClickListener {
+
+            true
+        }
+
+        setMapLongClick(mMap)
     }
 
+    private fun setMapLongClick(map: GoogleMap) {
+        map.setOnMapLongClickListener { latLng ->
+            map.addMarker(
+                MarkerOptions()
+                    .position(latLng)
+            )
+        }
+    }
 }
