@@ -54,7 +54,7 @@ class EditProfileFragment : Fragment() {
 
         (activity as MainActivity).setToolbarTitle("Edit Profile")
 
-        user_address_edit.setOnClickListener(){
+        MapButton.setOnClickListener(){
 
             findNavController().navigate(R.id.action_nav_editProfile_to_mapFragment)
 

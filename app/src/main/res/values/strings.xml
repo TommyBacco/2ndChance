@@ -28,6 +28,8 @@
     <string name="show_interested_button">Show all</string>
     <string name="filter_button">Edit</string>
     <string name="review_button">Review User</string>
+    <string name="dropped_pin">Position</string>
+    <string name="api_key">AIzaSyDH281vutpjpPLM7aWG8vGGRD-EMU_QfZU</string>
 
     <string name="menu_gallery">Select an image from the gallery</string>
     <string name="menu_camera">Use the camera to take a picture</string>
