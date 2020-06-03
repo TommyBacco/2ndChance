@@ -18,8 +18,10 @@
     <string name="profile_nickname">Nickname</string>
     <string name="profile_email">email@address.com</string>
     <string name="profile_area">Area of interest</string>
-    <string name="profile_address">Address</string>
+    <string name="profile_address">Private address</string>
     <string name="profile_telephone">Telephone number</string>
+    <string name="user_show_position">Show position on the map</string>
+    <string name="user_search_position">Search position on the map</string>
 
     <string name="pencil_button">Edit</string>
     <string name="save_button">Save</string>
@@ -75,6 +77,8 @@
 
     <string name="login_message">login in progress…</string>
     <string name="login_message_error">Please, check your connection and then try again</string>
+
+    <string name="map_searchBar">Enter Address, City or Zip Code</string>
 
 
     <string-array name="Categories">

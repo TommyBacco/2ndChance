@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/search_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white"
+        android:id="@+id/myRelativeLayout">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_search"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="4dp"
+            android:layout_centerVertical="true"/>
+
+        <EditText
+            android:id="@+id/input_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:hint="@string/map_searchBar"
+            android:layout_marginStart="4dp"
+            android:inputType="text"
+            android:layout_toEndOf="@id/imageView"
+            android:imeOptions="actionSearch"/>
+
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_find_my_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/fab_margin"
+        app:backgroundTint="@color/colorAccent"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/fab_save"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_gps"
+        android:visibility="visible"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/newItem"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_done_white"
+        android:visibility="visible"/>
+
+</RelativeLayout>

@@ -71,7 +71,7 @@ class OnSaleListFragment : Fragment() {
 
         val searchItem = menu.findItem(R.id.search_button)
         val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
-        searchView.imeOptions = EditorInfo.IME_ACTION_DONE
+        searchView.imeOptions = EditorInfo.IME_ACTION_SEARCH
         searchView.queryHint = "Search for title, category..."
 
         searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{

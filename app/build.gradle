@@ -96,4 +96,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+
+    //GoogleMaps
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
 }

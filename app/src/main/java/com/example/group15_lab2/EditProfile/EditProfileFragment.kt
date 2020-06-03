@@ -37,6 +37,9 @@ class EditProfileFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 10
     private val REQUEST_SELECT_GALLERY_PHOTO = 20
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 21
+    private val REQUEST_LOCATION_PERMISSION = 5000
+    private val FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
+    private val COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION
 
     private val myViewModel: EditProfileVM by viewModels()
     private lateinit var cameraPhotoPath: String
@@ -86,6 +89,10 @@ class EditProfileFragment : Fragment() {
 
         rotate_button.setOnClickListener {
             myViewModel.rotateImage()
+        }
+
+        user_search_position.setOnClickListener {
+            checkPermission()
         }
 
         enableEditMode()
@@ -217,6 +224,20 @@ class EditProfileFragment : Fragment() {
                     ).show()
                 }
             }
+            REQUEST_LOCATION_PERMISSION ->{
+                if(grantResults.isNotEmpty()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                    navigateToMap()
+                }
+                else {
+                    // permission denied, boo!
+                    Toast.makeText(
+                        requireActivity(), "Permission is needed\nto to access the map",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
@@ -327,6 +348,20 @@ class EditProfileFragment : Fragment() {
             startBitmap, 0, 0, startBitmap.width, startBitmap.height,
             matrix, true
         )
+    }
+
+    private fun navigateToMap(){
+        findNavController().navigate(R.id.action_nav_editProfile_to_setMapPositionFragment)
+    }
+
+    private fun checkPermission(){
+        val permissions = arrayOf(FINE_LOCATION,COARSE_LOCATION)
+
+        if (ContextCompat.checkSelfPermission(requireActivity(), FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(requireActivity(), COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            requestPermissions(permissions,REQUEST_LOCATION_PERMISSION)
+        else
+            navigateToMap()
     }
 
 }

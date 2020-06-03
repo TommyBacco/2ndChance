@@ -2,6 +2,7 @@ package com.example.group15_lab2.EditProfile
 
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,10 +24,22 @@ class EditProfileVM : ViewModel() {
     private fun loadUser() {
 
         FirebaseRepository.getUserData()
+            .addSnapshotListener { doc, err ->
+            if (err != null) {
+                Log.d("ERROR-TAG", "Listen ShowProfile failed")
+                user.value = User()
+            } else {
+                user.value = doc?.toObject(User::class.java) ?: User()
+            }
+        }
+/*
+        FirebaseRepository.getUserData()
             .get()
             .addOnSuccessListener { res ->
                 user.value = res.toObject(User::class.java) ?: User()
             }
+            */
+
     }
 
     fun getImage() : LiveData<Bitmap> {

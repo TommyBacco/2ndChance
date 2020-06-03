@@ -277,10 +277,10 @@
                         android:id="@+id/item_location_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
                         android:drawableStart="@drawable/ic_area_of_interest"
                         android:drawablePadding="4dp"
                         android:hint="@string/default_location"
+                        android:layout_marginBottom="8dp"
                         android:imeOptions="actionDone"
                         android:inputType="textCapWords"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -288,6 +288,7 @@
 
 
                 </com.google.android.material.textfield.TextInputLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

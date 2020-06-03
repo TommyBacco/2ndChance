@@ -1,7 +1,10 @@
 package com.example.group15_lab2.ShowProfile
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -16,6 +19,9 @@ import kotlinx.android.synthetic.main.fragment_show_profile.*
 class ShowProfileFragment : Fragment() {
 
     private val myViewModel: ShowProfileVM by viewModels()
+    private val REQUEST_LOCATION_PERMISSION = 5000
+    private val FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION
+    private val COARSE_LOCATION = android.Manifest.permission.ACCESS_COARSE_LOCATION
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -38,6 +44,10 @@ class ShowProfileFragment : Fragment() {
             val userID = myViewModel.getUserID()
             val bundle = bundleOf(Pair("group15.lab4.USER_ID",userID))
             findNavController().navigate(R.id.action_nav_profile_to_showUserRatingFragment,bundle)
+        }
+
+        user_show_position.setOnClickListener {
+            checkPermission()
         }
     }
 
@@ -98,6 +108,46 @@ class ShowProfileFragment : Fragment() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun navigateToMap(){
+        findNavController().navigate(R.id.action_nav_profile_to_showMapFragment)
+    }
+
+    private fun checkPermission(){
+        val permissions = arrayOf(FINE_LOCATION,COARSE_LOCATION)
+
+        if (ContextCompat.checkSelfPermission(requireActivity(), FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(requireActivity(), COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            requestPermissions(permissions,REQUEST_LOCATION_PERMISSION)
+        else
+            navigateToMap()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode){
+            REQUEST_LOCATION_PERMISSION ->{
+                if(grantResults.isNotEmpty()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                    navigateToMap()
+                }
+                else {
+                    // permission denied, boo!
+                    Toast.makeText(
+                        requireActivity(), "Permission is needed\nto to access the map",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+
         }
     }
 }
