@@ -82,7 +82,15 @@
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.example.group15_lab2.LogInFragment"
-        android:label="LogInFragment" />
+        android:label="LogInFragment" >
+
+        <action
+            android:id="@+id/action_logInFragment_to_nav_editProfile2"
+            app:destination="@id/nav_editProfile" />
+    </fragment>
+
+
+
     <fragment
         android:id="@+id/nav_advertisements"
         android:name="com.example.group15_lab2.OnSaleList.OnSaleListFragment"
@@ -99,6 +107,7 @@
             app:destination="@id/logInFragment"
             app:enterAnim="@anim/fade_in"
             app:popEnterAnim="@anim/fade_in" />
+
     </fragment>
     <fragment
         android:id="@+id/iterestedUserListFragment"

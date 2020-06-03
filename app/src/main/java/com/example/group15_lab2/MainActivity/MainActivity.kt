@@ -54,7 +54,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_myItems,
                 R.id.nav_advertisements,
                 R.id.nav_itemsOfInterest,
-                R.id.nav_boughtItems
+                R.id.nav_boughtItems,
+                R.id.logInFragment
             ), drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)

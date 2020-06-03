@@ -42,17 +42,32 @@ class LogInFragment : Fragment() {
 
         (activity as MainActivity).setToolbarTitle("Log-IN")
 
-        logIn()
+        logOut()
 
         bn_login.setOnClickListener {
             logIn()
         }
+
+
+        /*bn_logout.setOnClickListener {
+            logOut()
+
+        }*/
+
     }
 
     private fun logIn(){
+        message_login.visibility=View.VISIBLE
+        bn_login.visibility=View.GONE
         startActivityForResult(
-            AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers).build(),
+            AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).setAvailableProviders(providers).build(),
             AUTH_REQUEST_CODE)
+    }
+
+    private fun logOut(){
+        FirebaseAuth.getInstance().signOut()
+        bn_login.visibility=View.VISIBLE
+        message_login.visibility=View.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -65,12 +80,14 @@ class LogInFragment : Fragment() {
                 // Successfully signed in
                 FirebaseRepository.setUserAccount(FirebaseAuth.getInstance().currentUser)
                 //Positive Snackbar
+
                 val snack: Snackbar = Snackbar.make(requireView(), "You have been successfully logged", Snackbar.LENGTH_LONG)
                 val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
                 tv.setTextColor(Color.WHITE)
                 tv.typeface = Typeface.DEFAULT_BOLD
                 snack.view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.editedItem))
                 snack.show()
+
                 findNavController().popBackStack()
             } else {
                 val snack: Snackbar = Snackbar.make(requireView(), "Error while connecting :(", Snackbar.LENGTH_LONG)

@@ -24,5 +24,9 @@
             android:id="@+id/nav_boughtItems"
             android:icon="@drawable/ic_bought"
             android:title="@string/menu_boughtItems" />
+        <item
+            android:id="@+id/logInFragment"
+            android:icon="@drawable/ic_exit_to_app_black"
+            android:title="@string/logout"/>
     </group>
 </menu>

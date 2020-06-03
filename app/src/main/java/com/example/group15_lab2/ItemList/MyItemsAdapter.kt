@@ -98,7 +98,6 @@ class MyItemsAdapter: RecyclerView.Adapter<MyItemsAdapter.ViewHolder>() {
                     else -> Color.parseColor("#BBDEFB") //Blue
                 }
             card.setBackgroundColor(color)
-
         }
     }
 
