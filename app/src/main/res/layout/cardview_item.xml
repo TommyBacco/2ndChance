@@ -104,12 +104,24 @@
             android:id="@+id/cardview_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cardview_price"
+            android:layout_below="@+id/cardview_location"
             android:layout_marginLeft="4dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:textStyle="italic"
             android:hint="@string/default_ExpireDate"
+            android:layout_marginBottom="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+        <TextView
+            android:id="@+id/cardview_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardview_price"
+            android:layout_marginLeft="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:hint="@string/default_location"
             android:layout_marginBottom="4dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
@@ -127,7 +139,7 @@
             android:id="@+id/bookmark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/cardview_price"
+            android:layout_alignBaseline="@id/cardview_location"
             android:layout_alignParentEnd="true"
             app:srcCompat="@drawable/ic_bookmark_border"
             android:contentDescription="@string/cardview_bookmark"
@@ -137,7 +149,7 @@
             android:id="@+id/bought"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignBaseline="@id/cardview_price"
+            android:layout_alignBaseline="@id/cardview_location"
             android:layout_alignParentEnd="true"
             app:srcCompat="@drawable/ic_bought"
             android:contentDescription="@string/cardview_bought"

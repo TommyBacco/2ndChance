@@ -219,12 +219,44 @@
                 android:id="@+id/item_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:drawableStart="@drawable/ic_area_of_interest"
                 android:drawablePadding="4dp"
                 android:hint="@string/default_location"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/myColorPrimaryText" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp">
+
+
+                <TextView
+                    android:id="@+id/item_show_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:textColor="@android:color/black"
+                    android:drawableEnd="@drawable/ic_arrow_forward"
+                    android:layout_marginStart="6dp"
+                    android:layout_centerVertical="true"
+                    android:hint="@string/user_show_position"
+                    android:layout_toEndOf="@id/ic_show_map"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="4dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                <ImageView
+                    android:id="@+id/ic_show_map"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    app:srcCompat="@drawable/ic_show_map" />
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/item_delivery"

@@ -116,6 +116,15 @@ object FirebaseRepository {
 
     private fun saveItem(item: Item?) {
         subscribeToTopic(item?.ID ?: "")
+
+        val location = item?.location
+
+        item?.itemLocation =
+            if(location == user_position.value?.locality)
+                user_position.value ?: LocationPosition()
+            else
+                LocationPosition(location)
+
         db.collection("Items")
             .document("item:" + item?.ID)
             .set(item ?: Item())

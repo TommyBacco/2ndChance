@@ -75,6 +75,7 @@ class MyItemsAdapter: RecyclerView.Adapter<MyItemsAdapter.ViewHolder>() {
         private val category:TextView = v.findViewById(R.id.cardview_category)
         private val status:TextView = v.findViewById(R.id.cardview_status)
         private val card:View =v.findViewById(R.id.cardview)
+        private val location:TextView = v.findViewById(R.id.cardview_location)
 
         fun bind(item: Item){
             name.text = item.title
@@ -83,6 +84,7 @@ class MyItemsAdapter: RecyclerView.Adapter<MyItemsAdapter.ViewHolder>() {
             currency.text = item.currency
             category.text = item.category
             status.text = item.status
+            location.text = item.location
 
             Picasso.get()
                 .load(item.imageURL.toUri())

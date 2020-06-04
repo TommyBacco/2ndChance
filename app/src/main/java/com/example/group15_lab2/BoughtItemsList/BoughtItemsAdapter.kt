@@ -83,6 +83,7 @@ class BoughtItemsAdapter: RecyclerView.Adapter<BoughtItemsAdapter.ViewHolder>() 
         private val category: TextView = v.findViewById(R.id.cardview_category)
         private val status: TextView = v.findViewById(R.id.cardview_status)
         private val rating_done:ImageView = v.findViewById(R.id.cardview_rating_done)
+        private val location:TextView = v.findViewById(R.id.cardview_location)
 
         fun bind(item: Item) {
             name.text = item.title
@@ -93,6 +94,7 @@ class BoughtItemsAdapter: RecyclerView.Adapter<BoughtItemsAdapter.ViewHolder>() 
             category.text = item.category
             status.text = item.status
             bn_review.visibility = View.VISIBLE
+            location.text = item.location
 
             if(item.rated)
                 rating_done.visibility = View.VISIBLE

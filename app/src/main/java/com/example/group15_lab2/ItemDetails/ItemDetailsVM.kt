@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.group15_lab2.DataClasses.Item
 import com.example.group15_lab2.DataClasses.ItemFABStatus
+import com.example.group15_lab2.DataClasses.LocationPosition
 import com.example.group15_lab2.FirebaseRepository
 
 class ItemDetailsVM : ViewModel() {
@@ -30,6 +31,8 @@ class ItemDetailsVM : ViewModel() {
     fun getInterest():LiveData<ItemFABStatus>{
         return fabStatus
     }
+
+    fun getItemLocation(): LocationPosition? = item.value?.itemLocation
 
     private fun loadItem() {
         FirebaseRepository.getItemData(itemID.value).addSnapshotListener { doc, err ->

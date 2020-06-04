@@ -114,9 +114,9 @@ class ShowProfileFragment : Fragment() {
     private fun navigateToMap(){
         val location = myViewModel.getMyLocation()
         val bundle = bundleOf(
-            Pair("group15.lab4.USER_LOCALITY",location?.locality),
-            Pair("group15.lab4.USER_LATITUDE",location?.latitude),
-            Pair("group15.lab4.USER_LONGITUDE",location?.longitude)
+            Pair("group15.lab4.LOCALITY",location?.locality),
+            Pair("group15.lab4.LATITUDE",location?.latitude),
+            Pair("group15.lab4.LONGITUDE",location?.longitude)
         )
         findNavController().navigate(R.id.action_nav_profile_to_showMapFragment,bundle)
     }
@@ -152,8 +152,6 @@ class ShowProfileFragment : Fragment() {
                     ).show()
                 }
             }
-
-
         }
     }
 }

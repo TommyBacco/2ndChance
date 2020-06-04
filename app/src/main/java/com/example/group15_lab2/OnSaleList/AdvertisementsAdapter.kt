@@ -77,6 +77,7 @@ class AdvertisementsAdapter: RecyclerView.Adapter<AdvertisementsAdapter.ViewHold
         private val status:TextView = v.findViewById(R.id.cardview_status)
         private val ic_bookmark:ImageView = v.findViewById(R.id.bookmark)
         private val ic_bought:ImageView = v.findViewById(R.id.bought)
+        private val location:TextView = v.findViewById(R.id.cardview_location)
 
         fun bind(item: Item){
             name.text = item.title
@@ -87,6 +88,7 @@ class AdvertisementsAdapter: RecyclerView.Adapter<AdvertisementsAdapter.ViewHold
             ic_bought.visibility = View.GONE
             category.text = item.category
             status.text = item.status
+            location.text = item.location
 
             Picasso.get()
                 .load(item.imageURL.toUri())

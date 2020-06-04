@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.group15_lab2.DataClasses.Item
+import com.example.group15_lab2.DataClasses.LocationPosition
 import com.example.group15_lab2.DataClasses.User
 import com.example.group15_lab2.FirebaseRepository
 import java.io.ByteArrayOutputStream
@@ -39,13 +40,17 @@ class ItemEditVM : ViewModel() {
 
     fun getInterestedUsers():LiveData<List<User>> = interestedUsers
 
+    fun getItemLocation(): LiveData<LocationPosition>{
+        return FirebaseRepository.getUserPosition()
+    }
+
     private fun loadItem() {
 
         FirebaseRepository.getItemData(itemID.value)
             .get()
             .addOnSuccessListener { res ->
                 item.value = res.toObject(Item::class.java) ?: Item()
-
+                FirebaseRepository.setUserPosition(item.value?.itemLocation ?: LocationPosition())
                 if(itemID.value == null){
                     itemID.value = UUID.randomUUID().toString()
                     item.value?.ID = itemID.value
@@ -108,6 +113,10 @@ class ItemEditVM : ViewModel() {
     fun setUserToSoldItem(position:Int){
         val user = interestedUsers.value?.get(position)
         item.value?.soldTo = user?.ID ?: "None"
+    }
+
+    fun editItemLocation(location:String){
+        FirebaseRepository.setUserPosition(LocationPosition(location))
     }
 
     fun saveData(): JsonObjectRequest? {

@@ -12,4 +12,17 @@
         android:id="@+id/mapAPI"
         android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_road_to_road"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/colorAccent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:fabSize="auto"
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/ic_road_to_road"
+        android:visibility="gone"/>
+
 </RelativeLayout>

@@ -1,11 +1,13 @@
 package com.example.group15_lab2.ItemDetails
 
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
@@ -23,6 +25,10 @@ import kotlinx.android.synthetic.main.fragment_item_details.*
 class ItemDetailsFragment : Fragment() {
 
     private val myViewModel: ItemDetailsVM by viewModels()
+    private val REQUEST_LOCATION_PERMISSION = 5000
+    private val FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION
+    private val COARSE_LOCATION = android.Manifest.permission.ACCESS_COARSE_LOCATION
+
     private var itemID:String? = null
     private var isSoldToMe:Boolean = false
     private var itemOwner:String? = null
@@ -96,6 +102,10 @@ class ItemDetailsFragment : Fragment() {
         item_show_seller_profile.setOnClickListener {
             val bundle = bundleOf(Pair("group15.lab3.USER_ID",itemOwner))
             findNavController().navigate(R.id.action_nav_itemDetails_to_nav_profile,bundle)
+        }
+
+        item_show_position.setOnClickListener {
+            checkPermission()
         }
 
     }
@@ -207,6 +217,56 @@ class ItemDetailsFragment : Fragment() {
         tv.typeface = Typeface.DEFAULT_BOLD
         snack.view.setBackgroundColor(ContextCompat.getColor(requireContext(), background))
         snack.show()
+    }
+
+
+    private fun navigateToMap(){
+        val location = myViewModel.getItemLocation()
+        val userLocation = (activity as MainActivity).getUserLocation()
+        val bundle = bundleOf(
+            Pair("group15.lab4.LOCALITY",location?.locality),
+            Pair("group15.lab4.LATITUDE",location?.latitude),
+            Pair("group15.lab4.LONGITUDE",location?.longitude),
+            Pair("group15.lab4.IS_ITEM",true),
+            Pair("group15.lab4.USER_LOCALITY",userLocation?.locality),
+            Pair("group15.lab4.USER_LATITUDE",userLocation?.latitude),
+            Pair("group15.lab4.USER_LONGITUDE",userLocation?.longitude)
+        )
+        findNavController().navigate(R.id.action_nav_itemDetails_to_showMapFragment,bundle)
+    }
+
+    private fun checkPermission(){
+        val permissions = arrayOf(FINE_LOCATION,COARSE_LOCATION)
+
+        if (ContextCompat.checkSelfPermission(requireActivity(), FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(requireActivity(), COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            requestPermissions(permissions,REQUEST_LOCATION_PERMISSION)
+        else
+            navigateToMap()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode){
+            REQUEST_LOCATION_PERMISSION ->{
+                if(grantResults.isNotEmpty()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                    navigateToMap()
+                }
+                else {
+                    // permission denied, boo!
+                    Toast.makeText(
+                        requireActivity(), "Permission is needed\nto to access the map",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 
 }

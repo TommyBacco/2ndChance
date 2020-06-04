@@ -74,6 +74,7 @@ class ItemsOfInterestAdapter: RecyclerView.Adapter<ItemsOfInterestAdapter.ViewHo
         private val status: TextView = v.findViewById(R.id.cardview_status)
         private val card: View = v.findViewById(R.id.cardview)
         private val bookmark:ImageView = v.findViewById(R.id.bookmark)
+        private val location:TextView = v.findViewById(R.id.cardview_location)
 
         fun bind(item: Item) {
             name.text = item.title
@@ -84,6 +85,7 @@ class ItemsOfInterestAdapter: RecyclerView.Adapter<ItemsOfInterestAdapter.ViewHo
             category.text = item.category
             status.text = item.status
             bookmark.visibility = View.VISIBLE
+            location.text = item.location
 
             Picasso.get()
                 .load(item.imageURL.toUri())

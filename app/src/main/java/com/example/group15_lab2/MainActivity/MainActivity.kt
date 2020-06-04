@@ -21,6 +21,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.group15_lab2.DataClasses.LocationPosition
 import com.example.group15_lab2.FirebaseRepository
 import com.example.group15_lab2.R
 import com.google.android.material.navigation.NavigationView
@@ -122,5 +123,9 @@ class MainActivity : AppCompatActivity() {
 
     fun getUserNickname():String?{
         return myViewModel.getUserNickname()
+    }
+
+    fun getUserLocation():LocationPosition?{
+        return myViewModel.getUserLocation()
     }
 }

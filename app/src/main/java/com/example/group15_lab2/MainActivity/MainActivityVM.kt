@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.group15_lab2.DataClasses.LocationPosition
 import com.example.group15_lab2.DataClasses.User
 import com.example.group15_lab2.FirebaseRepository
 
@@ -16,6 +17,8 @@ class MainActivityVM : ViewModel() {
     }
 
     fun getUserNickname():String? = user.value?.nickname
+
+    fun getUserLocation():LocationPosition? = user.value?.userLocation
 
     private fun loadUser() {
         FirebaseRepository.getUserData().addSnapshotListener { doc, err ->

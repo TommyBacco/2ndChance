@@ -14,6 +14,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
@@ -50,6 +51,9 @@ class ItemEditFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 10
     private val REQUEST_SELECT_GALLERY_PHOTO = 20
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 21
+    private val REQUEST_LOCATION_PERMISSION = 5000
+    private val FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
+    private val COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -190,6 +194,7 @@ class ItemEditFragment : Fragment() {
 
         populateItemViews()
         enableEditMode()
+        listenForNewLocation()
 
         myViewModel.getImage().observe(viewLifecycleOwner, Observer { bitmap ->
             if (!myViewModel.isImageOld()){
@@ -202,6 +207,14 @@ class ItemEditFragment : Fragment() {
             val bundle = bundleOf(Pair("group15.lab3.ITEM_ID",itemID))
             findNavController().navigate(R.id.action_nav_itemEdit_to_iterestedUserListFragment,bundle)
         }
+
+        myViewModel.getItemLocation().observe(viewLifecycleOwner, Observer {position ->
+            item_location_edit.setText(position.locality)
+        })
+
+        item_search_position.setOnClickListener {
+            checkPermission()
+        }
     }
 
 
@@ -210,7 +223,7 @@ class ItemEditFragment : Fragment() {
             item_title_edit.setText(item.title)
             item_price_edit.setText(item.price)
             item_expire_date_edit.setText(item.expireDate)
-            item_location_edit.setText(item.location)
+            //item_location_edit.setText(item.location)
             item_description_edit.setText(item.description)
 
             populateCategorySpinners(item.category, item.subcategory)
@@ -358,6 +371,23 @@ class ItemEditFragment : Fragment() {
         }
     }
 
+    private fun listenForNewLocation(){
+        item_location_edit.setOnEditorActionListener { _, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_DONE)
+                myViewModel.editItemLocation(item_location_edit.text.toString())
+            return@setOnEditorActionListener false
+        }
+
+        item_location_edit.setOnFocusChangeListener { v, hasFocus ->
+            if(!hasFocus)
+                myViewModel.editItemLocation(item_location_edit.text.toString())
+        }
+
+        item_location_endIcon_edit.setEndIconOnClickListener {
+            myViewModel.editItemLocation("")
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_save, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -500,6 +530,20 @@ class ItemEditFragment : Fragment() {
                     ).show()
                 }
             }
+            REQUEST_LOCATION_PERMISSION ->{
+                if(grantResults.isNotEmpty()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                    navigateToMap()
+                }
+                else {
+                    // permission denied, boo!
+                    Toast.makeText(
+                        requireActivity(), "Permission is needed\nto to access the map",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
@@ -610,6 +654,22 @@ class ItemEditFragment : Fragment() {
             startBitmap, 0, 0, startBitmap.width, startBitmap.height,
             matrix, true
         )
+    }
+
+
+    private fun navigateToMap(){
+        val bundle = bundleOf(Pair("group15.lab4.CURRENT_POSITION",item_location_edit.text.toString()))
+        findNavController().navigate(R.id.action_nav_itemEdit_to_setMapPositionFragment,bundle)
+    }
+
+    private fun checkPermission(){
+        val permissions = arrayOf(FINE_LOCATION,COARSE_LOCATION)
+
+        if (ContextCompat.checkSelfPermission(requireActivity(), FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(requireActivity(), COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            requestPermissions(permissions,REQUEST_LOCATION_PERMISSION)
+        else
+            navigateToMap()
     }
 
 }
