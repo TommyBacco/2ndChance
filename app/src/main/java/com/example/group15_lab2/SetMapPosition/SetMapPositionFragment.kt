@@ -31,7 +31,7 @@ class SetMapPositionFragment:Fragment() {
 
     private lateinit var map:GoogleMap
     private lateinit var mapFragment: SupportMapFragment
-    private val DEFAULT_ZOOM = 12f
+    private val DEFAULT_ZOOM = 15f
     private val myViewModel: SetMapPositionVM by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -53,6 +53,7 @@ class SetMapPositionFragment:Fragment() {
             map.isMyLocationEnabled = true
             map.uiSettings.isMapToolbarEnabled = false
             map.uiSettings?.isMyLocationButtonEnabled = false
+            setMapClickListener()
             geolocate(myViewModel.getCurrentPosition())
         }
 
@@ -72,7 +73,13 @@ class SetMapPositionFragment:Fragment() {
             myViewModel.savePosition()
             findNavController().popBackStack()
         }
+    }
 
+    private fun setMapClickListener(){
+        map.setOnMapClickListener {latLng ->
+            val myPosition = LocationPosition("Click position",latLng.latitude,latLng.longitude)
+            geolocate(myPosition)
+        }
     }
 
     private fun geolocate(currentLocation:LocationPosition? = null){

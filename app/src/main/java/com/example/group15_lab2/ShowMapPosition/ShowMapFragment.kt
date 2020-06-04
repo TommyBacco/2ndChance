@@ -26,7 +26,7 @@ class ShowMapFragment:Fragment() {
 
     private lateinit var map:GoogleMap
     private lateinit var mapFragment: SupportMapFragment
-    private val DEFAULT_ZOOM = 12f
+    private val DEFAULT_ZOOM = 15f
     private lateinit var myViewModel:ShowMapVM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
