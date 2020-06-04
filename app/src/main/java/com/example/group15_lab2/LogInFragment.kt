@@ -48,7 +48,6 @@ class LogInFragment : Fragment() {
             logIn()
         }
 
-
         /*bn_logout.setOnClickListener {
             logOut()
 
@@ -65,9 +64,10 @@ class LogInFragment : Fragment() {
     }
 
     private fun logOut(){
-        FirebaseAuth.getInstance().signOut()
-        bn_login.visibility=View.VISIBLE
-        message_login.visibility=View.GONE
+     FirebaseAuth.getInstance().signOut()
+     AuthUI.getInstance().signOut(activity as MainActivity)
+     bn_login.visibility=View.VISIBLE
+     message_login.visibility=View.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

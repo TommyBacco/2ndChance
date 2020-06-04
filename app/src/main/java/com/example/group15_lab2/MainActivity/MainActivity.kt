@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
             )
 
         FirebaseRepository.getUserAccount().observe(this, Observer {
+            myViewModel.setUser()
             if(it != null)
                 setUserDataIntoDrawer()
         })
@@ -84,7 +85,6 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
     private fun setUserDataIntoDrawer() {
         val user_fullname_view: TextView = headView.findViewById(R.id.nav_user_fullName)
         val user_nickname_view: TextView = headView.findViewById(R.id.nav_user_nickname)

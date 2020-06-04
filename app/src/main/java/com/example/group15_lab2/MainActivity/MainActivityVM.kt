@@ -1,15 +1,13 @@
 package com.example.group15_lab2.MainActivity
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.group15_lab2.DataClasses.User
 import com.example.group15_lab2.FirebaseRepository
 
 class MainActivityVM : ViewModel() {
 
-    private val user: MutableLiveData<User> by lazy { MutableLiveData<User>().also { loadUser() } }
+    private val user: MutableLiveData<User> = MutableLiveData()
 
     fun getUserData(): LiveData<User> {
         return user
@@ -26,5 +24,9 @@ class MainActivityVM : ViewModel() {
                 user.value = doc?.toObject(User::class.java) ?: User()
             }
         }
+    }
+
+    fun setUser(){
+        user.apply{loadUser()}
     }
 }
