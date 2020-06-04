@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.group15_lab2.DataClasses.LocationPosition
 import com.example.group15_lab2.DataClasses.User
 import com.example.group15_lab2.FirebaseRepository
 import java.io.ByteArrayOutputStream
@@ -21,25 +22,17 @@ class EditProfileVM : ViewModel() {
         return user
     }
 
-    private fun loadUser() {
+    fun getUserLocation(): LiveData<LocationPosition>{
+        return FirebaseRepository.getUserPosition()
+    }
 
-        FirebaseRepository.getUserData()
-            .addSnapshotListener { doc, err ->
-            if (err != null) {
-                Log.d("ERROR-TAG", "Listen ShowProfile failed")
-                user.value = User()
-            } else {
-                user.value = doc?.toObject(User::class.java) ?: User()
-            }
-        }
-/*
+    private fun loadUser() {
         FirebaseRepository.getUserData()
             .get()
             .addOnSuccessListener { res ->
                 user.value = res.toObject(User::class.java) ?: User()
+                FirebaseRepository.setUserPosition(user.value?.userLocation ?: LocationPosition())
             }
-            */
-
     }
 
     fun getImage() : LiveData<Bitmap> {
@@ -67,9 +60,13 @@ class EditProfileVM : ViewModel() {
             "nickname" -> user.value?.nickname=value
             "email" -> user.value?.email=value
             "address" -> user.value?.address=value
-            "location" -> user.value?.location=value
+            "location" -> user.value?.location = value
             "telephone" -> user.value?.telephone=value
         }
+    }
+
+    fun editUserLocation(location:String){
+       FirebaseRepository.setUserPosition(LocationPosition(location))
     }
 
     fun saveData(){

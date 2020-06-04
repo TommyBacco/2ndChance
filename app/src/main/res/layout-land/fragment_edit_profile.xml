@@ -121,6 +121,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/user_location_ednIcon_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:endIconMode="clear_text"
@@ -139,6 +140,37 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/user_search_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:drawableEnd="@drawable/ic_arrow_forward"
+                    android:layout_centerVertical="true"
+                    android:hint="@string/user_search_position"
+                    android:layout_toEndOf="@id/ic_show_map"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="4dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                <ImageView
+                    android:id="@+id/ic_show_map"
+                    android:layout_width="30dp"
+                    android:layout_height="22dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    app:srcCompat="@drawable/ic_search_map" />
+
+            </RelativeLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

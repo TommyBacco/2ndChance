@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.group15_lab2.DataClasses.LocationPosition
 import com.example.group15_lab2.DataClasses.Rating
 import com.example.group15_lab2.DataClasses.User
 import com.example.group15_lab2.FirebaseRepository
@@ -19,12 +20,13 @@ class ShowProfileVM : ViewModel() {
         userID=id
     }
 
-
     fun getUserData(): LiveData<User> {
         return user
     }
 
     fun getUserRatings():LiveData<List<Rating>> = userRatings
+
+    fun getMyLocation():LocationPosition? = user.value?.userLocation
 
     private fun loadUser() {
         FirebaseRepository.getUserData(userID).addSnapshotListener { doc, err ->

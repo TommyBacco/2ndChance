@@ -7,6 +7,7 @@ import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.group15_lab2.DataClasses.Item
+import com.example.group15_lab2.DataClasses.LocationPosition
 import com.example.group15_lab2.DataClasses.Rating
 import com.example.group15_lab2.DataClasses.User
 import com.google.firebase.auth.FirebaseUser
@@ -24,6 +25,14 @@ object FirebaseRepository {
 
     private const val googleApisURL = "https://fcm.googleapis.com/fcm/send"
     private const val serverKey = "AAAA_-rvyXk:APA91bGyvWuLQCBYRNkquB4-ZJCeLpggy0tJaKlcHLGcPv3DHxBkaro3G515BuNoXaVZj7GcudN3G2p9EUFZM002oqfd469SAcVxcsP5Cqyq70awOVAMWcNDY4PWtgdHFpyu14tqxQd1"
+
+    private val user_position : MutableLiveData<LocationPosition> by lazy {MutableLiveData<LocationPosition>()}
+
+    fun setUserPosition(locationPosition: LocationPosition){
+        user_position.value = locationPosition
+    }
+
+    fun getUserPosition():LiveData<LocationPosition> = user_position
 
     fun getUserAccount():LiveData<FirebaseUser>{
         return userAccount
@@ -63,6 +72,14 @@ object FirebaseRepository {
     }
 
     private fun saveUser(user: User?) {
+        val location = user?.location
+
+        user?.userLocation =
+        if(location == user_position.value?.locality)
+            user_position.value ?: LocationPosition()
+        else
+            LocationPosition(location)
+
         db.collection("Users")
             .document("user:" + userAccount.value?.uid)
             .set(user ?: User())

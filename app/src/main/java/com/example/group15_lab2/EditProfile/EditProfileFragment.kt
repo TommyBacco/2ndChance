@@ -13,12 +13,14 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -29,6 +31,7 @@ import com.example.group15_lab2.MainActivity.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
+import kotlinx.android.synthetic.main.fragment_show_profile.*
 import java.io.File
 import java.io.IOException
 
@@ -59,6 +62,10 @@ class EditProfileFragment : Fragment() {
 
         registerForContextMenu(requireActivity().findViewById(R.id.camera_button))
         camera_button.setOnClickListener { v -> requireActivity().openContextMenu(v) }
+
+        myViewModel.getUserLocation().observe(viewLifecycleOwner, Observer {position ->
+            user_location_edit.setText(position.locality)
+        })
 
         myViewModel.getUserData().observe(viewLifecycleOwner, Observer { u ->
             user_fullname_edit.setText(u.fullName)
@@ -96,6 +103,7 @@ class EditProfileFragment : Fragment() {
         }
 
         enableEditMode()
+        listenForNewLocation()
     }
 
     private fun enableEditMode(){
@@ -118,6 +126,24 @@ class EditProfileFragment : Fragment() {
             myViewModel.editData("telephone",text.toString())
         }
     }
+
+    private fun listenForNewLocation(){
+        user_location_edit.setOnEditorActionListener { _, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_DONE)
+                myViewModel.editUserLocation(user_location_edit.text.toString())
+            return@setOnEditorActionListener false
+        }
+
+        user_location_edit.setOnFocusChangeListener { v, hasFocus ->
+            if(!hasFocus)
+                myViewModel.editUserLocation(user_location_edit.text.toString())
+        }
+
+        user_location_ednIcon_edit.setEndIconOnClickListener {
+            myViewModel.editUserLocation("")
+        }
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_save, menu)
@@ -351,7 +377,8 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun navigateToMap(){
-        findNavController().navigate(R.id.action_nav_editProfile_to_setMapPositionFragment)
+        val bundle = bundleOf(Pair("group15.lab4.CURRENT_POSITION",user_location_edit.text.toString()))
+        findNavController().navigate(R.id.action_nav_editProfile_to_setMapPositionFragment,bundle)
     }
 
     private fun checkPermission(){
