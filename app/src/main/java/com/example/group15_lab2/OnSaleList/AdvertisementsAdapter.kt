@@ -136,6 +136,7 @@ class AdvertisementsAdapter: RecyclerView.Adapter<AdvertisementsAdapter.ViewHold
                         item.price?.toLowerCase(Locale.ROOT)?.startsWith(filterPattern) == true -> filteredList.add(item)
                         item.status?.toLowerCase(Locale.ROOT)?.startsWith(filterPattern) == true -> filteredList.add(item)
                         item.expireDate?.toLowerCase(Locale.ROOT)?.startsWith(filterPattern) == true -> filteredList.add(item)
+                        item.location?.toLowerCase(Locale.ROOT)?.startsWith(filterPattern) == true -> filteredList.add(item)
                     }
                 }
             }
@@ -157,7 +158,7 @@ class AdvertisementsAdapter: RecyclerView.Adapter<AdvertisementsAdapter.ViewHold
        return myFilter
     }
 
-    fun filterByCategoryAndPrice(filterParams: FilterParams){
+    fun filterByCategoryPriceAndLocation(filterParams: FilterParams){
         val min = filterParams.from_price ?: 0F
         val max = filterParams.to_price ?: Float.MAX_VALUE
         val list = mutableListOf<Item>()
@@ -167,7 +168,10 @@ class AdvertisementsAdapter: RecyclerView.Adapter<AdvertisementsAdapter.ViewHold
                 if(item.price == null || item.price == "" || item.price == "-") 0F
                 else item.price!!.toFloat()
 
-            if( (filterParams.category == "ALL" || item.category == filterParams.category) && price >= min && price <= max )
+            if( (filterParams.category == "ALL" || item.category == filterParams.category)
+                && price >= min && price <= max
+                && (filterParams.location == "NONE"
+                        || item.location?.toLowerCase(Locale.ROOT)?.startsWith(filterParams.location) == true))
                 list.add(item)
         }
 

@@ -59,6 +59,8 @@
     <string name="price_to">To</string>
     <string name="filter_category">Choose a category</string>
     <string name="filter_price">Choose a price range</string>
+    <string name="filter_location">Choose a Location</string>
+    <string name="filter_location_hint">Location that starts with…</string>
 
     <string name="emptyMessage">No advertisements have been published yet!</string>
     <string name="emptyMyItemsMessage">You haven\'t posted any advertisements yet!</string>

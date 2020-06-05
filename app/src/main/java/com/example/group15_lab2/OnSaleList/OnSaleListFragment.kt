@@ -1,14 +1,11 @@
 package com.example.group15_lab2.OnSaleList
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.group15_lab2.MainActivity.MainActivity
 import com.example.group15_lab2.R
 import kotlinx.android.synthetic.main.fragment_on_sale_list.*
+import java.util.*
 
 class OnSaleListFragment : Fragment() {
 
@@ -60,7 +58,7 @@ class OnSaleListFragment : Fragment() {
         })
 
         myViewModel.getFilterParams().observe(viewLifecycleOwner, Observer {
-            myAdapter.filterByCategoryAndPrice(it)
+            myAdapter.filterByCategoryPriceAndLocation(it)
         })
 
     }
@@ -96,6 +94,8 @@ class OnSaleListFragment : Fragment() {
                         = view.findViewById(R.id.price_from)
                 val price_to:com.google.android.material.textfield.TextInputEditText
                         = view.findViewById(R.id.price_to)
+                val location:com.google.android.material.textfield.TextInputEditText
+                        = view.findViewById(R.id.location)
 
                 val category_spinner:Spinner = view.findViewById(R.id.spinner_filter_category)
                 val category_adapter = ArrayAdapter.createFromResource(
@@ -124,7 +124,12 @@ class OnSaleListFragment : Fragment() {
                             if(to == "") null
                             else to.toFloat()
 
-                        myViewModel.setFilterParams(category,int_from,int_to)
+                        val loc = location.text.toString()
+                        val loc_to_find =
+                            if(loc == "") "NONE"
+                            else loc.toLowerCase(Locale.ROOT)
+
+                        myViewModel.setFilterParams(category,int_from,int_to,loc_to_find)
                     }
                     .setNeutralButton("CANCEL"){ _, _ ->
                     }
