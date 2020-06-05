@@ -42,14 +42,14 @@
                     android:layout_centerVertical="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
                 <RatingBar
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:id="@+id/user_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/user_rating_value"
+                    android:isIndicator="true"
                     android:numStars="5"
-                    android:stepSize="0.5"
-                    android:isIndicator="true"/>
+                    android:stepSize="0.5" />
             </RelativeLayout>
 
             <TextView
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:drawableLeft="@drawable/ic_person"
+                android:drawableStart="@drawable/ic_person"
                 android:drawablePadding="4dp"
                 android:ellipsize="end"
                 android:hint="@string/profile_fullname"
@@ -88,7 +88,7 @@
                 android:hint="@string/profile_nickname"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:drawableLeft="@drawable/ic_person_outline"
+                android:drawableStart="@drawable/ic_person_outline"
                 android:drawablePadding="4dp"
                 android:textColor="@android:color/black"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -102,7 +102,7 @@
                 android:textColor="@android:color/black"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:drawableLeft="@drawable/ic_email"
+                android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -115,7 +115,7 @@
                 android:hint="@string/profile_area"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:drawableLeft="@drawable/ic_area_of_interest"
+                android:drawableStart="@drawable/ic_area_of_interest"
                 android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -128,7 +128,7 @@
                 android:hint="@string/profile_address"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:drawableLeft="@drawable/ic_location"
+                android:drawableStart="@drawable/ic_location"
                 android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -141,7 +141,7 @@
                 android:hint="@string/profile_telephone"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:drawableLeft="@drawable/ic_phone"
+                android:drawableStart="@drawable/ic_phone"
                 android:drawablePadding="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 

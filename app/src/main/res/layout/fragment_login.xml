@@ -57,17 +57,19 @@
     <Button
         android:id="@+id/bn_logout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="162dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="155dp"
-        android:text="@string/logout"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="83dp"
         android:backgroundTint="@color/myColorAccent"
-        android:visibility = "gone"/>
-
+        android:fontFamily="@font/quicksand_medium"
+        android:gravity="center"
+        android:text="@string/logout"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
 </RelativeLayout>
