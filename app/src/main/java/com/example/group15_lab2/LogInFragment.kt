@@ -48,11 +48,6 @@ class LogInFragment : Fragment() {
             logIn()
         }
 
-        /*bn_logout.setOnClickListener {
-            logOut()
-
-        }*/
-
     }
 
     private fun logIn(){
@@ -64,10 +59,19 @@ class LogInFragment : Fragment() {
     }
 
     private fun logOut(){
-     FirebaseAuth.getInstance().signOut()
-     AuthUI.getInstance().signOut(activity as MainActivity)
-     bn_login.visibility=View.VISIBLE
-     message_login.visibility=View.GONE
+         FirebaseAuth.getInstance().signOut()
+         AuthUI.getInstance().signOut(activity as MainActivity)
+
+              if(FirebaseRepository.getUserAccount().value?.uid!=null){
+             val snack: Snackbar = Snackbar.make(requireView(), "You have been successfully logged out", Snackbar.LENGTH_LONG)
+             val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
+             tv.setTextColor(Color.WHITE)
+             tv.typeface = Typeface.DEFAULT_BOLD
+             snack.view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.editedItem))
+             snack.show()}
+
+         bn_login.visibility=View.VISIBLE
+         message_login.visibility=View.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

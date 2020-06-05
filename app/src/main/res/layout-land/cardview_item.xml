@@ -25,8 +25,8 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="4dp"
             android:layout_alignParentStart="true"
             android:src="@drawable/item_icon"
             app:civ_border_width="2dp"
@@ -36,7 +36,7 @@
             android:id="@+id/cardview_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/cardview_image"
+            android:layout_toEndOf="@+id/cardview_image"
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
             android:layout_centerHorizontal="true"
@@ -57,7 +57,7 @@
             android:maxLines="1"
             android:layout_marginBottom="4dp"
             android:hint="@string/default_category"
-            android:layout_toRightOf="@id/cardview_image"
+            android:layout_toEndOf="@id/cardview_image"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/myColorPrimaryText"/>
 
@@ -70,7 +70,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:hint="@string/default_status"
-            android:layout_toRightOf="@id/cardview_image"
+            android:layout_toEndOf="@id/cardview_image"
             android:textStyle="bold|italic"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/myColorPrimaryText"/>
@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cardview_status"
-            android:layout_toRightOf="@id/cardview_image"
+            android:layout_toEndOf="@id/cardview_image"
             android:layout_marginEnd="4dp"
             android:ellipsize="end"
             android:maxLines="1"
@@ -96,9 +96,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/cardview_price"
-            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
             android:layout_marginEnd="4dp"
-            android:layout_toRightOf="@id/cardview_price"
+            android:layout_toEndOf="@id/cardview_price"
             android:text="€"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@android:color/holo_red_dark" />
@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cardview_price"
-            android:layout_toRightOf="@id/cardview_image"
+            android:layout_toEndOf="@id/cardview_image"
             android:layout_marginEnd="4dp"
             android:ellipsize="end"
             android:maxLines="1"
@@ -118,13 +118,15 @@
 
 
         <ImageView
+            android:id="@+id/cardview_bn_edit"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:id="@+id/cardview_bn_edit"
             android:layout_alignBaseline="@id/cardview_name"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:contentDescription="@string/pencil_button"
+            android:layout_marginTop="29dp"
             android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/pencil_button"
             app:srcCompat="@android:drawable/ic_menu_edit" />
 
         <ImageView

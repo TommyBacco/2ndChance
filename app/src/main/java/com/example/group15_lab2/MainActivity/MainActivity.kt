@@ -63,10 +63,12 @@ class MainActivity : AppCompatActivity() {
 
         headView = navView.getHeaderView(0)
 
-        if(FirebaseRepository.getUserAccount().value == null)
-            findNavController(R.id.nav_host_fragment).navigate(
-                R.id.action_nav_advertisements_to_logInFragment
-            )
+        if(FirebaseRepository.getUserAccount().value== null)
+            if(savedInstanceState==null) {
+                findNavController(R.id.nav_host_fragment).navigate(
+                    R.id.action_nav_advertisements_to_logInFragment
+                )
+            }
 
         FirebaseRepository.getUserAccount().observe(this, Observer {
             myViewModel.setUser()
