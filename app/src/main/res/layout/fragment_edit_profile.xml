@@ -109,11 +109,11 @@
                     android:id="@+id/user_email_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/profile_email"
                     android:drawableStart="@drawable/ic_email"
                     android:drawablePadding="4dp"
-                    android:inputType="textEmailAddress"
+                    android:hint="@string/profile_email"
                     android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -171,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@android:drawable/ic_dialog_map" />
-s
+
             </LinearLayout>
 
 

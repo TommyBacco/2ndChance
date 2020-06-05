@@ -6,7 +6,6 @@
         <item name="colorPrimary">@color/myColorPrimary</item>
         <item name="colorPrimaryDark">@color/myColorPrimaryDark</item>
         <item name="colorAccent">@color/myColorAccent</item>
-        <item name = "fontFamily">@font/quicksand_medium</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

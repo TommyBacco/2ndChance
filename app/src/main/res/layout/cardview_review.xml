@@ -36,10 +36,10 @@
             android:layout_below="@+id/rate_user_nickname"
             android:layout_marginBottom="4dp"
             android:ellipsize="end"
-            android:maxLines="1"
             android:hint="@string/rating_date"
+            android:maxLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/myColorPrimaryText"/>
+            android:textColor="@color/myColorPrimaryText" />
 
         <RatingBar
             android:id="@+id/rate_ratingBar"
@@ -47,10 +47,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rate_date"
-            android:numStars="5"
-            android:stepSize="0.5"
             android:layout_marginBottom="4dp"
-            android:isIndicator="true"/>
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="0.5" />
 
         <TextView
             android:id="@+id/rate_comment"

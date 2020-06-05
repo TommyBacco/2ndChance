@@ -61,7 +61,6 @@ class LogInFragment : Fragment() {
     private fun logOut(){
          FirebaseAuth.getInstance().signOut()
          AuthUI.getInstance().signOut(activity as MainActivity)
-
               if(FirebaseRepository.getUserAccount().value?.uid!=null){
              val snack: Snackbar = Snackbar.make(requireView(), "You have been successfully logged out", Snackbar.LENGTH_LONG)
              val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
@@ -69,7 +68,7 @@ class LogInFragment : Fragment() {
              tv.typeface = Typeface.DEFAULT_BOLD
              snack.view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.editedItem))
              snack.show()}
-
+    FirebaseRepository.setUserAccount(null)
          bn_login.visibility=View.VISIBLE
          message_login.visibility=View.GONE
     }
