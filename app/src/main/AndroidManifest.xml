@@ -39,6 +39,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShowMapPosition.ShowMapFragment" />
+        <activity android:name=".SignInActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

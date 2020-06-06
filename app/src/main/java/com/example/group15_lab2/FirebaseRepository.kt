@@ -10,6 +10,7 @@ import com.example.group15_lab2.DataClasses.Item
 import com.example.group15_lab2.DataClasses.LocationPosition
 import com.example.group15_lab2.DataClasses.Rating
 import com.example.group15_lab2.DataClasses.User
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
 import com.google.firebase.messaging.FirebaseMessaging
@@ -19,7 +20,8 @@ import org.json.JSONObject
 
 
 object FirebaseRepository {
-    private val userAccount:MutableLiveData<FirebaseUser> by lazy { MutableLiveData<FirebaseUser>().apply { value = null } }
+    private val userAccount:MutableLiveData<FirebaseUser>
+            by lazy { MutableLiveData<FirebaseUser>().apply { value = FirebaseAuth.getInstance().currentUser } }
     private val db = FirebaseFirestore.getInstance()
     private val storageRef = FirebaseStorage.getInstance().reference
 
@@ -38,8 +40,13 @@ object FirebaseRepository {
         return userAccount
     }
 
-    fun setUserAccount(id:FirebaseUser?){
-        userAccount.value = id
+    fun updateUserAccount(){
+        userAccount.value = FirebaseAuth.getInstance().currentUser
+    }
+
+    fun signOut(){
+        FirebaseAuth.getInstance().signOut()
+        userAccount.value = null
     }
 
     fun getUserData(userID:String? = null): DocumentReference {

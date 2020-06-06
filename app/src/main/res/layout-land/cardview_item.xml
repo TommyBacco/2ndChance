@@ -138,18 +138,6 @@
             app:srcCompat="@android:drawable/ic_menu_edit" />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="4dp"
-            android:id="@+id/cardview_bn_rating"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:contentDescription="@string/review_button"
-            android:backgroundTint="@android:color/transparent"
-            app:srcCompat="@drawable/ic_rating"
-            android:visibility="gone"/>
-
-        <ImageView
             android:id="@+id/bookmark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -168,6 +156,31 @@
             app:srcCompat="@drawable/ic_bought"
             android:contentDescription="@string/cardview_bought"
             android:visibility="gone"/>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/cardview_bn_rating"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/review_button"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/ic_rating"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardview_rating_done"
+            android:layout_alignBaseline="@id/cardview_bn_rating"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/cardview_bn_rating"
+            android:contentDescription="@string/review_button"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/ic_done"
+            android:visibility="gone"/>
+
 
 
     </RelativeLayout>

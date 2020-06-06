@@ -90,10 +90,6 @@
             app:destination="@id/setMapPositionFragment" />
     </fragment>
     <fragment
-        android:id="@+id/logInFragment"
-        android:name="com.example.group15_lab2.LogInFragment"
-        android:label="LogInFragment" />
-    <fragment
         android:id="@+id/nav_advertisements"
         android:name="com.example.group15_lab2.OnSaleList.OnSaleListFragment"
         android:label="OnSaleListFragment" >
@@ -104,11 +100,6 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
-        <action
-            android:id="@+id/action_nav_advertisements_to_logInFragment"
-            app:destination="@id/logInFragment"
-            app:enterAnim="@anim/fade_in"
-            app:popEnterAnim="@anim/fade_in" />
     </fragment>
     <fragment
         android:id="@+id/iterestedUserListFragment"

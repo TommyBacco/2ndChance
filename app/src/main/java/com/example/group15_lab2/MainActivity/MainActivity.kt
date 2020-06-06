@@ -1,7 +1,12 @@
 package com.example.group15_lab2.MainActivity
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
 import android.graphics.Rect
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MotionEvent
@@ -10,29 +15,37 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.group15_lab2.DataClasses.LocationPosition
-import com.example.group15_lab2.FirebaseRepository
 import com.example.group15_lab2.R
+import com.example.group15_lab2.SignInActivity
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_sign_in.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var headView: View
+    private lateinit var navController:NavController
     private val myViewModel: MainActivityVM by viewModels()
+    private val REQUEST_LOGIN = 4000
 
     fun setToolbarTitle(title:String){
         supportActionBar?.title = title
@@ -45,9 +58,9 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerLayout:DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
-        val navController = findNavController(R.id.nav_host_fragment)
+        navController = findNavController(R.id.nav_host_fragment)
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -63,16 +76,32 @@ class MainActivity : AppCompatActivity() {
 
         headView = navView.getHeaderView(0)
 
-        if(FirebaseRepository.getUserAccount().value == null)
-            findNavController(R.id.nav_host_fragment).navigate(
-                R.id.action_nav_advertisements_to_logInFragment
-            )
-
-        FirebaseRepository.getUserAccount().observe(this, Observer {
-            if(it != null)
+        myViewModel.getUserAccount().observe(this, Observer { currentuser ->
+            if(currentuser == null){
+                val intent = Intent(this, SignInActivity::class.java)
+                startActivityForResult(intent,REQUEST_LOGIN)
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+            }
+            else
                 setUserDataIntoDrawer()
         })
 
+
+
+        val bn:ImageView = headView.findViewById(R.id.bn_logout)
+
+        bn.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("You are going to Sign-Out")
+                .setIcon(R.drawable.ic_signout)
+                .setMessage("Are you sure you want to proceed?")
+                .setPositiveButton("YES") {_,_ ->
+                    myViewModel.signOut()
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+                .setNeutralButton("NO") {_,_ ->}
+                .show()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -85,11 +114,14 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+
     private fun setUserDataIntoDrawer() {
         val user_fullname_view: TextView = headView.findViewById(R.id.nav_user_fullName)
         val user_nickname_view: TextView = headView.findViewById(R.id.nav_user_nickname)
         val user_email_view: TextView = headView.findViewById(R.id.nav_user_email)
         val user_avatar_view: ImageView = headView.findViewById(R.id.nav_user_avatar)
+
+        myViewModel.loadUserData()
 
         myViewModel.getUserData().observe(this, Observer { profile ->
             user_fullname_view.text = profile.fullName
@@ -128,4 +160,13 @@ class MainActivity : AppCompatActivity() {
     fun getUserLocation():LocationPosition?{
         return myViewModel.getUserLocation()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_LOGIN && resultCode == Activity.RESULT_OK) {
+            navController.popBackStack(R.id.nav_advertisements,true)
+            navController.navigate(R.id.nav_advertisements)
+        }
+    }
+
 }

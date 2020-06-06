@@ -24,7 +24,7 @@
         android:padding="8dp"
         android:text="@string/emptyMyItemsMessage"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#808080"
         android:textStyle="italic|bold"
         android:visibility="gone"/>
