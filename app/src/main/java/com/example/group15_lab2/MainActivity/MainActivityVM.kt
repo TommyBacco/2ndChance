@@ -4,11 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.group15_lab2.DataClasses.LocationPosition
 import com.example.group15_lab2.DataClasses.User
 import com.example.group15_lab2.FirebaseRepository
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ListenerRegistration
+import kotlinx.coroutines.launch
 
 class MainActivityVM : ViewModel() {
 
@@ -39,5 +41,11 @@ class MainActivityVM : ViewModel() {
     fun signOut(){
         listenerRegistration?.remove()
         FirebaseRepository.signOut()
+    }
+
+    fun addNotificationListener(){
+        viewModelScope.launch {
+            FirebaseRepository.addNotificationListener()
+        }
     }
 }

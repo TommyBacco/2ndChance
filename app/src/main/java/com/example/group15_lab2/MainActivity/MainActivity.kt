@@ -82,8 +82,10 @@ class MainActivity : AppCompatActivity() {
                 startActivityForResult(intent,REQUEST_LOGIN)
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
             }
-            else
+            else {
                 setUserDataIntoDrawer()
+                myViewModel.addNotificationListener()
+            }
         })
 
 

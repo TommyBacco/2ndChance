@@ -15,6 +15,9 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -42,6 +45,23 @@ object FirebaseRepository {
 
     fun updateUserAccount(){
         userAccount.value = FirebaseAuth.getInstance().currentUser
+    }
+
+    suspend fun addNotificationListener(){
+        withContext(Dispatchers.IO) {
+            try{
+                getMyItems()
+                    .get()
+                    .addOnSuccessListener { res ->
+                        for(obj in res){
+                            val item = obj.toObject(Item::class.java)
+                            subscribeToTopic(item.ID ?: "")
+                        }
+                    }.await()
+            } catch (exc:Exception){
+                Log.d("ERR-TAG","Error while addNotificationListener: ${exc.message}")
+            }
+        }
     }
 
     fun signOut(){

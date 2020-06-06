@@ -10,7 +10,7 @@
 
     <string name="menu_profile">Profile</string>
     <string name="menu_advertisements">Advertisements</string>
-    <string name="menu_myAdvertisements">My items</string>
+    <string name="menu_myAdvertisements">My items for sale</string>
     <string name="menu_itemsOfInterest">Items of interest</string>
     <string name="menu_boughtItems">Bought items</string>
 

@@ -27,7 +27,7 @@ class ItemListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("My Items")
+        (activity as MainActivity).setToolbarTitle("My Items for sale")
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager =
