@@ -31,7 +31,8 @@ class OnSaleListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("Advertisements")
+        val title = resources.getString(R.string.onSaleList_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager =
@@ -70,7 +71,7 @@ class OnSaleListFragment : Fragment() {
         val searchItem = menu.findItem(R.id.search_button)
         val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
         searchView.imeOptions = EditorInfo.IME_ACTION_SEARCH
-        searchView.queryHint = "Search for title, category..."
+        searchView.queryHint = resources.getString(R.string.onSaleList_query_hint)
 
         searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
 
@@ -108,7 +109,7 @@ class OnSaleListFragment : Fragment() {
 
                 AlertDialog.Builder(context)
                     .setView(view)
-                    .setPositiveButton("FILTER") { _, _ ->
+                    .setPositiveButton(resources.getString(R.string.alert_filter_positiveBN)) { _, _ ->
 
                         val category =
                             if(category_spinner.selectedItemPosition == 0) "ALL"
@@ -131,7 +132,7 @@ class OnSaleListFragment : Fragment() {
 
                         myViewModel.setFilterParams(category,int_from,int_to,loc_to_find)
                     }
-                    .setNeutralButton("CANCEL"){ _, _ ->
+                    .setNeutralButton(resources.getString(R.string.alert_filter_neutralBN)){ _, _ ->
                     }
                     .show()
 

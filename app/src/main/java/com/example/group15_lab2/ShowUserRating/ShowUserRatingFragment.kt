@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.group15_lab2.MainActivity.MainActivity
 import com.example.group15_lab2.R
+import kotlinx.android.synthetic.main.fragment_item_edit.*
 import kotlinx.android.synthetic.main.fragment_show_user_rating.*
 
 class ShowUserRatingFragment : Fragment() {
@@ -28,7 +29,8 @@ class ShowUserRatingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("User Ratings")
+        val title = resources.getString(R.string.showUserRating_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         myViewModel = ViewModelProvider(this).get(ShowUserRatingVM::class.java)
 

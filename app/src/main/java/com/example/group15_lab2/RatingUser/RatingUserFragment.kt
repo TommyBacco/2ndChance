@@ -33,7 +33,8 @@ class RatingUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("Rating User")
+        val title = resources.getString(R.string.ratingUsers_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         if(savedInstanceState == null){
             val itemID = arguments?.getString("group15.lab3.ITEM_ID")
@@ -50,7 +51,8 @@ class RatingUserFragment : Fragment() {
         button_send_rating.setOnClickListener {
             val user_nickname = (activity as MainActivity).getUserNickname()
             myViewModel.sendUserRating(user_nickname)
-            val snack: Snackbar = Snackbar.make(requireView(), "Review correctly sent to the seller", Snackbar.LENGTH_LONG)
+            val text = resources.getString(R.string.ratingUsers_snack)
+            val snack: Snackbar = Snackbar.make(requireView(), text, Snackbar.LENGTH_LONG)
             val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
             tv.setTextColor(Color.WHITE)
             tv.typeface = Typeface.DEFAULT_BOLD

@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.group15_lab2.DataClasses.LocationPosition
+import com.example.group15_lab2.MainActivity.MainActivity
 import com.example.group15_lab2.R
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -41,6 +42,9 @@ class SetMapPositionFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val title = resources.getString(R.string.setMapPosition_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         if(savedInstanceState == null){
             val location = arguments?.getString("group15.lab4.CURRENT_POSITION")
@@ -147,24 +151,24 @@ class SetMapPositionFragment:Fragment() {
     }
 
 
-    private fun setSnackbar(tipe:String){
+    private fun setSnackbar(type:String){
         val text:String
         val background:Int
-        when(tipe){
-            "err-currloc" -> {
-                text = "Unable to get current location"
-                background = R.color.longTitle
-            }
+        when(type){
             "no-results" -> {
-                text = "No results found"
+                text = resources.getString(R.string.map_snack_err_no_results)
                 background = R.color.longTitle
             }
             "err-geo" -> {
-                text = "Error while searching"
+                text = resources.getString(R.string.map_snack_err_conn)
+                background = R.color.longTitle
+            }
+            "err-currloc" -> {
+                text = resources.getString(R.string.setMapPos_snack3)
                 background = R.color.longTitle
             }
             else -> {
-                text = "New location has been correctly chosen!"
+                text = resources.getString(R.string.setMapPos_snack4)
                 background =  R.color.editedItem
             }
         }

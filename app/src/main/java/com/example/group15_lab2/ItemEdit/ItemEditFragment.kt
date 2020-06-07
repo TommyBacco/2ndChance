@@ -46,7 +46,6 @@ class ItemEditFragment : Fragment() {
     private lateinit var cameraPhotoPath: String
     private var itemID:String? = null
     private var categoryPosition: Int = -1
-    private val noUsers = "No user is interested"
 
     private val REQUEST_IMAGE_CAPTURE = 10
     private val REQUEST_SELECT_GALLERY_PHOTO = 20
@@ -66,7 +65,8 @@ class ItemEditFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("Edit Item")
+        val title = resources.getString(R.string.itemEdit_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         registerForContextMenu(requireActivity().findViewById(R.id.item_camera_button))
         item_camera_button.setOnClickListener { v -> requireActivity().openContextMenu(v) }
@@ -159,7 +159,7 @@ class ItemEditFragment : Fragment() {
             AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                if(spinner_userToSold.selectedItem.toString() != "No user is interested")
+                if(spinner_userToSold.selectedItem.toString() != resources.getString(R.string.no_user_interested))
                     myViewModel.setUserToSoldItem(position)
             }
         }
@@ -223,7 +223,6 @@ class ItemEditFragment : Fragment() {
             item_title_edit.setText(item.title)
             item_price_edit.setText(item.price)
             item_expire_date_edit.setText(item.expireDate)
-            //item_location_edit.setText(item.location)
             item_description_edit.setText(item.description)
 
             populateCategorySpinners(item.category, item.subcategory)
@@ -332,7 +331,7 @@ class ItemEditFragment : Fragment() {
             var spinnerPosition = 0
 
             if(usersList.isEmpty())
-                list.add(noUsers)
+                list.add(resources.getString(R.string.no_user_interested))
 
             for(user in usersList){
                 if(soldTo == user.ID)
@@ -424,19 +423,19 @@ class ItemEditFragment : Fragment() {
         val background:Int
         when(tipe){
             "edited" -> {
-                text = "Item has been correctly updated"
+                text = resources.getString(R.string.itemEdit_snack1)
                 background = R.color.editedItem
             }
             "newItem" -> {
-                text = "New item has been added"
+                text = resources.getString(R.string.itemEdit_snack2)
                 background = R.color.newItem
             }
             "itemSold" -> {
-                text = "Item has been correctly sold!"
+                text = resources.getString(R.string.itemEdit_snack3)
                 background = R.color.editedItem
             }
            else -> {
-                text = "Too many characters in the Title!"
+                text = resources.getString(R.string.itemEdit_snack4)
                background =  R.color.longTitle
             }
         }
@@ -453,7 +452,8 @@ class ItemEditFragment : Fragment() {
         v: View,
         menuInfo: ContextMenu.ContextMenuInfo?
     ) {
-        menu.setHeaderTitle("Choose a new image")
+        val title = resources.getString(R.string.bn_camera_title)
+        menu.setHeaderTitle(title)
         activity?.menuInflater?.inflate(R.menu.menu_camera, menu)
     }
     override fun onContextItemSelected(item: MenuItem): Boolean {
@@ -524,8 +524,9 @@ class ItemEditFragment : Fragment() {
 
                 } else {
                     // permission denied, boo!
+                    val text = resources.getString(R.string.permission_new_image)
                     Toast.makeText(
-                        requireActivity(), "Permission is needed\nto choose a new image!",
+                        requireActivity(), text,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -538,8 +539,9 @@ class ItemEditFragment : Fragment() {
                 }
                 else {
                     // permission denied, boo!
+                    val text = resources.getString(R.string.permission_map)
                     Toast.makeText(
-                        requireActivity(), "Permission is needed\nto to access the map",
+                        requireActivity(), text,
                         Toast.LENGTH_SHORT
                     ).show()
                 }

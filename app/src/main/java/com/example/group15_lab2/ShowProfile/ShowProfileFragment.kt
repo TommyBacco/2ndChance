@@ -31,7 +31,8 @@ class ShowProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("User Profile")
+        val title = resources.getString(R.string.showProfile_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         if(savedInstanceState == null) {
             val id = arguments?.getString("group15.lab3.USER_ID",null)
@@ -146,8 +147,9 @@ class ShowProfileFragment : Fragment() {
                 }
                 else {
                     // permission denied, boo!
+                    val text = resources.getString(R.string.permission_map)
                     Toast.makeText(
-                        requireActivity(), "Permission is needed\nto to access the map",
+                        requireActivity(), text,
                         Toast.LENGTH_SHORT
                     ).show()
                 }

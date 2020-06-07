@@ -58,7 +58,8 @@ class EditProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("Edit Profile")
+        val title = resources.getString(R.string.editProfile_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         registerForContextMenu(requireActivity().findViewById(R.id.camera_button))
         camera_button.setOnClickListener { v -> requireActivity().openContextMenu(v) }
@@ -163,7 +164,8 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun setSnackbar(){
-        val snack: Snackbar = Snackbar.make(user_avatar_edit, "Profile has been updated", Snackbar.LENGTH_LONG)
+        val text = resources.getString(R.string.editProfile_snack)
+        val snack: Snackbar = Snackbar.make(user_avatar_edit, text, Snackbar.LENGTH_LONG)
         val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
         tv.setTextColor(Color.WHITE)
         tv.typeface = Typeface.DEFAULT_BOLD
@@ -172,7 +174,8 @@ class EditProfileFragment : Fragment() {
     }
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
-        menu.setHeaderTitle("Choose a new image")
+        val title = resources.getString(R.string.bn_camera_title)
+        menu.setHeaderTitle(title)
         activity?.menuInflater?.inflate(R.menu.menu_camera, menu)
     }
 
@@ -244,8 +247,9 @@ class EditProfileFragment : Fragment() {
 
                 } else {
                     // permission denied, boo!
+                    val text = resources.getString(R.string.permission_new_image)
                     Toast.makeText(
-                        requireActivity(), "Permission is needed\nto choose a new image!",
+                        requireActivity(), text,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -258,8 +262,9 @@ class EditProfileFragment : Fragment() {
                 }
                 else {
                     // permission denied, boo!
+                    val text = resources.getString(R.string.permission_map)
                     Toast.makeText(
-                        requireActivity(), "Permission is needed\nto to access the map",
+                        requireActivity(), text,
                         Toast.LENGTH_SHORT
                     ).show()
                 }

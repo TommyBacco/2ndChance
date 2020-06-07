@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.group15_lab2.DataClasses.LocationPosition
+import com.example.group15_lab2.MainActivity.MainActivity
 import com.example.group15_lab2.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -39,6 +40,9 @@ class ShowMapFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val title = resources.getString(R.string.showMap_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         myViewModel = ViewModelProvider(this).get(ShowMapVM::class.java)
 
@@ -119,10 +123,10 @@ class ShowMapFragment:Fragment() {
     private fun setSnackbar(tipe:String){
         val background = R.color.longTitle
         val text = when(tipe){
-            "no-loc" -> "Unable to get location"
-            "no-results" -> "No results found"
-            "no-user-results" -> "No results found while searching your location"
-            else  -> "Error while searching"
+            "no-loc" -> resources.getString(R.string.showMapPos_snack1)
+            "no-results" -> resources.getString(R.string.map_snack_err_no_results)
+            "no-user-results" -> resources.getString(R.string.showMapPos_snack3)
+            else  -> resources.getString(R.string.map_snack_err_conn)
         }
         val snack: Snackbar = Snackbar.make(requireView(), text, Snackbar.LENGTH_LONG)
         val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)

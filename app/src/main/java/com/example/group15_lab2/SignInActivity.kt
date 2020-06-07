@@ -59,11 +59,13 @@ class SignInActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
                 FirebaseRepository.updateUserAccount()
-                Toast.makeText(this, "You have been successfully logged", Toast.LENGTH_LONG).show()
+                val text = resources.getString(R.string.sign_in_toast1)
+                Toast.makeText(this, text, Toast.LENGTH_LONG).show()
                 setResult(Activity.RESULT_OK)
                 finish()
             } else {
-                val snack: Snackbar = Snackbar.make(bn_login, "Error while connecting :(", Snackbar.LENGTH_LONG)
+                val text = resources.getString(R.string.sign_in_snack2)
+                val snack: Snackbar = Snackbar.make(bn_login, text, Snackbar.LENGTH_LONG)
                 val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
                 tv.setTextColor(Color.WHITE)
                 tv.typeface = Typeface.DEFAULT_BOLD
@@ -83,7 +85,4 @@ class SignInActivity : AppCompatActivity() {
         super.finish()
         overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
     }
-
-
-
 }

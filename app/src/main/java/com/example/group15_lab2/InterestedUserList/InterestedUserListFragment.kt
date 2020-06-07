@@ -27,7 +27,8 @@ class InterestedUserListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("Interested Users")
+        val title = resources.getString(R.string.interestedUsers_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         if(savedInstanceState == null) {
             val id = arguments?.getString("group15.lab3.ITEM_ID")

@@ -27,7 +27,8 @@ class ItemsOfInterestListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("Items of Interest")
+        val title = resources.getString(R.string.itemsOfInterest_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager =

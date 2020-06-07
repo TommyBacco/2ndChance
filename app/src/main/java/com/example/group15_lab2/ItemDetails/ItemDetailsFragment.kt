@@ -42,7 +42,8 @@ class ItemDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("Item Details")
+        val title = resources.getString(R.string.itemDetails_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         if(savedInstanceState == null) {
             val id = arguments?.getString("group15.lab3.ITEM_ID")
@@ -199,15 +200,15 @@ class ItemDetailsFragment : Fragment() {
         val background:Int
         when(tipe){
             "isRated" -> {
-                text = "You have already rated the seller for this item!"
+                text = resources.getString(R.string.itemDetals_snack1)
                 background = R.color.longTitle
             }
             "addInterest" -> {
-                text = "Interest notified to the seller"
+                text = resources.getString(R.string.itemDetals_snack2)
                 background = R.color.editedItem
             }
             else -> {
-                text = "Interest removed"
+                text = resources.getString(R.string.itemDetals_snack3)
                 background = R.color.longTitle
             }
         }
@@ -260,8 +261,9 @@ class ItemDetailsFragment : Fragment() {
                 }
                 else {
                     // permission denied, boo!
+                    val text = resources.getString(R.string.permission_map)
                     Toast.makeText(
-                        requireActivity(), "Permission is needed\nto to access the map",
+                        requireActivity(), text,
                         Toast.LENGTH_SHORT
                     ).show()
                 }

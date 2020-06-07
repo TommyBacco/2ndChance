@@ -94,14 +94,14 @@ class MainActivity : AppCompatActivity() {
 
         bn.setOnClickListener {
             AlertDialog.Builder(this)
-                .setTitle("You are going to Sign-Out")
+                .setTitle(resources.getString(R.string.alert_logout_title))
                 .setIcon(R.drawable.ic_signout)
-                .setMessage("Are you sure you want to proceed?")
-                .setPositiveButton("YES") {_,_ ->
+                .setMessage(R.string.alert_logout_message)
+                .setPositiveButton(R.string.alert_logout_positiveBN) {_,_ ->
                     myViewModel.signOut()
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
-                .setNeutralButton("NO") {_,_ ->}
+                .setNeutralButton(R.string.alert_logout_neutralBN) {_,_ ->}
                 .show()
         }
     }

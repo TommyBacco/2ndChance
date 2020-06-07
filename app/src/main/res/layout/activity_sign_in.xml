@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="sign-in"
+            android:text="@string/sign_in_button"
             android:textAllCaps="true"
             android:backgroundTint="@color/myColorAccent"
             app:layout_constraintBottom_toBottomOf="parent"

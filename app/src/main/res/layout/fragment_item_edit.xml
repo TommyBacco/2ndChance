@@ -46,11 +46,10 @@
             <HorizontalScrollView
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/title">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:padding="8dp">
 
@@ -187,7 +186,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="35dp"
-                        android:text="To: "
+                        android:text="@string/soldTo_text"
                         android:drawableStart="@drawable/ic_subdirectory_arrow_right_black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/holo_red_light"

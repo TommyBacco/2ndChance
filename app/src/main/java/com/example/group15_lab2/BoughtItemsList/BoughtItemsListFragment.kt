@@ -35,7 +35,8 @@ class BoughtItemsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("Bought Items")
+        val title = resources.getString(R.string.boughtItems_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager =
@@ -62,7 +63,8 @@ class BoughtItemsListFragment : Fragment() {
 
             override fun onItemReview(itemID: String?, itemOwner: String?, isRated: Boolean) {
                 if(isRated){
-                    val snack: Snackbar = Snackbar.make(requireView(), "You have already rated the seller for this item!", Snackbar.LENGTH_LONG)
+                    val text = resources.getString(R.string.boughtItems_snack)
+                    val snack: Snackbar = Snackbar.make(requireView(), text, Snackbar.LENGTH_LONG)
                     val tv: TextView = snack.view.findViewById(com.google.android.material.R.id.snackbar_text)
                     tv.setTextColor(Color.WHITE)
                     tv.typeface = Typeface.DEFAULT_BOLD

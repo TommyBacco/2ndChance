@@ -27,7 +27,8 @@ class ItemListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).setToolbarTitle("My Items for sale")
+        val title = resources.getString(R.string.itemList_title)
+        (activity as MainActivity).setToolbarTitle(title)
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager =
