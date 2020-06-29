@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_advertisements">
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.group15_lab2.ShowProfile.ShowProfileFragment"
+        android:label="ShowProfileFragment" >
+        <action
+            android:id="@+id/action_showProfileFragment_to_editProfileFragment"
+            app:destination="@id/nav_editProfile"
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
+        <action
+            android:id="@+id/action_nav_profile_to_showUserRatingFragment"
+            app:destination="@id/showUserRatingFragment"
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
+        <action
+            android:id="@+id/action_nav_profile_to_showMapFragment"
+            app:destination="@id/showMapFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_editProfile"
+        android:name="com.example.group15_lab2.EditProfile.EditProfileFragment"
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/action_nav_editProfile_to_setMapPositionFragment"
+            app:destination="@id/setMapPositionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_itemDetails"
+        android:name="com.example.group15_lab2.ItemDetails.ItemDetailsFragment"
+        android:label="ItemDetailsFragment" >
+        <action
+            android:id="@+id/action_itemDetailsFragment_to_itemEditFragment"
+            app:destination="@id/nav_itemEdit"
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
+        <action
+            android:id="@+id/action_nav_itemDetails_to_iterestedUserListFragment"
+            app:destination="@id/iterestedUserListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in" />
+        <action
+            android:id="@+id/action_nav_itemDetails_to_ratingUserFragment"
+            app:destination="@id/ratingUserFragment"
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
+        <action
+            android:id="@+id/action_nav_itemDetails_to_nav_profile"
+            app:destination="@id/nav_profile"
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
+        <action
+            android:id="@+id/action_nav_itemDetails_to_showMapFragment"
+            app:destination="@id/showMapFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_myItems"
+        android:name="com.example.group15_lab2.ItemList.ItemListFragment"
+        android:label="ItemListFragment" >
+        <action
+            android:id="@+id/action_itemListFragment_to_itemDetailsFragment"
+            app:destination="@id/nav_itemDetails"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_itemListFragment_to_itemEditFragment"
+            app:destination="@id/nav_itemEdit"
+            app:enterAnim="@anim/slide_up"
+            app:popEnterAnim="@anim/slide_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_itemEdit"
+        android:name="com.example.group15_lab2.ItemEdit.ItemEditFragment"
+        android:label="fragment_item_edit"
+        tools:layout="@layout/fragment_item_edit" >
+        <action
+            android:id="@+id/action_nav_itemEdit_to_iterestedUserListFragment"
+            app:destination="@id/iterestedUserListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in" />
+        <action
+            android:id="@+id/action_nav_itemEdit_to_setMapPositionFragment"
+            app:destination="@id/setMapPositionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_advertisements"
+        android:name="com.example.group15_lab2.OnSaleList.OnSaleListFragment"
+        android:label="OnSaleListFragment" >
+        <action
+            android:id="@+id/action_nav_advertisements_to_nav_itemDetails"
+            app:destination="@id/nav_itemDetails"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/iterestedUserListFragment"
+        android:name="com.example.group15_lab2.InterestedUserList.InterestedUserListFragment"
+        android:label="IterestedUserListFragment" >
+        <action
+            android:id="@+id/action_iterestedUserListFragment_to_nav_profile"
+            app:destination="@id/nav_profile"
+            app:enterAnim="@anim/slide_up"
+            app:popEnterAnim="@anim/slide_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_itemsOfInterest"
+        android:name="com.example.group15_lab2.ItemsOfInterestList.ItemsOfInterestListFragment"
+        android:label="ItemsOfInterestListFragment" >
+        <action
+            android:id="@+id/action_nav_itemsOfInterest_to_nav_itemDetails"
+            app:destination="@id/nav_itemDetails"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_boughtItems"
+        android:name="com.example.group15_lab2.BoughtItemsList.BoughtItemsListFragment"
+        android:label="BoughtItemsListFragment" >
+        <action
+            android:id="@+id/action_nav_boughtItems_to_nav_itemDetails"
+            app:destination="@id/nav_itemDetails"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_nav_boughtItems_to_ratingUserFragment"
+            app:destination="@id/ratingUserFragment"
+            app:enterAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in" />
+    </fragment>
+    <fragment
+        android:id="@+id/ratingUserFragment"
+        android:name="com.example.group15_lab2.RatingUser.RatingUserFragment"
+        android:label="RatingUserFragment" />
+    <fragment
+        android:id="@+id/showUserRatingFragment"
+        android:name="com.example.group15_lab2.ShowUserRating.ShowUserRatingFragment"
+        android:label="ShowUserRatingFragment" />
+    <fragment
+        android:id="@+id/showMapFragment3"
+        android:name="com.example.group15_lab2.ShowMapPosition.ShowMapFragment"
+        android:label="ShowMapFragment" />
+    <fragment
+        android:id="@+id/setMapPositionFragment"
+        android:name="com.example.group15_lab2.SetMapPosition.SetMapPositionFragment"
+        android:label="SetMapPositionFragment" />
+</navigation>

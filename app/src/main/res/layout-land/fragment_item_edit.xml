@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/item_image_edit"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/item_icon" />
+
+            <ImageButton
+                android:id="@+id/item_rotate_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/item_image_edit"
+                android:layout_alignRight="@id/item_image_edit"
+                android:background="#ffffffff"
+                android:visibility="visible"
+                app:srcCompat="@android:drawable/ic_menu_rotate" />
+
+            <ImageButton
+                android:id="@+id/item_camera_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/item_image_edit"
+                android:layout_centerHorizontal="true"
+                android:background="#ffffffff"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text"
+                android:layout_marginBottom="4dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="15"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_title_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:hint="@string/default_title"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapSentences"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColorHint="@android:color/black"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    android:orientation="vertical">
+
+                    <HorizontalScrollView
+                        android:id="@+id/category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="8dp">
+
+                            <Spinner
+                                android:id="@+id/spinner_item_category"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@null"/>
+
+                            <TextView
+                                android:id="@+id/kind_category"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/spinner_item_category"
+                                android:layout_marginLeft="20dp"
+                                android:drawableStart="@drawable/ic_subdirectory_arrow_right_black"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@android:color/black" />
+
+                            <Spinner
+                                android:id="@+id/spinner_item_sub_category"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/spinner_item_category"
+                                android:layout_toRightOf="@id/kind_category"
+                                android:background="@null" />
+
+                        </RelativeLayout>
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:id="@+id/item_interested_users"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_bookmark_gray"
+                        android:drawablePadding="4dp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="8dp"
+                        android:textStyle="bold|italic"
+                        android:textColor="@color/myColorSecondaryText"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        />
+
+                    <TextView
+                        android:id="@+id/bn_show_interested"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginBottom="8dp"
+                        android:textStyle="italic"
+                        android:drawableEnd="@drawable/ic_arrow_forward"
+                        android:drawablePadding="4dp"
+                        android:text="@string/show_interested_button"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/myColorSecondaryText" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/itemStatus"
+                            android:layout_marginBottom="8dp"
+                            android:drawableStart="@drawable/ic_shopping_cart"
+                            android:drawablePadding="4dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/darker_gray"
+                            android:textStyle="bold"
+                            android:layout_marginRight="8dp"/>
+
+                        <Spinner
+                            android:id="@+id/spinner_item_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp">
+
+                        <TextView
+                            android:id="@+id/sold_to"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:text="@string/soldTo_text"
+                            android:drawableStart="@drawable/ic_subdirectory_arrow_right_black"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/holo_red_light"
+                            android:textStyle="bold"/>
+
+                        <Spinner
+                            android:id="@+id/spinner_userToSold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="@null" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/price"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+                            android:hint="@string/default_price"
+                            app:hintTextColor="@android:color/holo_red_dark"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/item_price_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_price"
+                                android:drawablePadding="4dp"
+                                android:imeOptions="actionDone"
+                                android:inputType="numberDecimal"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                android:textColor="@android:color/holo_red_dark"
+                                android:textStyle="bold" />
+
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <Spinner
+                            android:id="@+id/spinner_currency"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:helperText="@string/expire_date_helper_text"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/item_expire_date_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:drawableStart="@drawable/ic_date"
+                            android:drawablePadding="4dp"
+                            android:focusable="false"
+                            android:hint="@string/default_ExpireDate"
+                            android:inputType="none" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/item_location_endIcon_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        app:endIconMode="clear_text"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/item_location_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_area_of_interest"
+                            android:drawablePadding="4dp"
+                            android:hint="@string/default_location"
+                            android:imeOptions="actionDone"
+                            android:inputType="textCapWords"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:id="@+id/item_search_position"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:drawableEnd="@drawable/ic_arrow_forward"
+                            android:layout_centerVertical="true"
+                            android:hint="@string/user_search_position"
+                            android:layout_toEndOf="@id/ic_show_map"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:gravity="center_vertical"
+                            android:drawablePadding="4dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                        <ImageView
+                            android:id="@+id/ic_show_map"
+                            android:layout_width="30dp"
+                            android:layout_height="22dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="15dp"
+                            app:srcCompat="@drawable/ic_search_map" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:drawableStart="@drawable/ic_delivery"
+                            android:drawablePadding="4dp" />
+
+                        <Spinner
+                            android:id="@+id/spinner_delivery_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"/>
+
+                    </LinearLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:endIconMode="clear_text"
+                        android:focusable="true"
+                        android:layout_marginTop="8dp"
+                        android:focusableInTouchMode="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/item_description_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/description"
+                            android:drawableStart="@drawable/ic_description"
+                            android:drawablePadding="4dp"
+                            android:imeOptions="actionDone"
+                            android:hint="@string/default_description"
+                            android:inputType="text"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,269 @@
+<resources>
+    <string name="app_name">2nd Chance</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="login_title">Sing-In</string>
+    <string name="boughtItems_title">Bought Items</string>
+    <string name="editProfile_title">Edit Profile</string>
+    <string name="interestedUsers_title">Interested Users</string>
+    <string name="itemDetails_title">Item Details</string>
+    <string name="itemEdit_title">Edit Item</string>
+    <string name="itemList_title">My Items for sale</string>
+    <string name="itemsOfInterest_title">Items of Interest</string>
+    <string name="onSaleList_title">Advertisements</string>
+    <string name="ratingUsers_title">Rating User</string>
+    <string name="setMapPosition_title">Search for a location</string>
+    <string name="showMap_title">Location</string>
+    <string name="showProfile_title">User Profile</string>
+    <string name="showUserRating_title">User Ratings</string>
+
+    <string name="menu_profile">Profile</string>
+    <string name="menu_advertisements">Advertisements</string>
+    <string name="menu_myAdvertisements">My items for sale</string>
+    <string name="menu_itemsOfInterest">Items of interest</string>
+    <string name="menu_boughtItems">Bought items</string>
+
+    <string name="profile_fullname">Full Name</string>
+    <string name="profile_image">Image</string>
+    <string name="profile_nickname">Nickname</string>
+    <string name="profile_email">email@address.com</string>
+    <string name="profile_area">Area of interest</string>
+    <string name="profile_address">Private address</string>
+    <string name="profile_telephone">Telephone number</string>
+    <string name="user_show_position">Show position on the map</string>
+    <string name="user_search_position">Search position on the map</string>
+
+    <string name="pencil_button">Edit</string>
+    <string name="save_button">Save</string>
+    <string name="rotate_button">Rotate</string>
+    <string name="search">Search</string>
+    <string name="show_interested_button">Show all</string>
+    <string name="filter_button">Edit</string>
+    <string name="review_button">Review User</string>
+
+    <string name="menu_gallery">Select an image from the gallery</string>
+    <string name="menu_camera">Use the camera to take a picture</string>
+
+    <string name="item_image">Item image</string>
+    <string name="cardview_bookmark">Bookmark</string>
+    <string name="cardview_bought">Bought</string>
+
+    <string name="default_title">Title</string>
+    <string name="default_price">Price</string>
+    <string name="default_ExpireDate">Expire Date</string>
+    <string name="default_category">Category</string>
+    <string name="default_subcategory">Sub-category</string>
+    <string name="default_location">Location</string>
+    <string name="default_delivery">Delivery type</string>
+    <string name="default_description">Description</string>
+    <string name="default_status">Status</string>
+    <string name="default_interestedUsers">Interested users:</string>
+    <string name="item_userInterested">You are interested in this item!</string>
+    <string name="item_soldToUser">This item has been sold to you!</string>
+    <string name="currency">€</string>
+    <string name="itemStatus">Status: </string>
+    <string name="default_review">reviews</string>
+    <string name="show_seller_profile">Show seller profile</string>
+    <string name="default_no_nickname">No Nickname</string>
+
+    <string name="price_from">From</string>
+    <string name="price_to">To</string>
+    <string name="soldTo_text">To: </string>
+    <string name="filter_category">Choose a category</string>
+    <string name="filter_price">Choose a price range</string>
+    <string name="filter_location">Choose a Location</string>
+    <string name="filter_location_hint">Location that starts with…</string>
+
+    <string name="emptyMessage">No advertisements have been published yet!</string>
+    <string name="emptyMyItemsMessage">You have not posted any ads yet!</string>
+    <string name="emptyMessage_userList">Unluckily, no user is interested in this item</string>
+    <string name="emptyMessage_itemsOfInterest">You are not interested in any item yet!</string>
+    <string name="emptyMessage_boughtItems">You have not bought any items yet!</string>
+    <string name="emptyMessage_userRatings">There is no review yet!</string>
+
+    <string name="rating_nickname">No Nickname</string>
+    <string name="rating_date">Date</string>
+    <string name="rating_comment">No comment</string>
+    <string name="rating_title">Rate seller of this item</string>
+    <string name="ratingBar_comment">Touch a star to rate</string>
+    <string name="rating_comment_title">Leave a comment</string>
+    <string name="rating_comment_extra">(Optional)</string>
+    <string name="rating_comment_hint">Comment…</string>
+    <string name="rating_bnSend">SEND</string>
+
+
+    <string name="open_drawer">Drawer Opened</string>
+    <string name="close_drawer">Drawer Closed</string>
+
+    <string name="login_message">Welcome, click below to login</string>
+    <string name="login_message_error">Please, check your connection and then try again</string>
+
+    <string name="map_searchBar">Enter Address, City or Zip Code</string>
+
+
+    <string-array name="Categories">
+        <item>- Category -</item>
+        <item>Arts &amp; Crafts</item>
+        <item>Sports &amp; Hobby</item>
+        <item>Baby</item>
+        <item>Women\'s fashion</item>
+        <item>Men\'s fashion</item>
+        <item>Electronics</item>
+        <item>Games &amp; Videogames</item>
+        <item>Automotive</item>
+    </string-array>
+
+    <string-array name="SubcategoryArt">
+        <item>- Subcategory -</item>
+        <item>Painting, Drawing &amp; Art Supplies</item>
+        <item>Sewing</item>
+        <item>Scrapbooking &amp; Stamping</item>
+        <item>4 Party Decorations &amp; Supplies</item>
+    </string-array>
+
+    <string-array name="SubcategorySport">
+        <item>- Subcategory -</item>
+        <item>Sports and Outdoors</item>
+        <item>Outdoor Recreation</item>
+        <item> Sports &amp; Fitness</item>
+        <item>Pet Supplies</item>
+    </string-array>
+
+    <string-array name="SubcategoryBaby">
+        <item>- Subcategory -</item>
+        <item>Apparel &amp; Accessories</item>
+        <item>Baby &amp; Toddler Toys</item>
+        <item>Car Seats &amp; Accessories</item>
+        <item>Pregnancy &amp; Maternity</item>
+        <item>Strollers &amp; Accessories</item>
+    </string-array>
+
+    <string-array name="SubcategoryWomen">
+        <item>- Subcategory -</item>
+        <item>Clothing</item>
+        <item>Shoes</item>
+        <item>Watches</item>
+        <item>Handbags</item>
+        <item>Accessories</item>
+    </string-array>
+
+    <string-array name="SubcategoryMen">
+        <item>- Subcategory -</item>
+        <item>Clothing</item>
+        <item>Shoes</item>
+        <item>Watches</item>
+        <item>Accessories</item>
+    </string-array>
+
+    <string-array name="SubcategoryElectronic">
+        <item>- Subcategory -</item>
+        <item>Computers</item>
+        <item>Monitors</item>
+        <item>Printers &amp; Scanners</item>
+        <item>Camera &amp; Photo</item>
+        <item>Smartphone &amp; Tablet</item>
+        <item>Audio</item>
+        <item>Television &amp; Video</item>
+        <item>Video Game Consoles</item>
+        <item>Wearable Technology</item>
+        <item>Accessories &amp; Supplies</item>
+        <item>Irons &amp; Steamers</item>
+        <item>Vacuums &amp; Floor Care</item>
+    </string-array>
+
+    <string-array name="SubcategoryGame">
+        <item>- Subcategory -</item>
+        <item>Action Figures &amp; Statues</item>
+        <item>Arts &amp; Crafts</item>
+        <item>Building Toys</item>
+        <item> Dolls &amp; Accessories</item>
+        <item>Kids\' Electronics</item>
+        <item>Learning &amp; Education</item>
+        <item>Tricycles, Scooters &amp; Wagons</item>
+        <item>Videogames</item>
+    </string-array>
+
+    <string-array name="SubcategoryAuto">
+        <item>- Subcategory -</item>
+        <item>Car Electronics &amp; Accessories</item>
+        <item>Accessories</item>
+        <item>Motorcycle &amp; Powersports</item>
+        <item>Replacement Parts</item>
+        <item>RV Parts &amp; Accessories</item>
+        <item>Tools &amp; Equipment</item>
+    </string-array>
+
+
+    <string-array name="SubcategoryDefault">
+        <item>- Subcategory -</item>
+    </string-array>
+
+    <string-array name="ItemStatus">
+        <item>On sale</item>
+        <item>Sold</item>
+        <item>No longer on sale</item>
+    </string-array>
+    
+    
+    <string-array name="Currencies">
+        <item>€</item>
+        <item>$</item>
+        <item>£</item>
+    </string-array>
+
+    <string-array name="Delivery_type">
+        <item>- Delivery Type -</item>
+        <item>Standard</item>
+        <item>Express</item>
+        <item>Premium</item>
+    </string-array>
+
+    <string-array name="FilterCategories">
+        <item>All categories</item>
+        <item>Arts &amp; Crafts</item>
+        <item>Sports &amp; Hobby</item>
+        <item>Baby</item>
+        <item>Women\'s fashion</item>
+        <item>Men\'s fashion</item>
+        <item>Electronics</item>
+        <item>Games &amp; Videogames</item>
+        <item>Automotive</item>
+    </string-array>
+
+    <string name="boughtItems_snack">You have already rated the seller for this item!</string>
+    <string name="editProfile_snack">Profile has been updated</string>
+    <string name="bn_camera_title">Choose a new image</string>
+    <string name="permission_new_image">Permission is needed to choose a new image!</string>
+    <string name="permission_map">Permission is needed to access the map</string>
+    <string name="itemDetals_snack1">You have already rated the seller for this item!</string>
+    <string name="itemDetals_snack2">Interest notified to the seller</string>
+    <string name="itemDetals_snack3">Interest removed</string>
+    <string name="no_user_interested">No user is interested</string>
+    <string name="itemEdit_snack1">Item has been correctly updated</string>
+    <string name="itemEdit_snack2">New item has been added</string>
+    <string name="itemEdit_snack3">Item has been correctly sold!</string>
+    <string name="itemEdit_snack4">Too many characters in the Title!</string>
+    <string name="alert_logout_title">You are going to Sign-Out</string>
+    <string name="alert_logout_message">Are you sure you want to proceed?</string>
+    <string name="alert_logout_positiveBN">YES</string>
+    <string name="alert_logout_neutralBN">NO</string>
+    <string name="alert_filter_positiveBN">FILTER</string>
+    <string name="alert_filter_neutralBN">CANCEL</string>
+    <string name="onSaleList_query_hint">Search for title, category…</string>
+    <string name="ratingUsers_snack">Review correctly sent to the seller</string>
+    <string name="map_snack_err_conn">Error while searching</string>
+    <string name="map_snack_err_no_results">No results found</string>
+    <string name="setMapPos_snack3">Unable to get current location</string>
+    <string name="setMapPos_snack4">New location has been correctly chosen!</string>
+    <string name="showMapPos_snack3">No results found while searching your location</string>
+    <string name="showMapPos_snack1">Unable to get location</string>
+    <string name="sign_in_toast1">You have been successfully logged</string>
+    <string name="sign_in_snack2">Error while connecting :(</string>
+    <string name="sign_in_button">sign-in</string>
+    <string name="expire_date_helper_text">Day/Month/Year</string>
+
+</resources>

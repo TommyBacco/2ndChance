@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+    <ImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/profile_image"
+        android:gravity="center"
+        app:srcCompat="@drawable/user_icon" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/user_rating_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/myColorSecondaryText"
+                    android:layout_marginEnd="4dp"
+                    android:layout_centerVertical="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:id="@+id/user_ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/user_rating_value"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:isIndicator="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/user_number_ratings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginStart="4dp"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:drawableEnd="@drawable/ic_arrow_forward"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/myColorSecondaryText"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/user_fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="4dp"
+                android:ellipsize="end"
+                android:hint="@string/profile_fullname"
+                android:maxLines="2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="@string/profile_nickname"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:drawableLeft="@drawable/ic_person_outline"
+                android:drawablePadding="4dp"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/user_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="@string/profile_email"
+                android:textColor="@android:color/black"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:drawableLeft="@drawable/ic_email"
+                android:drawablePadding="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/user_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:hint="@string/profile_area"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:drawableLeft="@drawable/ic_area_of_interest"
+                android:drawablePadding="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp">
+
+
+                <TextView
+                    android:id="@+id/user_show_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:textColor="@android:color/black"
+                    android:drawableEnd="@drawable/ic_arrow_forward"
+                    android:layout_marginStart="6dp"
+                    android:layout_centerVertical="true"
+                    android:hint="@string/user_show_position"
+                    android:layout_toEndOf="@id/ic_show_map"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="4dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                <ImageView
+                    android:id="@+id/ic_show_map"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    app:srcCompat="@drawable/ic_show_map" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/user_telephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:textColor="@android:color/black"
+                android:hint="@string/profile_telephone"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:drawableLeft="@drawable/ic_phone"
+                android:drawablePadding="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/user_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:textColor="@android:color/black"
+                android:hint="@string/profile_address"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:drawableLeft="@drawable/ic_location"
+                android:drawablePadding="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
